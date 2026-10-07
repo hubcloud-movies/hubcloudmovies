@@ -66,6 +66,7 @@
         <input 
           type="text" 
           id="searchInput" 
+          autocomplete="off"
           placeholder="Duniya ki koi bhi Movie ya Series search karein..." 
           class="w-full pl-10 pr-10 py-2 bg-zinc-900 border border-zinc-700 rounded-full text-sm text-white placeholder-zinc-400 focus:outline-none focus:border-red-600 transition"
         >
@@ -97,6 +98,7 @@
   <section class="max-w-7xl mx-auto px-4 sm:px-6 pt-4 w-full">
     <div class="flex flex-wrap items-center gap-2.5 border-b border-zinc-800/80 pb-3">
       <button 
+        type="button"
         onclick="setCategory('all')" 
         id="tab-all" 
         class="tab-btn active px-4 py-1.5 rounded-full text-xs font-bold border border-zinc-700 bg-zinc-900 text-zinc-300 hover:border-red-600 transition flex items-center gap-1.5"
@@ -105,6 +107,7 @@
       </button>
 
       <button 
+        type="button"
         onclick="setCategory('movie')" 
         id="tab-movie" 
         class="tab-btn px-4 py-1.5 rounded-full text-xs font-bold border border-zinc-700 bg-zinc-900 text-zinc-300 hover:border-red-600 transition flex items-center gap-1.5"
@@ -113,6 +116,7 @@
       </button>
 
       <button 
+        type="button"
         onclick="setCategory('series')" 
         id="tab-series" 
         class="tab-btn px-4 py-1.5 rounded-full text-xs font-bold border border-zinc-700 bg-zinc-900 text-zinc-300 hover:border-red-600 transition flex items-center gap-1.5"
@@ -180,7 +184,7 @@
             <span class="font-bold text-red-500">Admin</span>
             <span class="text-[10px] text-zinc-500">Pinned</span>
           </div>
-          <p class="text-xs text-zinc-300">Welcome to HUB CLOUD MOVIES! Agar koi movie ka download link nahi mil raha toh upar search karke Request button dabayein.</p>
+          <p class="text-xs text-zinc-300">Welcome to HUB CLOUD MOVIES! Agar koi movie ka download link nahi mil raha toh Request button dabayein.</p>
         </div>
       </div>
     </div>
@@ -276,29 +280,35 @@
       filterContent();
     }
 
-    // 1. RENDER CAROUSEL
+    // 1. RENDER CAROUSEL (No #requestSection jumping)
     function renderCarousel(list) {
       const track = document.getElementById('carouselTrack');
       if (!track) return;
       const loopList = [...list, ...list];
       
-      track.innerHTML = loopList.map(item => `
-        <a href="${item.downloadUrl || '#requestSection'}" target="${item.downloadUrl ? '_blank' : '_self'}" rel="noopener noreferrer" 
-           class="flex-shrink-0 w-44 sm:w-52 bg-zinc-900 border border-zinc-800 rounded-xl overflow-hidden hover:border-red-600 transition group">
-          <div class="relative aspect-[16/10] overflow-hidden bg-zinc-950">
-            <img src="${item.poster}" alt="${item.title}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-            <span class="absolute top-1.5 left-1.5 bg-red-600 text-white font-bold text-[9px] px-1.5 py-0.5 rounded">1080p</span>
-            <span class="absolute bottom-1.5 right-1.5 bg-black/80 text-zinc-300 text-[9px] px-1.5 py-0.5 rounded">⭐ ${item.vote}</span>
-          </div>
-          <div class="p-2.5">
-            <h4 class="text-white text-xs font-semibold truncate group-hover:text-red-500 transition">${item.title}</h4>
-            <div class="text-[10px] text-zinc-400 mt-0.5 flex justify-between">
-              <span>${item.year}</span>
-              <span class="text-red-500 font-bold"><i class="fa-solid fa-download"></i> Fast Link</span>
+      track.innerHTML = loopList.map(item => {
+        const hasUrl = Boolean(item.downloadUrl);
+        const clickAttr = hasUrl 
+          ? `href="${item.downloadUrl}" target="_blank" rel="noopener noreferrer"` 
+          : `href="javascript:void(0)" onclick="requestMovie('${item.title.replace(/'/g, "\\'")}')"`;
+
+        return `
+          <a ${clickAttr} class="flex-shrink-0 w-44 sm:w-52 bg-zinc-900 border border-zinc-800 rounded-xl overflow-hidden hover:border-red-600 transition group cursor-pointer">
+            <div class="relative aspect-[16/10] overflow-hidden bg-zinc-950">
+              <img src="${item.poster}" alt="${item.title}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+              <span class="absolute top-1.5 left-1.5 bg-red-600 text-white font-bold text-[9px] px-1.5 py-0.5 rounded">1080p</span>
+              <span class="absolute bottom-1.5 right-1.5 bg-black/80 text-zinc-300 text-[9px] px-1.5 py-0.5 rounded">⭐ ${item.vote}</span>
             </div>
-          </div>
-        </a>
-      `).join('');
+            <div class="p-2.5">
+              <h4 class="text-white text-xs font-semibold truncate group-hover:text-red-500 transition">${item.title}</h4>
+              <div class="text-[10px] text-zinc-400 mt-0.5 flex justify-between">
+                <span>${item.year}</span>
+                <span class="text-red-500 font-bold"><i class="fa-solid fa-download"></i> ${hasUrl ? 'Fast Link' : 'Request'}</span>
+              </div>
+            </div>
+          </a>
+        `;
+      }).join('');
     }
 
     // 2. RENDER MAIN GRID
@@ -327,9 +337,10 @@
               rel="noopener noreferrer"
               class="w-full bg-red-600 hover:bg-red-700 text-white text-xs font-semibold py-2 px-3 rounded-lg flex items-center justify-center gap-1.5 transition active:scale-95 shadow-md shadow-red-900/30"
             >
-              <i class="fa-solid fa-download"></i> Download (1080p)
+              <i class="fa-solid fa-download"></i> ${item.type === 'series' ? 'Download Series' : 'Download (1080p)'}
             </a>`
           : `<button 
+              type="button"
               onclick="requestMovie('${item.title.replace(/'/g, "\\'")}')" 
               class="w-full bg-zinc-800 hover:bg-red-600 text-zinc-300 hover:text-white text-xs font-semibold py-2 px-3 rounded-lg flex items-center justify-center gap-1.5 transition active:scale-95 border border-zinc-700 hover:border-red-600"
             >
@@ -388,15 +399,19 @@
       filterOrSearch();
     }
 
+    // ONLY smooth scroll when user explicitly clicks "Request"
     window.requestMovie = function(movieTitle) {
       const msgInput = document.getElementById('commentMsg');
       if (!msgInput) return;
       msgInput.value = `Mujhe "${movieTitle}" ka 1080p direct download link upload karke dijiye.`;
-      document.getElementById('requestSection').scrollIntoView({ behavior: 'smooth' });
+      const targetSec = document.getElementById('requestSection');
+      if (targetSec) {
+        targetSec.scrollIntoView({ behavior: 'smooth' });
+      }
       msgInput.focus();
     };
 
-    // 4. SEARCH (LOCAL + TMDB LIVE FETCH)
+    // 4. SEARCH (Search karte time scroll bilkul nahi hoga)
     let searchDebounce = null;
 
     function filterContent() {
@@ -478,7 +493,7 @@
 
     document.getElementById('searchInput').addEventListener('input', filterOrSearch);
 
-    // Initial Auto Load
+    // Initial Load
     loadAllMoviesAuto();
 
     // Comment Chat Submission
