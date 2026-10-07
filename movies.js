@@ -39,5 +39,12 @@ const myMovies = [
   { title: "Joker", downloadUrl: "https://hubcloud.ist/drive/ik90nnivom0i0no" },
   { title: "Django Unchained", downloadUrl: "https://hubcloud.ist/drive/jk3ex08grjxt2t1" },
   { title: "The Social Network", downloadUrl: "https://hubcloud.ist/drive/ieo58pi9wiw9i5b" },
-  { title: "RRR", downloadUrl: "https://hubcloud.ist/drive/vshodeofhyvfdoj" }
+  { title: "RRR", downloadUrl: "https://hubcloud.ist/drive/vshodeofhyvfdoj" },
+  { title: "Mandaadi", downloadUrl: "https://hubcloud.ist/drive/4oc06scs2kjedze" },
+  { title: "Vadala", downloadUrl: "https://hubcloud.ist/drive/fmzlda7hubaafxu" },
+  { title: " Spider-Man: Brand New Day", downloadUrl: "https://hubcloud.ist/drive/ghkhyg1qqh4vsdo" },
+  { title: "Insidious: Out of the Further", downloadUrl: "https://hubcloud.ist/drive/ha15aqbwnsnunoq"},
+  { title: "Sinister", downloadUrl: "https://hubcloud.ist/drive/1rf1iiufc21cuec" },
+  { title: "Bethlehem Kudumba Unit ", downloadUrl: "https://hubcloud.ist/drive/1bvtwak6kfsn4ks" },
+  { title: "The Colony", downloadUrl: "https://hubcloud.ist/drive/iqwhb0l0zl0uumu" },
 ];
