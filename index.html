@@ -60,15 +60,18 @@
         <span>HUB CLOUD <span class="text-white">MOVIES</span></span>
       </a>
 
-      <!-- Search Input -->
+      <!-- TMDB LIVE SEARCH INPUT -->
       <div class="relative w-full sm:w-96">
         <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-3.5 text-zinc-400"></i>
         <input 
           type="text" 
           id="searchInput" 
-          placeholder="Movie ya Web Series search karein..." 
-          class="w-full pl-10 pr-4 py-2 bg-zinc-900 border border-zinc-700 rounded-full text-sm text-white placeholder-zinc-400 focus:outline-none focus:border-red-600 transition"
+          placeholder="Duniya ki koi bhi Movie ya Series search karein..." 
+          class="w-full pl-10 pr-10 py-2 bg-zinc-900 border border-zinc-700 rounded-full text-sm text-white placeholder-zinc-400 focus:outline-none focus:border-red-600 transition"
         >
+        <span id="searchLoader" class="hidden absolute right-3.5 top-3 text-red-500 text-xs">
+          <i class="fa-solid fa-spinner fa-spin"></i>
+        </span>
       </div>
     </div>
   </header>
@@ -90,7 +93,7 @@
     </div>
   </section>
 
-  <!-- CATEGORY FILTER BUTTONS (ALL / MOVIES / WEB SERIES) -->
+  <!-- CATEGORY FILTER BUTTONS -->
   <section class="max-w-7xl mx-auto px-4 sm:px-6 pt-4 w-full">
     <div class="flex flex-wrap items-center gap-2.5 border-b border-zinc-800/80 pb-3">
       <button 
@@ -141,7 +144,7 @@
   </main>
 
   <!-- 💬 CHAT & COMMENT BOX SECTION -->
-  <section class="max-w-4xl mx-auto px-4 w-full my-6">
+  <section id="requestSection" class="max-w-4xl mx-auto px-4 w-full my-6">
     <div class="bg-zinc-900 border border-zinc-800 rounded-2xl p-5 sm:p-6">
       <h3 class="text-base sm:text-lg font-bold text-white flex items-center gap-2 mb-2">
         <i class="fa-solid fa-comments text-red-500"></i> Movie & Web Series Request Chat
@@ -167,7 +170,7 @@
           type="submit" 
           class="bg-red-600 hover:bg-red-700 text-white font-semibold text-xs px-5 py-2.5 rounded-lg transition active:scale-95 flex items-center gap-1.5"
         >
-          <i class="fa-solid fa-paper-plane"></i> Send Message
+          <i class="fa-solid fa-paper-plane"></i> Send Request
         </button>
       </form>
 
@@ -177,7 +180,7 @@
             <span class="font-bold text-red-500">Admin</span>
             <span class="text-[10px] text-zinc-500">Pinned</span>
           </div>
-          <p class="text-xs text-zinc-300">Welcome to HUB CLOUD MOVIES! Movies & Web Series ki fast links available hain.</p>
+          <p class="text-xs text-zinc-300">Welcome to HUB CLOUD MOVIES! Agar koi movie ka download link nahi mil raha toh upar search karke Request button dabayein.</p>
         </div>
       </div>
     </div>
@@ -191,6 +194,7 @@
       </div>
       <h3 class="text-lg sm:text-xl font-bold text-white">Sponsorship & Business Inquiries</h3>
       <p class="text-xs sm:text-sm text-zinc-400 max-w-lg mt-1 mb-4">
+        Website par promotions, banner ads ya sponsorship deals ke liye direct contact karein.
       </p>
 
       <a 
@@ -200,8 +204,8 @@
       >
         <i class="fa-solid fa-envelope"></i>
         <span>Comcinevault@gmail.com</span>
-      </a
-      <span class="text-[11px] text-zinc-500 mt-2">
+      </a>
+      <span class="text-[11px] text-zinc-500 mt-2">Click karke direct email open ho jayega</span>
     </div>
   </section>
 
@@ -212,21 +216,14 @@
 
   <script>
     // ==========================================
-    // 🎬 MOVIES & WEB SERIES DATA LIST
-    // (type: "movie" ya type: "series")
+    // 🔑 TMDB API KEY
+    // ==========================================
+    const TMDB_API_KEY = "e13cf1f3d38d468fa2073b407d19949f";
+
+    // ==========================================
+    // 🎬 LOCAL DATABASE (Aapke Direct Links)
     // ==========================================
     const moviesData = [
-      {
-        id: 35,
-        type: "movie",
-        title: "The.End.of.Oak.Street",
-        year: "2026",
-        quality: "1080p FHD",
-        size: "1.67 GB",
-        genre: "Action | Mystery | Sci-Fi | Thriller",
-        poster: "https://image.tmdb.org/t/p/w300/fYXqpgPmHMphSF2W30GbTeJVIa5.jpg",
-        downloadUrl: "https://hubcloud.ist/drive/fvgi5olqnrxquev"
-      },
       {
         id: 34,
         type: "movie",
@@ -251,7 +248,7 @@
       },
       {
         id: 33,
-        type: "movie",
+        type: "series",
         title: "Bombay Stories",
         year: "2026",
         quality: "1080p FHD",
@@ -290,7 +287,7 @@
         quality: "1080p FHD",
         size: "2.1 GB",
         genre: "Action / Romance",
-        poster: "https://m.media-amazon.com/images/M/MV5BZDJiYmZhMGYtMDZlYi00YTY1LWI3NDktNzYxMTY4NzhkNTU5XkEyXkFqcGc@._V1_.jpg",
+        poster: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRiFbq5VmbkHexC7cXLE9mcbDUzQ5ERkSsn1pQTpQk4ZA&s",
         downloadUrl: "https://hubcloud.ist/drive/c8ko7pukyzszppd"
       },
       {
@@ -596,148 +593,13 @@
         title: "The Social Network",
         year: "2010",
         quality: "1080p FHD",
-        size: "2.45GB",
+        size: "2.46GB",
         genre: "Drama/History",
         poster: "https://upload.wikimedia.org/wikipedia/en/8/8c/The_Social_Network_film_poster.png?utm_source=en.wikipedia.org&utm_campaign=index&utm_content=original",
         downloadUrl: "https://hubcloud.ist/drive/ieo58pi9wiw9i5b"
-      },
-      {
-        id: 35,
-        type: "movie",
-        title: "Avengers.Infinity.War",
-        year: "2018",
-        quality: "1080p FHD",
-        size: "3.0 GB",
-        genre: "Sci-Fi/Action",
-        poster: "https://i.pinimg.com/1200x/8f/4f/49/8f4f49b9fe19395ef505a699430db897.jpg",
-        downloadUrl: "https://hubcloud.ist/drive/k3kho3k77qjd32i"
-
-      },
-      {
-        id: 36,
-        type: "movie",
-        title: "Avengers.Endgame encore",
-        year: "2019",
-        quality: "1080p FHD",
-        size: "3.24 GB",
-        genre: "Sci-Fi/Action",
-        poster: "https://cdn.marvel.com/content/2x/enrr_disney_27x40_silverpayoff_fin10a_finalfiles_mech14.webp",
-        downloadUrl: "https://hubcloud.ist/drive/k3kho3k77qjd32i",
-      },
-      {
-        id: 37,
-        type: "movie",
-        title: "Doraemon-Nobita.and.Castle.of.UnderSea.Devil",
-        year: "2026",
-        quality: "1080p FHD",
-        size: "1.84 GB",
-        genre: "Animation | Adventure | Fantasy | Family",
-        poster: "https://assets-in.bmscdn.com/discovery-catalog/events/et00507337-aeyeqdfuhm-landscape.jpg",
-        downloadUrl: "https://hubcloud.ist/drive/qslgxfy2h4zlzz8"
-      },
-      {
-        id: 38,
-        type: "movie",
-        title: "One.Night.Only",
-        year: "2026",
-        quality: "1080p FHD",
-        size: "1.35 GB",
-        genre: "Comedy | Romance",
-        poster: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQiEe8hc3JKZRNOJgsw3liiO1uHB242pZnIEwOf0smr5kevpaif6uSLRLp6hoAB1snSGLFTA&s=10",
-        downloadUrl: "https://hubcloud.ist/drive/ydlf99zl9dp1oh5"
-      },
-      {
-        id: 39,
-        type: "movie",
-        title: "The Prestige",
-        year: "2006",
-        quality: "1080p FHD",
-        size: "2.66 GB",
-        genre: "Drama/Thriller",
-        poster: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS36gNOl3nchfq-2-pigXlippqefT6qDF_3coVJ_iFCmWLx44MIzRrHEBXZKWPLZUFgEK0r&s=10-",
-        downloadUrl: "https://hubcloud.ist/drive/jggvbygyyy4xupb",
-      },
-      {
-        id: 40,
-        type: "movie",
-        title: "The Wolf of Wall Street",
-        year: "2013",
-        quality: "1080p FHD",
-        size: "3.71 GB",
-        genre: "Biography/Comedy/Crime",
-        poster: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTS4tnNNu71yzy-ldl9g6oiXRhEz0fP9pE9qElupNGZw3hRjEysNxFwPKHsHAZoI9rXLYzAuXSwlIBMb-I1lxcouJy-UjnA03ip2fKJgBGsmQ&s=10",
-        downloadUrl: "https://hubcloud.ist/drive/llvlzms82vluv2u"
-      },
-      {
-        id: 41,
-        type: "movie",
-        title: "The Imitation Game",
-        year: "2014",
-        quality: "1080p FHD",
-        size: "2.1 GB",
-        genre: "Biography/Drama/Thriller",
-        poster: "https://upload.wikimedia.org/wikipedia/en/8/87/The_Imitation_Game_%282014%29.png?utm_source=en.wikipedia.org&utm_campaign=index&utm_content=original",
-        downloadUrl: "https://hubcloud.ist/drive/ddvtvudvgvd11pq",
-      },
-      {
-        id: 42,
-        type: "movie",
-        title: "The Revenant",
-        year: "2015",
-        quality: "1080p FHD",
-        size: "3.2 GB",
-        genre: "Adventure/Drama/Thriller",
-        poster: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkdee7gA_U9lLfFV9DYkp-URexEPFmMyZWYywMz36rTp3iXmBXASlmHBjdVAlJG1hJB16A&s=10https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkdee7gA_U9lLfFV9DYkp-URexEPFmMyZWYywMz36rTp3iXmBXASlmHBjdVAlJG1hJB16A&s=10",
-        downloadUrl: "https://hubcloud.ist/drive/etydapdv58a2rvv",
-      },
-      {
-        id: 43,
-        type: "movie",
-        title: "The Martian",
-        year: "2015",
-        quality: "1080p FHD",
-        size: "2.1GB",
-        genre: "Adventure/Drama/Sci-Fi",
-        poster: "https://upload.wikimedia.org/wikipedia/en/c/cd/The_Martian_film_poster.jpg?utm_source=en.wikipedia.org&utm_campaign=index&utm_content=original",
-        downloadUrl: "https://hubcloud.ist/drive/kj8u3qo3dkgtnlr",
-      },
-      {
-        id: 44,
-        type: "movie",
-        title: "The Great Gatsby",
-        year: "2013",
-        quality: "1080p FHD",
-        size: "2.54G GB",
-        genre: "Drama/Romance",
-        poster: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkWhmsfjBUdzy9FZDyZZmr4BfNXLibp9T0PMfDOo5vUEUKnGb0SwO3G0m44CI53DXRZEQSMA&s=10",
-        downloadUrl: "https://hubcloud.ist/drive/fshzmzzpdmnkk9x",
-      },
-      {
-        id: 5,
-        type: "movie",
-        title: "Spider-Man: Brand New Day",
-        year: "2026",
-        quality: "1080p FHD",
-        size: "2.32 GB",
-        genre: "Action/Adventure/Sci-Fi",
-        poster: "https://resizing.flixster.com/A0AhY7vcoid: 4HLlqwO6nfwnyOB6wZA=/ems.cHJkLWVtcy1hc3NldHMvbW92aWVzL2E1NWUwMWJhLWI5OTUtNDZkMy04NmE4LWU5Y2I5NTQ2NTE4OC5qcGc=",
-        downloadUrl: "https://hubcloud.ist/drive/zmehhu1jvjtpyhd",
-      },
-      {
-        id: 5,
-        type: "movie",
-        title: "Spider-Man: Brand New Day",
-        year: "2026",
-        quality: "1080p FHD",
-        size: "2.32 GB",
-        genre: "Action/Adventure/Sci-Fi",
-        poster: "https://resizing.flixster.com/A0AhY7vcoid: 4HLlqwO6nfwnyOB6wZA=/ems.cHJkLWVtcy1hc3NldHMvbW92aWVzL2E1NWUwMWJhLWI5OTUtNDZkMy04NmE4LWU5Y2I5NTQ2NTE4OC5qcGc=",
-        downloadUrl: "https://hubcloud.ist/drive/zmehhu1jvjtpyhd",
       }
+    ];
 
-    ]
-      
-    ;
     let currentCategory = 'all';
 
     // ==========================================
@@ -748,14 +610,14 @@
       const loopList = [...moviesData, ...moviesData];
       
       track.innerHTML = loopList.map(item => `
-        <a href="${item.downloadUrl}" target="_blank" rel="noopener noreferrer" 
+        <a href="${item.downloadUrl || '#requestSection'}" target="${item.downloadUrl ? '_blank' : '_self'}" rel="noopener noreferrer" 
            class="flex-shrink-0 w-44 sm:w-52 bg-zinc-900 border border-zinc-800 rounded-xl overflow-hidden hover:border-red-600 transition group">
           <div class="relative aspect-[16/10] overflow-hidden bg-zinc-950">
             <img src="${item.poster}" alt="${item.title}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
             <span class="absolute top-1.5 left-1.5 bg-red-600 text-white font-bold text-[9px] px-1.5 py-0.5 rounded">
               ${item.type === 'series' ? 'SERIES' : '1080p'}
             </span>
-            <span class="absolute bottom-1.5 right-1.5 bg-black/80 text-zinc-300 text-[9px] px-1.5 py-0.5 rounded">${item.size}</span>
+            <span class="absolute bottom-1.5 right-1.5 bg-black/80 text-zinc-300 text-[9px] px-1.5 py-0.5 rounded">${item.size || 'HD'}</span>
           </div>
           <div class="p-2.5">
             <h4 class="text-white text-xs font-semibold truncate group-hover:text-red-500 transition">${item.title}</h4>
@@ -777,7 +639,7 @@
 
       grid.innerHTML = '';
 
-      if (data.length === 0) {
+      if (!data || data.length === 0) {
         noResults.classList.remove('hidden');
         return;
       }
@@ -787,44 +649,55 @@
         const card = document.createElement('div');
         card.className = "poster-card bg-zinc-900 border border-zinc-800 rounded-xl overflow-hidden flex flex-col group";
 
-        card.innerHTML = `
-          <!-- Poster -->
-          <a href="${item.downloadUrl}" target="_blank" rel="noopener noreferrer" class="relative block aspect-[2/3] overflow-hidden bg-zinc-950">
-            <img 
-              src="${item.poster}" 
-              alt="${item.title}" 
-              class="w-full h-full object-cover group-hover:scale-105 transition duration-500"
-              loading="lazy"
-            >
-            <span class="absolute top-2 left-2 ${item.type === 'series' ? 'bg-blue-600' : 'bg-red-600'} text-white font-extrabold text-[10px] px-2 py-0.5 rounded shadow">
-              ${item.type === 'series' ? 'WEB SERIES' : item.quality}
-            </span>
-            <span class="absolute bottom-2 right-2 bg-black/85 backdrop-blur text-zinc-300 font-semibold text-[10px] px-2 py-0.5 rounded border border-zinc-700">
-              ${item.size}
-            </span>
-          </a>
-
-          <!-- Details & Download Button -->
-          <div class="p-3.5 flex flex-col flex-1 justify-between gap-3">
-            <div>
-              <div class="flex items-center justify-between text-[11px] text-zinc-400 mb-1">
-                <span>${item.year}</span>
-                <span class="text-zinc-500">•</span>
-                <span>${item.genre}</span>
-              </div>
-              <a href="${item.downloadUrl}" target="_blank" rel="noopener noreferrer" class="font-bold text-white text-sm hover:text-red-500 transition line-clamp-1 block">
-                ${item.title}
-              </a>
-            </div>
-
-            <a 
+        const hasLink = Boolean(item.downloadUrl);
+        const actionBtn = hasLink 
+          ? `<a 
               href="${item.downloadUrl}" 
               target="_blank" 
               rel="noopener noreferrer"
               class="w-full bg-red-600 hover:bg-red-700 text-white text-xs font-semibold py-2 px-3 rounded-lg flex items-center justify-center gap-1.5 transition active:scale-95 shadow-md shadow-red-900/30"
             >
               <i class="fa-solid fa-download"></i> ${item.type === 'series' ? 'Download Series' : 'Download (1080p)'}
-            </a>
+            </a>`
+          : `<button 
+              onclick="requestMovie('${item.title.replace(/'/g, "\\'")}')" 
+              class="w-full bg-zinc-800 hover:bg-red-600 text-zinc-300 hover:text-white text-xs font-semibold py-2 px-3 rounded-lg flex items-center justify-center gap-1.5 transition active:scale-95 border border-zinc-700 hover:border-red-600"
+            >
+              <i class="fa-solid fa-bell"></i> Request 1080p Link
+            </button>`;
+
+        card.innerHTML = `
+          <!-- Poster -->
+          <div class="relative block aspect-[2/3] overflow-hidden bg-zinc-950">
+            <img 
+              src="${item.poster}" 
+              alt="${item.title}" 
+              class="w-full h-full object-cover group-hover:scale-105 transition duration-500"
+              loading="lazy"
+              onerror="this.src='https://via.placeholder.com/300x450/111827/ffffff?text=Poster+Unavailable'"
+            >
+            <span class="absolute top-2 left-2 ${item.type === 'series' ? 'bg-blue-600' : 'bg-red-600'} text-white font-extrabold text-[10px] px-2 py-0.5 rounded shadow">
+              ${item.type === 'series' ? 'WEB SERIES' : (item.quality || '1080p FHD')}
+            </span>
+            <span class="absolute bottom-2 right-2 bg-black/85 backdrop-blur text-zinc-300 font-semibold text-[10px] px-2 py-0.5 rounded border border-zinc-700">
+              ${item.size || (item.vote ? '⭐ ' + item.vote : '1080p')}
+            </span>
+          </div>
+
+          <!-- Details & Action Button -->
+          <div class="p-3.5 flex flex-col flex-1 justify-between gap-3">
+            <div>
+              <div class="flex items-center justify-between text-[11px] text-zinc-400 mb-1">
+                <span>${item.year || '2026'}</span>
+                <span class="text-zinc-500">•</span>
+                <span class="truncate max-w-[100px]">${item.genre || 'Dual Audio'}</span>
+              </div>
+              <h3 class="font-bold text-white text-sm hover:text-red-500 transition line-clamp-1">
+                ${item.title}
+              </h3>
+            </div>
+
+            ${actionBtn}
           </div>
         `;
         grid.appendChild(card);
@@ -837,38 +710,114 @@
     function setCategory(category) {
       currentCategory = category;
 
-      // Update button styling
       document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
       document.getElementById(`tab-${category}`).classList.add('active');
 
-      // Update Heading Text
       const heading = document.getElementById('sectionHeading');
       if (category === 'movie') heading.innerHTML = '<i class="fa-solid fa-film text-red-600"></i> Latest Movies (1080p)';
       else if (category === 'series') heading.innerHTML = '<i class="fa-solid fa-tv text-blue-500"></i> Popular Web Series';
       else heading.innerHTML = '<i class="fa-solid fa-bolt text-red-600"></i> Latest 1080p Uploads';
 
-      filterContent();
+      filterOrSearch();
     }
 
-    // Filter by both Category & Search Input
-    function filterContent() {
-      const term = document.getElementById('searchInput').value.toLowerCase().trim();
+    // Helper: Request movie to chat
+    window.requestMovie = function(movieTitle) {
+      const msgInput = document.getElementById('commentMsg');
+      msgInput.value = `Mujhe "${movieTitle}" ka 1080p direct download link upload karke dijiye.`;
+      document.getElementById('requestSection').scrollIntoView({ behavior: 'smooth' });
+      msgInput.focus();
+    };
 
-      const filtered = moviesData.filter(item => {
+    // ==========================================
+    // 4. TMDB LIVE SEARCH ENGINE
+    // ==========================================
+    let searchDebounce = null;
+
+    async function filterOrSearch() {
+      const term = document.getElementById('searchInput').value.trim();
+      const loader = document.getElementById('searchLoader');
+
+      // Agar search box khali hai toh local movies show karein
+      if (!term) {
+        loader.classList.add('hidden');
+        const filtered = moviesData.filter(item => (currentCategory === 'all') || (item.type === currentCategory));
+        renderMovies(filtered);
+        return;
+      }
+
+      // Pehle local list me match dekhein
+      const localMatches = moviesData.filter(item => {
         const matchesCategory = (currentCategory === 'all') || (item.type === currentCategory);
-        const matchesSearch = item.title.toLowerCase().includes(term) || item.genre.toLowerCase().includes(term);
+        const matchesSearch = item.title.toLowerCase().includes(term.toLowerCase()) || (item.genre && item.genre.toLowerCase().includes(term.toLowerCase()));
         return matchesCategory && matchesSearch;
       });
 
-      renderMovies(filtered);
+      // Agar local me match mil gaya toh pehle wo dikhayein
+      if (localMatches.length > 0) {
+        renderMovies(localMatches);
+      }
+
+      // TMDB se live fetch karein
+      loader.classList.remove('hidden');
+      clearTimeout(searchDebounce);
+      searchDebounce = setTimeout(async () => {
+        try {
+          const res = await fetch(`https://api.themoviedb.org/3/search/multi?api_key=${TMDB_API_KEY}&query=${encodeURIComponent(term)}&include_adult=false`);
+          const data = await res.json();
+          loader.classList.add('hidden');
+
+          if (data && data.results) {
+            const tmdbResults = data.results
+              .filter(r => (r.media_type === 'movie' || r.media_type === 'tv') && (r.title || r.name))
+              .map(r => {
+                const isTv = r.media_type === 'tv';
+                const title = isTv ? r.name : r.title;
+                const releaseDate = isTv ? r.first_air_date : r.release_date;
+                const year = releaseDate ? releaseDate.split('-')[0] : '2026';
+                const poster = r.poster_path ? `https://image.tmdb.org/t/p/w500${r.poster_path}` : 'https://via.placeholder.com/300x450/111827/ffffff?text=' + encodeURIComponent(title);
+
+                // Check agar yeh movie local array me already link ke sath hai
+                const existing = moviesData.find(m => m.title.toLowerCase() === title.toLowerCase());
+
+                return {
+                  id: r.id,
+                  type: isTv ? 'series' : 'movie',
+                  title: title,
+                  year: year,
+                  quality: '1080p FHD',
+                  vote: r.vote_average ? r.vote_average.toFixed(1) : '',
+                  poster: poster,
+                  genre: isTv ? 'Web Series' : 'Movie',
+                  downloadUrl: existing ? existing.downloadUrl : null
+                };
+              });
+
+            // Local + TMDB results merge karein (Duplicates avoid karke)
+            const combined = [...localMatches];
+            tmdbResults.forEach(item => {
+              if (!combined.some(c => c.title.toLowerCase() === item.title.toLowerCase())) {
+                if (currentCategory === 'all' || item.type === currentCategory) {
+                  combined.push(item);
+                }
+              }
+            });
+
+            renderMovies(combined);
+          }
+        } catch (err) {
+          loader.classList.add('hidden');
+          console.error("TMDB Fetch Error:", err);
+        }
+      }, 400);
     }
 
     // Initial load
     renderCarousel();
     renderMovies(moviesData);
 
-    // Search filter event
-    document.getElementById('searchInput').addEventListener('input', filterContent);
+    // Search Input Listener
+    document.getElementById('searchInput').addEventListener('input', filterOrSearch);
 
     // Chat / Comment Submission
     document.getElementById('commentForm').addEventListener('submit', (e) => {
