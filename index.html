@@ -215,409 +215,122 @@
   </footer>
 
   <script>
-    // ==========================================
-    // 🔑 TMDB API KEY
-    // ==========================================
     const TMDB_API_KEY = "e13cf1f3d38d468fa2073b407d19949f";
 
-    // ==========================================
-    // 🎬 LOCAL DATABASE (Aapke Direct Links)
-    // ==========================================
-    const moviesData = [
-      {
-        id: 34,
-        type: "movie",
-        title: "TOXiC",
-        year: "2026",
-        quality: "1080p FHD",
-        size: "3.00 GB",
-        genre: "Action/Adventure",
-        poster: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRgvnOYbe9ZQmI5vwyYavpEVoDCmd0iM-tuNB38MMo2KA&s=10",
-        downloadUrl: "https://hubcloud.ist/drive/m1qcyqeykj1fkz0"
-      },
-      {
-        id: 1,
-        type: "movie",
-        title: "The Last Voyage",
-        year: "2026",
-        quality: "1080p FHD",
-        size: "2.00 GB",
-        genre: "Drama/Thriller",
-        poster: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSCU2sIPBSmwxUtatkuSvfzP3ztP7_8zO2Eeullr3R1Og&s=10",
-        downloadUrl: "https://hubcloud.ist/drive/tofrctls8ssu19z"
-      },
-      {
-        id: 33,
-        type: "series",
-        title: "Bombay Stories",
-        year: "2026",
-        quality: "1080p FHD",
-        size: "2.56 GB",
-        genre: "Drama / Crime",
-        poster: "https://m.media-amazon.com/images/M/MV5BNmViYjA1ODAtZmZiYy00NzJlLTk2MzQtOWE2NDE0YTc2ZTBlXkEyXkFqcGc@._V1_QL75_UY281_CR1,0,190,281_.jpg",
-        downloadUrl: "https://hubcloud.ist/drive/6ms9obt126bo5nb"
-      },
-      {
-        id: 2,
-        type: "movie",
-        title: "Death of a Unicorn",
-        year: "2025",
-        quality: "1080p FHD",
-        size: "1.83 GB",
-        genre: "Comedy / Fantasy",
-        poster: "https://m.media-amazon.com/images/M/MV5BNjUzMjhkZjktNTU5Mi00MzhmLWJhMTQtZjhkYjczOTEzM2M5XkEyXkFqcGc@._V1_.jpg",
-        downloadUrl: "https://hubcloud.ist/drive/f4n4w1dk1y24d2t"
-      },
-      {
-        id: 3,
-        type: "movie",
-        title: "Unabomber",
-        year: "2026",
-        quality: "1080p FHD",
-        size: "1.7 GB",
-        genre: "Biography / Crime",
-        poster: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQN6GkdIvVMcw0AzTZ4UhwJV4tjbaPgLyod9lN1J2Ur-5ZeQTleirhCkBoqVJXXL6cKXMap&s=10",
-        downloadUrl: "https://hubcloud.ist/drive/l8c0im09503aras"
-      },
-      {
-        id: 4,
-        type: "movie",
-        title: "Awarapan 2",
-        year: "2026",
-        quality: "1080p FHD",
-        size: "2.1 GB",
-        genre: "Action / Romance",
-        poster: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRiFbq5VmbkHexC7cXLE9mcbDUzQ5ERkSsn1pQTpQk4ZA&s",
-        downloadUrl: "https://hubcloud.ist/drive/c8ko7pukyzszppd"
-      },
-      {
-        id: 5,
-        type: "movie",
-        title: "The Paradise",
-        year: "2026",
-        quality: "1080p FHD",
-        size: "2.2 GB",
-        genre: "Action / Drama",
-        poster: "https://www.bollywoodhungama.com/wp-content/uploads/2025/08/The-Paradise-01.jpg",
-        downloadUrl: "https://hubcloud.ist/drive/zdik7k9hzu91zid"
-      },
-      {
-        id: 6,
-        type: "movie",
-        title: "Ohh My Dog",
-        year: "2026",
-        quality: "1080p FHD",
-        size: "2.31 GB",
-        genre: "Comedy / Drama",
-        poster: "https://m.media-amazon.com/images/M/MV5BOTk1YTBkMjktMTU4MS00ZWM1LTk1MmQtYzFlMjU0OWU4NWI2XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg",
-        downloadUrl: "https://hubcloud.ist/drive/vvxt9fldyd5id3f"
-      },
-      {
-        id: 7,
-        type: "movie",
-        title: "Hokum",
-        year: "2026",
-        quality: "1080p FHD",
-        size: "1.81 GB",
-        genre: "Action / Thriller",
-        poster: "https://m.media-amazon.com/images/M/MV5BZjA1ZjFlZGItNTVjZC00NTFhLTg2YTEtODMzODRmNGFiNTdmXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg",
-        downloadUrl: "https://hubcloud.ist/drive/lhd2kpctditivvg"
-      },
-      {
-        id: 8,
-        type: "movie",
-        title: "Dhurandhar",
-        year: "2025",
-        quality: "1080p FHD",
-        size: "2.75 GB",
-        genre: "Action / Hindi",
-        poster: "https://m.media-amazon.com/images/M/MV5BMzFiNTVkZjYtM2I3Yi00MGNjLWEyYTAtMGViNGExZmMzMGMzXkEyXkFqcGc@._V1_.jpg",
-        downloadUrl: "https://hubcloud.ist/drive/mcdsshlm8rpr1k1"
-      },
-      {
-        id: 9,
-        type: "movie",
-        title: "The Uprising",
-        year: "2026",
-        quality: "1080p FHD",
-        size: "2.1 GB",
-        genre: "Action / War",
-        poster: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTDfgGgtdicmXemFYig8i7llfaB3zWYII3YHVsUEZMwNHL52Cz4OnFmwN9OZixNSpog8_QGpJGcY1vn9B-vcMEGcLiBuezp8D2ek4zwbg&s",
-        downloadUrl: "https://hubcloud.ist/drive/iq25ylg4yl0l1yx"
-      },
-      {
-        id: 10,
-        type: "movie",
-        title: "Tumbbad",
-        year: "2018",
-        quality: "1080p FHD",
-        size: "1.65 GB",
-        genre: "Horror / Fantasy",
-        poster: "https://a.ltrbxd.com/resized/film-poster/4/6/8/1/9/5/468195-tumbbad-0-1000-0-1500-crop.jpg?v=c48f92ce1f",
-        downloadUrl: "https://hubcloud.ist/drive/qd8k8xyjnj1djdy"
-      },
-      {
-        id: 11,
-        type: "movie",
-        title: "f1",
-        year: "2025",
-        quality: "1080p FHD",
-        size: "2.63 GB",
-        genre: "Thriller / Crime",
-        poster: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSr2SgmDLkFhLGuF1CnP_xJv1stiKvK027DkN6m6wdqdg&s=10",
-        downloadUrl: "https://hubcloud.ist/drive/o21trh2srrmrsrb"
-      },
-      {
-        id: 12,
-        type: "movie",
-        title: "The Woman in the Yard",
-        year: "2026",
-        quality: "1080p FHD",
-        size: "2.84 GB",
-        genre: "Drama / Mystery",
-        poster: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTNHztyeWB99Qix4TPDHOgBaewoKkTxP46uoX4bTp1WWXqbdr-APDp2pAfi7P_uxd8dPFuC&s=10",
-        downloadUrl: "https://hubcloud.ist/drive/qm9mbmmweeiqnqc"
-      },
-      {
-        id: 13,
-        type: "movie",
-        title: "Resident Evil: Afterlife",
-        year: "2026",
-        quality: "1080p FHD",
-        size: "1.38 GB",
-        genre: "Horror / Thriller",
-        poster: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRxVTDFd6H1CvfAdpLrjv2-jUgeKfcpdivIzcb7SiD46rgY9Cw_pEHpOa0A2C2NtRrgz75lyw&s=10",
-        downloadUrl: "https://hubcloud.ist/drive/9tuxnl770ydyh7w"
-      },
-      {
-        id: 14,
-        type: "series",
-        title: "Mirzapur: The Movie",
-        year: "2026",
-        quality: "1080p FHD",
-        size: "2.83GB",
-        genre: "Action / Crime",
-        poster: "https://thumb.wikimedia.org/wikipedia/en/thumb/4/40/Mirzapur_%28film%29.jpg/250px-Mirzapur_%28film%29.jpg?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
-        downloadUrl: "https://hubcloud.ist/drive/2nnwjg32qxu7i1n"
-      },
-      {
-        id: 15,
-        type: "movie",
-        title: "Pooja Meri Jaan",
-        year: "2026",
-        quality: "1080p FHD",
-        size: "2.6 GB",
-        genre: "Action / Drama",
-        poster: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0D_RF-fDeKgCpYkjHmyJsXyQGfSB8JnIqJPTloXl89A&s=10",
-        downloadUrl: "https://hubcloud.ist/drive/tpaypkj6i9tdada"
-      },
-      {
-        id: 16,
-        type: "movie",
-        title: "The Shawshank Redemption",
-        year: "1994",
-        quality: "1080p FHD",
-        size: "2.6 GB",
-        genre: "Drama / Mystery",
-        poster: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSf1DK32xKMQzqSl8wnY1BLVu_gdwsRYzVSNM6A03r6c-fEwrif8raKzkFRuerw1KHdDICvOw&s=10",
-        downloadUrl: "https://hubcloud.ist/drive/cndjr1rkcxrzrzb"
-      },
-      {
-        id: 17,
-        type: "movie",
-        title: "The Godfather",
-        year: "1972",
-        quality: "1080p FHD",
-        size: "2.8 GB",
-        genre: "Crime / Drama",
-        poster: "https://m.media-amazon.com/images/M/MV5BNGEwYjgwOGQtYjg5ZS00Njc1LTk2ZGEtM2QwZWQ2NjdhZTE5XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg",
-        downloadUrl: "https://hubcloud.ist/drive/f1p10z565jkabg1"
-      },
-      {
-        id: 18,
-        type: "movie",
-        title: "Inception",
-        year: "2010",
-        quality: "1080p FHD",
-        size: "2.32 GB",
-        genre: "Action / Sci-Fi",
-        poster: "https://m.media-amazon.com/images/M/MV5BMjAxMzY3NjcxNF5BMl5BanBnXkFtZTcwNTI5OTM0Mw@@._V1_.jpg",
-        downloadUrl: "https://hubcloud.ist/drive/bbngzit6ukt9air"
-      },
-      {
-        id: 19,
-        type: "movie",
-        title: "The Dark Knight",
-        year: "2008",
-        quality: "1080p FHD",
-        size: "2.45 GB",
-        genre: "Action / Crime",
-        poster: "https://m.media-amazon.com/images/M/MV5BMTMxNTMwODM0NF5BMl5BanBnXkFtZTcwODAyMTk2Mw@@._V1_.jpg",
-        downloadUrl: "https://hubcloud.ist/drive/94iwblza2fzzt9n"
-      },
-      {
-        id: 20,
-        type: "movie",
-        title: "Interstellar",
-        year: "2014",
-        quality: "1080p FHD",
-        size: "3.68 GB",
-        genre: "Sci-fi/Adventure",
-        poster: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRGW7C6dkLMzUE-wYDb0t-Ze6UkSQlRzbkHdFbeuqJDeXCglJqSHLx52z2--O6a-gipTe5aIg&s=10",
-        downloadUrl: "https://hubcloud.ist/drive/tlcwldz4lonbl1f"
-      },
-      {
-        id: 21,
-        type: "movie",
-        title: "The Dark Knight Rises",
-        year: "2012",
-        quality: "1080p FHD",
-        size: "3.3 GB",
-        genre: "Action/Thriller",
-        poster: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQpBA5a1V4L0WZ7vOB8DLuZmWwdouli_6N1BUE9Lj46_Sx2Pzd5Hy9P7GNbXBL0a_fPcTrD&s=10",
-        downloadUrl: "https://hubcloud.ist/drive/9hv916dccilc2g6"
-      },
-      {
-        id: 22,
-        type: "movie",
-        title: "The Matrix",
-        year: "1999",
-        quality: "1080p FHD",
-        size: "2.55 GB",
-        genre: "Sci-fi/Action",
-        poster: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQCWXVvfvZR3oe7PCMM0exwV0dObOTKvLfSM-bjvKpQ1VegKXuCtq6aBrxqbIgUNxMbfavy&s=10",
-        downloadUrl: "https://hubcloud.ist/drive/hfhrzhm1yrzgvv3"
-      },
-      {
-        id: 23,
-        type: "movie",
-        title: "The Lord of the Rings: The Fellowship of the Ring",
-        year: "2001",
-        quality: "1080p FHD",
-        size: "3.5 GB",
-        genre: "Fantasy/Adventure",
-        poster: "https://m.media-amazon.com/images/M/MV5BNzIxMDQ2YTctNDY4MC00ZTRhLTk4ODQtMTVlOWY4NTdiYmMwXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg",
-        downloadUrl: "https://hubcloud.ist/drive/gqh9gibdadz3djd"
-      },
-      {
-        id: 24,
-        type: "movie",
-        title: "The Lord of the Rings: The Two Towers",
-        year: "2002",
-        quality: "1080p FHD",
-        size: "3.15 GB",
-        genre: "Fantasy/Adventure",
-        poster: "https://preview.redd.it/what-are-your-thoughts-on-lord-of-the-rings-the-two-towers-v0-jt4xqwrcsw6a1.jpg?width=1080&crop=smart&auto=webp&s=958c7895fc1b9446802e6269142c1477f7c4bb64",
-        downloadUrl: "https://hubcloud.ist/drive/1ljb8la02b3r98g"
-      },
-      {
-        id: 25,
-        type: "movie",
-        title: "The Lord of the Rings: The Return of the King",
-        year: "2003",
-        quality: "1080p FHD",
-        size: "3.51 GB",
-        genre: "Fantasy/Adventure",
-        poster: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQc9TF2jMcUd4xoSyvFS1be_J9C1jHLjm4FTAqmBJs9jcBLzOJoSvylFlc5zMbVnh0LofggQ&s=10",
-        downloadUrl: "https://hubcloud.ist/drive/x1ltxz5lwmlwzzh"
-      },
-      {
-        id: 26,
-        type: "movie",
-        title: "The Lion King",
-        year: "2019",
-        quality: "1080p FHD",
-        size: "2.42 GB",
-        genre: "Animation/Adventure",
-        poster: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmhZ4gVJ0b-nNWauEcPZq5eY_XAaGkcs5tSPQjy5CqGrGhx3zssmY1oxG4YsJxo7yUnG1UFA&s=10",
-        downloadUrl: "https://hubcloud.ist/drive/vqoqixox8br1w11"
-      },
-      {
-        id: 27,
-        type: "movie",
-        title: "The Avengers",
-        year: "2012",
-        quality: "1080p FHD",
-        size: "3.1 GB",
-        genre: "Action/Sci-fi",
-        poster: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQluFl3GfQDXohBaH-xG3GuRi8T4MDIQPRpCqUGLiE5tXdXbUO0hRFwnshvzg07igEgGg7i&s=10",
-        downloadUrl: "https://hubcloud.ist/drive/gf1qxm6t67686t7"
-      },
-      {
-        id: 28,
-        type: "movie",
-        title: "Fight Club",
-        year: "1999",
-        quality: "1080p FHD",
-        size: "1.76 GB",
-        genre: "DRAMA/Thriller",
-        poster: "https://m.media-amazon.com/images/M/MV5BOTgyOGQ1NDItNGU3Ny00MjU3LTg2YWEtNmEyYjBiMjI1Y2M5XkEyXkFqcGc@._V1_.jpg",
-        downloadUrl: "https://hubcloud.ist/drive/bgzza3z_hnoty4n"
-      },
-      {
-        id: 29,
-        type: "movie",
-        title: "Parasite",
-        year: "2019",
-        quality: "1080p FHD",
-        size: "1.72 GB",
-        genre: "Action/Sci-fi",
-        poster: "https://resizing.flixster.com/0nQ2niq2j-E4gdW_kB5H606atmc=/ems.cHJkLWVtcy1hc3NldHMvbW92aWVzLzZlZWEwMmY4LTk1OWUtNGEyOS04ODRmLTA0OWRjMzhlYWZkNi53ZWJw",
-        downloadUrl: "https://hubcloud.ist/drive/9ieip011u1uee7u"
-      },
-      {
-        id: 30,
-        type: "movie",
-        title: "Joker",
-        year: "2019",
-        quality: "1080p FHD",
-        size: "1.94 GB",
-        genre: "Drama/Thriller",
-        poster: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRkNeYGwWeQEwOoPhxW93QIeNUWnLmEvMPwTw9AlDBGN4uXjIAcOEwz2z2yZL8BpXHp3ZYyjQ&s=10",
-        downloadUrl: "https://hubcloud.ist/drive/ik90nnivom0i0no"
-      },
-      {
-        id: 31,
-        type: "movie",
-        title: "Django Unchained",
-        year: "2012",
-        quality: "1080p FHD",
-        size: "3.38 GB",
-        genre: "Western/Action",
-        poster: "https://m.media-amazon.com/images/M/MV5BMjIyNTQ5NjQ1OV5BMl5BanBnXkFtZTcwODg1MDU4OA@@._V1_FMjpg_UX1000_.jpg",
-        downloadUrl: "https://hubcloud.ist/drive/jk3ex08grjxt2t1"
-      },
-      {
-        id: 32,
-        type: "movie",
-        title: "The Social Network",
-        year: "2010",
-        quality: "1080p FHD",
-        size: "2.46GB",
-        genre: "Drama/History",
-        poster: "https://upload.wikimedia.org/wikipedia/en/8/8c/The_Social_Network_film_poster.png?utm_source=en.wikipedia.org&utm_campaign=index&utm_content=original",
-        downloadUrl: "https://hubcloud.ist/drive/ieo58pi9wiw9i5b"
-      }
+    // ==========================================================
+    // 🎬 AAPKI MOVIES KI LIST (Sirf Title & Download Link Dalein)
+    // Poster aur Details Internet se AUTOMATIC aayenge!
+    // ==========================================================
+    const myMovies = [
+      { title: "TOXiC", downloadUrl: "https://hubcloud.ist/drive/m1qcyqeykj1fkz0" },
+      { title: "The Last Voyage", downloadUrl: "https://hubcloud.ist/drive/tofrctls8ssu19z" },
+      { title: "Bombay Stories", downloadUrl: "https://hubcloud.ist/drive/6ms9obt126bo5nb" },
+      { title: "Death of a Unicorn", downloadUrl: "https://hubcloud.ist/drive/f4n4w1dk1y24d2t" },
+      { title: "Unabomber", downloadUrl: "https://hubcloud.ist/drive/l8c0im09503aras" },
+      { title: "Awarapan 2", downloadUrl: "https://hubcloud.ist/drive/c8ko7pukyzszppd" },
+      { title: "The Paradise", downloadUrl: "https://hubcloud.ist/drive/zdik7k9hzu91zid" },
+      { title: "Ohh My Dog", downloadUrl: "https://hubcloud.ist/drive/vvxt9fldyd5id3f" },
+      { title: "Hokum", downloadUrl: "https://hubcloud.ist/drive/lhd2kpctditivvg" },
+      { title: "Dhurandhar", downloadUrl: "https://hubcloud.ist/drive/mcdsshlm8rpr1k1" },
+      { title: "The Uprising", downloadUrl: "https://hubcloud.ist/drive/iq25ylg4yl0l1yx" },
+      { title: "Tumbbad", downloadUrl: "https://hubcloud.ist/drive/qd8k8xyjnj1djdy" },
+      { title: "F1", downloadUrl: "https://hubcloud.ist/drive/o21trh2srrmrsrb" },
+      { title: "The Woman in the Yard", downloadUrl: "https://hubcloud.ist/drive/qm9mbmmweeiqnqc" },
+      { title: "Resident Evil: Afterlife", downloadUrl: "https://hubcloud.ist/drive/9tuxnl770ydyh7w" },
+      { title: "Mirzapur", downloadUrl: "https://hubcloud.ist/drive/2nnwjg32qxu7i1n" },
+      { title: "Pooja Meri Jaan", downloadUrl: "https://hubcloud.ist/drive/tpaypkj6i9tdada" },
+      { title: "The Shawshank Redemption", downloadUrl: "https://hubcloud.ist/drive/cndjr1rkcxrzrzb" },
+      { title: "The Godfather", downloadUrl: "https://hubcloud.ist/drive/f1p10z565jkabg1" },
+      { title: "Inception", downloadUrl: "https://hubcloud.ist/drive/bbngzit6ukt9air" },
+      { title: "The Dark Knight", downloadUrl: "https://hubcloud.ist/drive/94iwblza2fzzt9n" },
+      { title: "Interstellar", downloadUrl: "https://hubcloud.ist/drive/tlcwldz4lonbl1f" },
+      { title: "The Dark Knight Rises", downloadUrl: "https://hubcloud.ist/drive/9hv916dccilc2g6" },
+      { title: "The Matrix", downloadUrl: "https://hubcloud.ist/drive/hfhrzhm1yrzgvv3" },
+      { title: "The Lord of the Rings: The Fellowship of the Ring", downloadUrl: "https://hubcloud.ist/drive/gqh9gibdadz3djd" },
+      { title: "The Lord of the Rings: The Two Towers", downloadUrl: "https://hubcloud.ist/drive/1ljb8la02b3r98g" },
+      { title: "The Lord of the Rings: The Return of the King", downloadUrl: "https://hubcloud.ist/drive/x1ltxz5lwmlwzzh" },
+      { title: "The Lion King", downloadUrl: "https://hubcloud.ist/drive/vqoqixox8br1w11" },
+      { title: "The Avengers", downloadUrl: "https://hubcloud.ist/drive/gf1qxm6t67686t7" },
+      { title: "Fight Club", downloadUrl: "https://hubcloud.ist/drive/bgzza3z_hnoty4n" },
+      { title: "Parasite", downloadUrl: "https://hubcloud.ist/drive/9ieip011u1uee7u" },
+      { title: "Joker", downloadUrl: "https://hubcloud.ist/drive/ik90nnivom0i0no" },
+      { title: "Django Unchained", downloadUrl: "https://hubcloud.ist/drive/jk3ex08grjxt2t1" },
+      { title: "The Social Network", downloadUrl: "https://hubcloud.ist/drive/ieo58pi9wiw9i5b" },
+      { title: "RRR", downloadUrl: "https://hubcloud.ist/drive/vshodeofhyvfdoj" },
+      
     ];
 
+    let fullMoviesList = [];
     let currentCategory = 'all';
 
+    // Helper: Normalize names for matching
+    function cleanName(n) {
+      return (n || "").toLowerCase().replace(/[^a-z0-9]/g, "");
+    }
+
     // ==========================================
-    // 1. RENDER AUTO-SCROLL CAROUSEL
+    // 🚀 AUTO-LOAD ALL MOVIES DETAILS VIA TMDB
     // ==========================================
-    function renderCarousel() {
+    async function loadAllMoviesAuto() {
+      const loader = document.getElementById('searchLoader');
+      loader.classList.remove('hidden');
+
+      const promises = myMovies.map(async (item) => {
+        try {
+          const res = await fetch(`https://api.themoviedb.org/3/search/multi?api_key=${TMDB_API_KEY}&query=${encodeURIComponent(item.title)}&include_adult=false`);
+          const data = await res.json();
+          const match = data.results && data.results.length > 0 ? data.results[0] : null;
+
+          if (match) {
+            const isTv = match.media_type === 'tv';
+            const release = isTv ? match.first_air_date : match.release_date;
+            return {
+              title: isTv ? match.name : match.title,
+              type: isTv ? 'series' : 'movie',
+              year: release ? release.split('-')[0] : '2026',
+              vote: match.vote_average ? match.vote_average.toFixed(1) : '8.5',
+              poster: match.poster_path ? `https://image.tmdb.org/t/p/w500${match.poster_path}` : 'https://via.placeholder.com/300x450/111827/ffffff?text=' + encodeURIComponent(item.title),
+              genre: isTv ? 'Web Series' : 'Movie',
+              downloadUrl: item.downloadUrl
+            };
+          }
+        } catch (e) {
+          console.error(e);
+        }
+
+        // Fallback agar internet slow ho
+        return {
+          title: item.title,
+          type: 'movie',
+          year: '2026',
+          vote: '8.0',
+          poster: 'https://via.placeholder.com/300x450/111827/ffffff?text=' + encodeURIComponent(item.title),
+          genre: '1080p FHD',
+          downloadUrl: item.downloadUrl
+        };
+      });
+
+      fullMoviesList = await Promise.all(promises);
+      loader.classList.add('hidden');
+
+      renderCarousel(fullMoviesList);
+      filterContent();
+    }
+
+    // ==========================================
+    // 1. RENDER CAROUSEL
+    // ==========================================
+    function renderCarousel(list) {
       const track = document.getElementById('carouselTrack');
-      const loopList = [...moviesData, ...moviesData];
+      const loopList = [...list, ...list];
       
       track.innerHTML = loopList.map(item => `
-        <a href="${item.downloadUrl || '#requestSection'}" target="${item.downloadUrl ? '_blank' : '_self'}" rel="noopener noreferrer" 
+        <a href="${item.downloadUrl}" target="_blank" rel="noopener noreferrer" 
            class="flex-shrink-0 w-44 sm:w-52 bg-zinc-900 border border-zinc-800 rounded-xl overflow-hidden hover:border-red-600 transition group">
           <div class="relative aspect-[16/10] overflow-hidden bg-zinc-950">
             <img src="${item.poster}" alt="${item.title}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-            <span class="absolute top-1.5 left-1.5 bg-red-600 text-white font-bold text-[9px] px-1.5 py-0.5 rounded">
-              ${item.type === 'series' ? 'SERIES' : '1080p'}
-            </span>
-            <span class="absolute bottom-1.5 right-1.5 bg-black/80 text-zinc-300 text-[9px] px-1.5 py-0.5 rounded">${item.size || 'HD'}</span>
+            <span class="absolute top-1.5 left-1.5 bg-red-600 text-white font-bold text-[9px] px-1.5 py-0.5 rounded">1080p</span>
+            <span class="absolute bottom-1.5 right-1.5 bg-black/80 text-zinc-300 text-[9px] px-1.5 py-0.5 rounded">⭐ ${item.vote}</span>
           </div>
           <div class="p-2.5">
             <h4 class="text-white text-xs font-semibold truncate group-hover:text-red-500 transition">${item.title}</h4>
@@ -657,7 +370,7 @@
               rel="noopener noreferrer"
               class="w-full bg-red-600 hover:bg-red-700 text-white text-xs font-semibold py-2 px-3 rounded-lg flex items-center justify-center gap-1.5 transition active:scale-95 shadow-md shadow-red-900/30"
             >
-              <i class="fa-solid fa-download"></i> ${item.type === 'series' ? 'Download Series' : 'Download (1080p)'}
+              <i class="fa-solid fa-download"></i> Download (1080p)
             </a>`
           : `<button 
               onclick="requestMovie('${item.title.replace(/'/g, "\\'")}')" 
@@ -667,36 +380,32 @@
             </button>`;
 
         card.innerHTML = `
-          <!-- Poster -->
           <div class="relative block aspect-[2/3] overflow-hidden bg-zinc-950">
             <img 
               src="${item.poster}" 
               alt="${item.title}" 
               class="w-full h-full object-cover group-hover:scale-105 transition duration-500"
               loading="lazy"
-              onerror="this.src='https://via.placeholder.com/300x450/111827/ffffff?text=Poster+Unavailable'"
             >
             <span class="absolute top-2 left-2 ${item.type === 'series' ? 'bg-blue-600' : 'bg-red-600'} text-white font-extrabold text-[10px] px-2 py-0.5 rounded shadow">
-              ${item.type === 'series' ? 'WEB SERIES' : (item.quality || '1080p FHD')}
+              ${item.type === 'series' ? 'WEB SERIES' : '1080p FHD'}
             </span>
             <span class="absolute bottom-2 right-2 bg-black/85 backdrop-blur text-zinc-300 font-semibold text-[10px] px-2 py-0.5 rounded border border-zinc-700">
-              ${item.size || (item.vote ? '⭐ ' + item.vote : '1080p')}
+              ⭐ ${item.vote}
             </span>
           </div>
 
-          <!-- Details & Action Button -->
           <div class="p-3.5 flex flex-col flex-1 justify-between gap-3">
             <div>
               <div class="flex items-center justify-between text-[11px] text-zinc-400 mb-1">
-                <span>${item.year || '2026'}</span>
+                <span>${item.year}</span>
                 <span class="text-zinc-500">•</span>
-                <span class="truncate max-w-[100px]">${item.genre || 'Dual Audio'}</span>
+                <span>${item.genre}</span>
               </div>
               <h3 class="font-bold text-white text-sm hover:text-red-500 transition line-clamp-1">
                 ${item.title}
               </h3>
             </div>
-
             ${actionBtn}
           </div>
         `;
@@ -721,7 +430,7 @@
       filterOrSearch();
     }
 
-    // Helper: Request movie to chat
+    // Request movie click
     window.requestMovie = function(movieTitle) {
       const msgInput = document.getElementById('commentMsg');
       msgInput.value = `Mujhe "${movieTitle}" ka 1080p direct download link upload karke dijiye.`;
@@ -730,35 +439,41 @@
     };
 
     // ==========================================
-    // 4. TMDB LIVE SEARCH ENGINE
+    // 4. SEARCH (LOCAL + TMDB LIVE FETCH)
     // ==========================================
     let searchDebounce = null;
+
+    function filterContent() {
+      const term = document.getElementById('searchInput').value.trim();
+      const filtered = fullMoviesList.filter(item => {
+        const matchesCategory = (currentCategory === 'all') || (item.type === currentCategory);
+        const matchesSearch = !term || item.title.toLowerCase().includes(term.toLowerCase());
+        return matchesCategory && matchesSearch;
+      });
+      renderMovies(filtered);
+    }
 
     async function filterOrSearch() {
       const term = document.getElementById('searchInput').value.trim();
       const loader = document.getElementById('searchLoader');
 
-      // Agar search box khali hai toh local movies show karein
       if (!term) {
         loader.classList.add('hidden');
-        const filtered = moviesData.filter(item => (currentCategory === 'all') || (item.type === currentCategory));
-        renderMovies(filtered);
+        filterContent();
         return;
       }
 
-      // Pehle local list me match dekhein
-      const localMatches = moviesData.filter(item => {
+      // Pehle local array filter karein
+      const localMatches = fullMoviesList.filter(item => {
         const matchesCategory = (currentCategory === 'all') || (item.type === currentCategory);
-        const matchesSearch = item.title.toLowerCase().includes(term.toLowerCase()) || (item.genre && item.genre.toLowerCase().includes(term.toLowerCase()));
-        return matchesCategory && matchesSearch;
+        return matchesCategory && item.title.toLowerCase().includes(term.toLowerCase());
       });
 
-      // Agar local me match mil gaya toh pehle wo dikhayein
       if (localMatches.length > 0) {
         renderMovies(localMatches);
       }
 
-      // TMDB se live fetch karein
+      // TMDB live search
       loader.classList.remove('hidden');
       clearTimeout(searchDebounce);
       searchDebounce = setTimeout(async () => {
@@ -773,30 +488,26 @@
               .map(r => {
                 const isTv = r.media_type === 'tv';
                 const title = isTv ? r.name : r.title;
-                const releaseDate = isTv ? r.first_air_date : r.release_date;
-                const year = releaseDate ? releaseDate.split('-')[0] : '2026';
+                const release = isTv ? r.first_air_date : r.release_date;
                 const poster = r.poster_path ? `https://image.tmdb.org/t/p/w500${r.poster_path}` : 'https://via.placeholder.com/300x450/111827/ffffff?text=' + encodeURIComponent(title);
 
-                // Check agar yeh movie local array me already link ke sath hai
-                const existing = moviesData.find(m => m.title.toLowerCase() === title.toLowerCase());
+                // Check local link
+                const existing = myMovies.find(m => cleanName(m.title) === cleanName(title));
 
                 return {
-                  id: r.id,
-                  type: isTv ? 'series' : 'movie',
                   title: title,
-                  year: year,
-                  quality: '1080p FHD',
-                  vote: r.vote_average ? r.vote_average.toFixed(1) : '',
+                  type: isTv ? 'series' : 'movie',
+                  year: release ? release.split('-')[0] : '2026',
+                  vote: r.vote_average ? r.vote_average.toFixed(1) : '8.0',
                   poster: poster,
                   genre: isTv ? 'Web Series' : 'Movie',
                   downloadUrl: existing ? existing.downloadUrl : null
                 };
               });
 
-            // Local + TMDB results merge karein (Duplicates avoid karke)
             const combined = [...localMatches];
             tmdbResults.forEach(item => {
-              if (!combined.some(c => c.title.toLowerCase() === item.title.toLowerCase())) {
+              if (!combined.some(c => cleanName(c.title) === cleanName(item.title))) {
                 if (currentCategory === 'all' || item.type === currentCategory) {
                   combined.push(item);
                 }
@@ -805,21 +516,19 @@
 
             renderMovies(combined);
           }
-        } catch (err) {
+        } catch (e) {
           loader.classList.add('hidden');
-          console.error("TMDB Fetch Error:", err);
         }
       }, 400);
     }
 
-    // Initial load
-    renderCarousel();
-    renderMovies(moviesData);
-
     // Search Input Listener
     document.getElementById('searchInput').addEventListener('input', filterOrSearch);
 
-    // Chat / Comment Submission
+    // Initial Auto Load
+    loadAllMoviesAuto();
+
+    // Comment Chat Submission
     document.getElementById('commentForm').addEventListener('submit', (e) => {
       e.preventDefault();
       const name = document.getElementById('commentName').value.trim();
