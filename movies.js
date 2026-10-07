@@ -1,0 +1,43 @@
+// ==========================================================
+// 🎬 HUB CLOUD MOVIES DATABASE
+// Aage se koi bhi nayi movie ka link add karna ho toh
+// bas yahan neeche ek nayi line add karni hai:
+// { title: "Movie Name", downloadUrl: "Link" },
+// ==========================================================
+const myMovies = [
+  { title: "TOXiC", downloadUrl: "https://hubcloud.ist/drive/m1qcyqeykj1fkz0" },
+  { title: "The Last Voyage", downloadUrl: "https://hubcloud.ist/drive/tofrctls8ssu19z" },
+  { title: "Bombay Stories", downloadUrl: "https://hubcloud.ist/drive/6ms9obt126bo5nb" },
+  { title: "Death of a Unicorn", downloadUrl: "https://hubcloud.ist/drive/f4n4w1dk1y24d2t" },
+  { title: "Unabomber", downloadUrl: "https://hubcloud.ist/drive/l8c0im09503aras" },
+  { title: "Awarapan 2", downloadUrl: "https://hubcloud.ist/drive/c8ko7pukyzszppd" },
+  { title: "The Paradise", downloadUrl: "https://hubcloud.ist/drive/zdik7k9hzu91zid" },
+  { title: "Ohh My Dog", downloadUrl: "https://hubcloud.ist/drive/vvxt9fldyd5id3f" },
+  { title: "Hokum", downloadUrl: "https://hubcloud.ist/drive/lhd2kpctditivvg" },
+  { title: "Dhurandhar", downloadUrl: "https://hubcloud.ist/drive/mcdsshlm8rpr1k1" },
+  { title: "The Uprising", downloadUrl: "https://hubcloud.ist/drive/iq25ylg4yl0l1yx" },
+  { title: "Tumbbad", downloadUrl: "https://hubcloud.ist/drive/qd8k8xyjnj1djdy" },
+  { title: "F1", downloadUrl: "https://hubcloud.ist/drive/o21trh2srrmrsrb" },
+  { title: "The Woman in the Yard", downloadUrl: "https://hubcloud.ist/drive/qm9mbmmweeiqnqc" },
+  { title: "Resident Evil: Afterlife", downloadUrl: "https://hubcloud.ist/drive/9tuxnl770ydyh7w" },
+  { title: "Mirzapur", downloadUrl: "https://hubcloud.ist/drive/2nnwjg32qxu7i1n" },
+  { title: "Pooja Meri Jaan", downloadUrl: "https://hubcloud.ist/drive/tpaypkj6i9tdada" },
+  { title: "The Shawshank Redemption", downloadUrl: "https://hubcloud.ist/drive/cndjr1rkcxrzrzb" },
+  { title: "The Godfather", downloadUrl: "https://hubcloud.ist/drive/f1p10z565jkabg1" },
+  { title: "Inception", downloadUrl: "https://hubcloud.ist/drive/bbngzit6ukt9air" },
+  { title: "The Dark Knight", downloadUrl: "https://hubcloud.ist/drive/94iwblza2fzzt9n" },
+  { title: "Interstellar", downloadUrl: "https://hubcloud.ist/drive/tlcwldz4lonbl1f" },
+  { title: "The Dark Knight Rises", downloadUrl: "https://hubcloud.ist/drive/9hv916dccilc2g6" },
+  { title: "The Matrix", downloadUrl: "https://hubcloud.ist/drive/hfhrzhm1yrzgvv3" },
+  { title: "The Lord of the Rings: The Fellowship of the Ring", downloadUrl: "https://hubcloud.ist/drive/gqh9gibdadz3djd" },
+  { title: "The Lord of the Rings: The Two Towers", downloadUrl: "https://hubcloud.ist/drive/1ljb8la02b3r98g" },
+  { title: "The Lord of the Rings: The Return of the King", downloadUrl: "https://hubcloud.ist/drive/x1ltxz5lwmlwzzh" },
+  { title: "The Lion King", downloadUrl: "https://hubcloud.ist/drive/vqoqixox8br1w11" },
+  { title: "The Avengers", downloadUrl: "https://hubcloud.ist/drive/gf1qxm6t67686t7" },
+  { title: "Fight Club", downloadUrl: "https://hubcloud.ist/drive/bgzza3z_hnoty4n" },
+  { title: "Parasite", downloadUrl: "https://hubcloud.ist/drive/9ieip011u1uee7u" },
+  { title: "Joker", downloadUrl: "https://hubcloud.ist/drive/ik90nnivom0i0no" },
+  { title: "Django Unchained", downloadUrl: "https://hubcloud.ist/drive/jk3ex08grjxt2t1" },
+  { title: "The Social Network", downloadUrl: "https://hubcloud.ist/drive/ieo58pi9wiw9i5b" },
+  { title: "RRR", downloadUrl: "https://hubcloud.ist/drive/vshodeofhyvfdoj" }
+];
