@@ -214,56 +214,14 @@
     <p>© HUB CLOUD MOVIES 1080p Portal. High-Speed Direct Downloads.</p>
   </footer>
 
+  <!-- 🔗 EXTERNAL MOVIES DATABASE CONNECT -->
+  <script src="movies.js"></script>
+
   <script>
     const TMDB_API_KEY = "e13cf1f3d38d468fa2073b407d19949f";
-
-    // ==========================================================
-    // 🎬 AAPKI MOVIES KI LIST (Sirf Title & Download Link Dalein)
-    // Poster aur Details Internet se AUTOMATIC aayenge!
-    // ==========================================================
-    const myMovies = [
-      { title: "TOXiC", downloadUrl: "https://hubcloud.ist/drive/m1qcyqeykj1fkz0" },
-      { title: "The Last Voyage", downloadUrl: "https://hubcloud.ist/drive/tofrctls8ssu19z" },
-      { title: "Bombay Stories", downloadUrl: "https://hubcloud.ist/drive/6ms9obt126bo5nb" },
-      { title: "Death of a Unicorn", downloadUrl: "https://hubcloud.ist/drive/f4n4w1dk1y24d2t" },
-      { title: "Unabomber", downloadUrl: "https://hubcloud.ist/drive/l8c0im09503aras" },
-      { title: "Awarapan 2", downloadUrl: "https://hubcloud.ist/drive/c8ko7pukyzszppd" },
-      { title: "The Paradise", downloadUrl: "https://hubcloud.ist/drive/zdik7k9hzu91zid" },
-      { title: "Ohh My Dog", downloadUrl: "https://hubcloud.ist/drive/vvxt9fldyd5id3f" },
-      { title: "Hokum", downloadUrl: "https://hubcloud.ist/drive/lhd2kpctditivvg" },
-      { title: "Dhurandhar", downloadUrl: "https://hubcloud.ist/drive/mcdsshlm8rpr1k1" },
-      { title: "The Uprising", downloadUrl: "https://hubcloud.ist/drive/iq25ylg4yl0l1yx" },
-      { title: "Tumbbad", downloadUrl: "https://hubcloud.ist/drive/qd8k8xyjnj1djdy" },
-      { title: "F1", downloadUrl: "https://hubcloud.ist/drive/o21trh2srrmrsrb" },
-      { title: "The Woman in the Yard", downloadUrl: "https://hubcloud.ist/drive/qm9mbmmweeiqnqc" },
-      { title: "Resident Evil: Afterlife", downloadUrl: "https://hubcloud.ist/drive/9tuxnl770ydyh7w" },
-      { title: "Mirzapur", downloadUrl: "https://hubcloud.ist/drive/2nnwjg32qxu7i1n" },
-      { title: "Pooja Meri Jaan", downloadUrl: "https://hubcloud.ist/drive/tpaypkj6i9tdada" },
-      { title: "The Shawshank Redemption", downloadUrl: "https://hubcloud.ist/drive/cndjr1rkcxrzrzb" },
-      { title: "The Godfather", downloadUrl: "https://hubcloud.ist/drive/f1p10z565jkabg1" },
-      { title: "Inception", downloadUrl: "https://hubcloud.ist/drive/bbngzit6ukt9air" },
-      { title: "The Dark Knight", downloadUrl: "https://hubcloud.ist/drive/94iwblza2fzzt9n" },
-      { title: "Interstellar", downloadUrl: "https://hubcloud.ist/drive/tlcwldz4lonbl1f" },
-      { title: "The Dark Knight Rises", downloadUrl: "https://hubcloud.ist/drive/9hv916dccilc2g6" },
-      { title: "The Matrix", downloadUrl: "https://hubcloud.ist/drive/hfhrzhm1yrzgvv3" },
-      { title: "The Lord of the Rings: The Fellowship of the Ring", downloadUrl: "https://hubcloud.ist/drive/gqh9gibdadz3djd" },
-      { title: "The Lord of the Rings: The Two Towers", downloadUrl: "https://hubcloud.ist/drive/1ljb8la02b3r98g" },
-      { title: "The Lord of the Rings: The Return of the King", downloadUrl: "https://hubcloud.ist/drive/x1ltxz5lwmlwzzh" },
-      { title: "The Lion King", downloadUrl: "https://hubcloud.ist/drive/vqoqixox8br1w11" },
-      { title: "The Avengers", downloadUrl: "https://hubcloud.ist/drive/gf1qxm6t67686t7" },
-      { title: "Fight Club", downloadUrl: "https://hubcloud.ist/drive/bgzza3z_hnoty4n" },
-      { title: "Parasite", downloadUrl: "https://hubcloud.ist/drive/9ieip011u1uee7u" },
-      { title: "Joker", downloadUrl: "https://hubcloud.ist/drive/ik90nnivom0i0no" },
-      { title: "Django Unchained", downloadUrl: "https://hubcloud.ist/drive/jk3ex08grjxt2t1" },
-      { title: "The Social Network", downloadUrl: "https://hubcloud.ist/drive/ieo58pi9wiw9i5b" },
-      { title: "RRR", downloadUrl: "https://hubcloud.ist/drive/vshodeofhyvfdoj" },
-      
-    ];
-
     let fullMoviesList = [];
     let currentCategory = 'all';
 
-    // Helper: Normalize names for matching
     function cleanName(n) {
       return (n || "").toLowerCase().replace(/[^a-z0-9]/g, "");
     }
@@ -273,9 +231,11 @@
     // ==========================================
     async function loadAllMoviesAuto() {
       const loader = document.getElementById('searchLoader');
-      loader.classList.remove('hidden');
+      if (loader) loader.classList.remove('hidden');
 
-      const promises = myMovies.map(async (item) => {
+      const sourceList = (typeof myMovies !== 'undefined' && Array.isArray(myMovies)) ? myMovies : [];
+
+      const promises = sourceList.map(async (item) => {
         try {
           const res = await fetch(`https://api.themoviedb.org/3/search/multi?api_key=${TMDB_API_KEY}&query=${encodeURIComponent(item.title)}&include_adult=false`);
           const data = await res.json();
@@ -298,7 +258,6 @@
           console.error(e);
         }
 
-        // Fallback agar internet slow ho
         return {
           title: item.title,
           type: 'movie',
@@ -311,21 +270,20 @@
       });
 
       fullMoviesList = await Promise.all(promises);
-      loader.classList.add('hidden');
+      if (loader) loader.classList.add('hidden');
 
       renderCarousel(fullMoviesList);
       filterContent();
     }
 
-    // ==========================================
     // 1. RENDER CAROUSEL
-    // ==========================================
     function renderCarousel(list) {
       const track = document.getElementById('carouselTrack');
+      if (!track) return;
       const loopList = [...list, ...list];
       
       track.innerHTML = loopList.map(item => `
-        <a href="${item.downloadUrl}" target="_blank" rel="noopener noreferrer" 
+        <a href="${item.downloadUrl || '#requestSection'}" target="${item.downloadUrl ? '_blank' : '_self'}" rel="noopener noreferrer" 
            class="flex-shrink-0 w-44 sm:w-52 bg-zinc-900 border border-zinc-800 rounded-xl overflow-hidden hover:border-red-600 transition group">
           <div class="relative aspect-[16/10] overflow-hidden bg-zinc-950">
             <img src="${item.poster}" alt="${item.title}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
@@ -343,20 +301,19 @@
       `).join('');
     }
 
-    // ==========================================
     // 2. RENDER MAIN GRID
-    // ==========================================
     function renderMovies(data) {
       const grid = document.getElementById('movieGrid');
       const noResults = document.getElementById('noResults');
+      if (!grid) return;
 
       grid.innerHTML = '';
 
       if (!data || data.length === 0) {
-        noResults.classList.remove('hidden');
+        if (noResults) noResults.classList.remove('hidden');
         return;
       }
-      noResults.classList.add('hidden');
+      if (noResults) noResults.classList.add('hidden');
 
       data.forEach(item => {
         const card = document.createElement('div');
@@ -413,38 +370,38 @@
       });
     }
 
-    // ==========================================
     // 3. CATEGORY SWITCH LOGIC
-    // ==========================================
     function setCategory(category) {
       currentCategory = category;
 
       document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-      document.getElementById(`tab-${category}`).classList.add('active');
+      const activeBtn = document.getElementById(`tab-${category}`);
+      if (activeBtn) activeBtn.classList.add('active');
 
       const heading = document.getElementById('sectionHeading');
-      if (category === 'movie') heading.innerHTML = '<i class="fa-solid fa-film text-red-600"></i> Latest Movies (1080p)';
-      else if (category === 'series') heading.innerHTML = '<i class="fa-solid fa-tv text-blue-500"></i> Popular Web Series';
-      else heading.innerHTML = '<i class="fa-solid fa-bolt text-red-600"></i> Latest 1080p Uploads';
+      if (heading) {
+        if (category === 'movie') heading.innerHTML = '<i class="fa-solid fa-film text-red-600"></i> Latest Movies (1080p)';
+        else if (category === 'series') heading.innerHTML = '<i class="fa-solid fa-tv text-blue-500"></i> Popular Web Series';
+        else heading.innerHTML = '<i class="fa-solid fa-bolt text-red-600"></i> Latest 1080p Uploads';
+      }
 
       filterOrSearch();
     }
 
-    // Request movie click
     window.requestMovie = function(movieTitle) {
       const msgInput = document.getElementById('commentMsg');
+      if (!msgInput) return;
       msgInput.value = `Mujhe "${movieTitle}" ka 1080p direct download link upload karke dijiye.`;
       document.getElementById('requestSection').scrollIntoView({ behavior: 'smooth' });
       msgInput.focus();
     };
 
-    // ==========================================
     // 4. SEARCH (LOCAL + TMDB LIVE FETCH)
-    // ==========================================
     let searchDebounce = null;
 
     function filterContent() {
-      const term = document.getElementById('searchInput').value.trim();
+      const searchEl = document.getElementById('searchInput');
+      const term = searchEl ? searchEl.value.trim() : '';
       const filtered = fullMoviesList.filter(item => {
         const matchesCategory = (currentCategory === 'all') || (item.type === currentCategory);
         const matchesSearch = !term || item.title.toLowerCase().includes(term.toLowerCase());
@@ -458,12 +415,11 @@
       const loader = document.getElementById('searchLoader');
 
       if (!term) {
-        loader.classList.add('hidden');
+        if (loader) loader.classList.add('hidden');
         filterContent();
         return;
       }
 
-      // Pehle local array filter karein
       const localMatches = fullMoviesList.filter(item => {
         const matchesCategory = (currentCategory === 'all') || (item.type === currentCategory);
         return matchesCategory && item.title.toLowerCase().includes(term.toLowerCase());
@@ -473,14 +429,13 @@
         renderMovies(localMatches);
       }
 
-      // TMDB live search
-      loader.classList.remove('hidden');
+      if (loader) loader.classList.remove('hidden');
       clearTimeout(searchDebounce);
       searchDebounce = setTimeout(async () => {
         try {
           const res = await fetch(`https://api.themoviedb.org/3/search/multi?api_key=${TMDB_API_KEY}&query=${encodeURIComponent(term)}&include_adult=false`);
           const data = await res.json();
-          loader.classList.add('hidden');
+          if (loader) loader.classList.add('hidden');
 
           if (data && data.results) {
             const tmdbResults = data.results
@@ -491,8 +446,7 @@
                 const release = isTv ? r.first_air_date : r.release_date;
                 const poster = r.poster_path ? `https://image.tmdb.org/t/p/w500${r.poster_path}` : 'https://via.placeholder.com/300x450/111827/ffffff?text=' + encodeURIComponent(title);
 
-                // Check local link
-                const existing = myMovies.find(m => cleanName(m.title) === cleanName(title));
+                const existing = (typeof myMovies !== 'undefined') ? myMovies.find(m => cleanName(m.title) === cleanName(title)) : null;
 
                 return {
                   title: title,
@@ -517,12 +471,11 @@
             renderMovies(combined);
           }
         } catch (e) {
-          loader.classList.add('hidden');
+          if (loader) loader.classList.add('hidden');
         }
       }, 400);
     }
 
-    // Search Input Listener
     document.getElementById('searchInput').addEventListener('input', filterOrSearch);
 
     // Initial Auto Load
