@@ -1,10 +1,1 @@
-{
-  id: 10,
-  title: "Tumbbad",
-  year: "2018",
-  quality: "1080p FHD",
-  size: "1.65 GB",
-  genre: "Horror / Fantasy",
-  poster: "https://a.ltrbxd.com/resized/film-poster/4/6/8/1/9/5/468195-tumbbad-0-1000-0-1500-crop.jpg?v=c48f92ce1f",
-  downloadUrl: "https://hubcloud.ist/drive/qd8k8xyjnj1djdy"
-},
+{ title: "Nayi Movie Ka Naam", downloadUrl: "Aapka Download Link" },{ title: "Nayi Movie Ka Naam", downloadUrl: "Aapka Download Link" },
