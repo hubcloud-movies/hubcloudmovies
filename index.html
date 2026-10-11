@@ -3,46 +3,65 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>HUB CLOUD MOVIES - 1080p Movie Downloads</title>
+  <title>HUB CLOUD MOVIES - Direct Downloads</title>
   
-  <!-- 🔥 CUSTOM CINEMATIC FAVICON -->
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='25' fill='%230b0c10'/><circle cx='50' cy='50' r='42' fill='none' stroke='%23e50914' stroke-width='6'/><polygon points='40,32 72,50 40,68' fill='%23e50914'/></svg>">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='25' fill='%23141414'/><circle cx='50' cy='50' r='42' fill='none' stroke='%23e50914' stroke-width='6'/><polygon points='40,32 72,50 40,68' fill='%23e50914'/></svg>">
 
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     body {
-      background-color: #000000;
-      color: #e5e7eb;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    }
-    .poster-card {
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-    .poster-card:hover {
-      transform: translateY(-6px) scale(1.02);
-      box-shadow: 0 15px 30px -10px rgba(229, 9, 20, 0.45);
+      background-color: #141414;
+      color: #e5e5e5;
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      overflow-x: hidden;
     }
 
-    /* Auto Scroll Carousel Animation */
+    #netflixIntro {
+      position: fixed;
+      inset: 0;
+      background: #000000;
+      z-index: 99999;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .intro-logo {
+      animation: netflixScale 1.8s ease-in-out forwards;
+      letter-spacing: 0.25em;
+    }
+    @keyframes netflixScale {
+      0% { transform: scale(0.65); opacity: 0; filter: blur(8px); }
+      50% { transform: scale(1.05); opacity: 1; filter: blur(0px); }
+      80% { transform: scale(1.15); opacity: 1; }
+      100% { transform: scale(1.35); opacity: 0; }
+    }
+
+    .netflix-card {
+      transition: transform 0.35s cubic-bezier(0.2, 0, 0.1, 1), box-shadow 0.35s ease;
+      transform-origin: center bottom;
+    }
+    .netflix-card:hover {
+      transform: translateY(-8px) scale(1.04);
+      box-shadow: 0 16px 32px rgba(0, 0, 0, 0.8), 0 0 18px rgba(229, 9, 20, 0.35);
+      z-index: 30;
+    }
+
     @keyframes autoScroll {
-      0% {
-        transform: translateX(0);
-      }
-      100% {
-        transform: translateX(-50%);
-      }
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
     }
     .carousel-track {
       display: flex;
       width: max-content;
-      animation: autoScroll 35s linear infinite;
+      animation: autoScroll 40s linear infinite;
     }
     .carousel-track:hover {
       animation-play-state: paused;
     }
 
-    /* Active Tab Style */
     .tab-btn.active {
       background-color: #e50914;
       color: #ffffff;
@@ -52,23 +71,33 @@
 </head>
 <body class="min-h-screen flex flex-col">
 
+  <!-- NETFLIX INTRO -->
+  <div id="netflixIntro">
+    <div class="intro-logo text-center">
+      <div class="flex items-center justify-center gap-3 text-red-600 font-black text-4xl sm:text-6xl drop-shadow-[0_0_35px_rgba(229,9,20,0.9)]">
+        <i class="fa-solid fa-cloud"></i>
+        <span>HUB CLOUD</span>
+      </div>
+      <p class="text-white text-xs sm:text-sm font-semibold tracking-[0.4em] mt-3">MOVIES & SERIES</p>
+    </div>
+  </div>
+
   <!-- NAVIGATION -->
-  <header class="sticky top-0 z-50 bg-[#0b0c10]/95 backdrop-blur-md border-b border-zinc-800">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex flex-col sm:flex-row items-center justify-between gap-4">
-      <a href="#" class="flex items-center gap-2 text-2xl font-black tracking-wider text-red-600">
+  <header class="sticky top-0 z-50 bg-[#141414]/95 backdrop-blur-md border-b border-zinc-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3.5 flex flex-col sm:flex-row items-center justify-between gap-3">
+      <a href="#" class="flex items-center gap-2.5 text-2xl font-black tracking-wider text-red-600">
         <i class="fa-solid fa-cloud text-3xl"></i>
         <span>HUB CLOUD <span class="text-white">MOVIES</span></span>
       </a>
 
-      <!-- TMDB LIVE SEARCH INPUT -->
       <div class="relative w-full sm:w-96">
         <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-3.5 text-zinc-400"></i>
         <input 
           type="text" 
           id="searchInput" 
           autocomplete="off"
-          placeholder="search here..." 
-          class="w-full pl-10 pr-10 py-2 bg-zinc-900 border border-zinc-700 rounded-full text-sm text-white placeholder-zinc-400 focus:outline-none focus:border-red-600 transition"
+          placeholder="Search movies, series, titles..." 
+          class="w-full pl-10 pr-10 py-2 bg-zinc-900 border border-zinc-700 rounded-full text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-red-600 transition"
         >
         <span id="searchLoader" class="hidden absolute right-3.5 top-3 text-red-500 text-xs">
           <i class="fa-solid fa-spinner fa-spin"></i>
@@ -77,296 +106,266 @@
     </div>
   </header>
 
-  <!-- AUTO-SCROLLING FEATURED BANNER -->
-  <section class="max-w-7xl mx-auto px-4 sm:px-6 pt-6 pb-2 w-full">
-    <div class="flex items-center justify-between mb-3">
+  <!-- TRENDING SPOTLIGHT -->
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 pt-5 pb-2 w-full">
+    <div class="flex items-center justify-between mb-2.5">
       <span class="text-xs font-bold uppercase tracking-widest text-red-500 flex items-center gap-1.5">
-        <i class="fa-solid fa-fire text-yellow-400"></i> Trending Spotlight
+        <i class="fa-solid fa-fire text-yellow-400"></i> Trending Top Picks
       </span>
-      <span class="text-[11px] text-zinc-500">Auto-moving (Hover to pause)</span>
+      <span class="text-[11px] text-zinc-500">Auto-playing banner</span>
     </div>
 
-    <!-- Carousel Container -->
-    <div class="relative w-full overflow-hidden rounded-2xl bg-zinc-950/80 border border-zinc-800/80 p-3 sm:p-4">
-      <div id="carouselTrack" class="carousel-track flex gap-4">
-        <!-- Dynamic Injection -->
-      </div>
+    <div class="relative w-full overflow-hidden rounded-2xl bg-zinc-950 border border-zinc-800/80 p-3">
+      <div id="carouselTrack" class="carousel-track flex gap-3.5"></div>
     </div>
   </section>
 
-  <!-- CATEGORY FILTER BUTTONS -->
+  <!-- CATEGORY SELECTOR -->
   <section class="max-w-7xl mx-auto px-4 sm:px-6 pt-4 w-full">
-    <div class="flex flex-wrap items-center gap-2.5 border-b border-zinc-800/80 pb-3">
-      <button 
-        type="button"
-        onclick="setCategory('all')" 
-        id="tab-all" 
-        class="tab-btn active px-4 py-1.5 rounded-full text-xs font-bold border border-zinc-700 bg-zinc-900 text-zinc-300 hover:border-red-600 transition flex items-center gap-1.5"
-      >
-        <i class="fa-solid fa-layer-group"></i> All Content
+    <div class="flex flex-wrap items-center gap-2 border-b border-zinc-800 pb-3">
+      <button type="button" onclick="setCategory('all')" id="tab-all" class="tab-btn active px-4 py-1.5 rounded-full text-xs font-bold border border-zinc-700 bg-zinc-900 text-zinc-300 hover:border-red-600 transition">
+        <i class="fa-solid fa-layer-group mr-1"></i> All
       </button>
-
-      <button 
-        type="button"
-        onclick="setCategory('movie')" 
-        id="tab-movie" 
-        class="tab-btn px-4 py-1.5 rounded-full text-xs font-bold border border-zinc-700 bg-zinc-900 text-zinc-300 hover:border-red-600 transition flex items-center gap-1.5"
-      >
-        <i class="fa-solid fa-film"></i> Movies
+      <button type="button" onclick="setCategory('movie')" id="tab-movie" class="tab-btn px-4 py-1.5 rounded-full text-xs font-bold border border-zinc-700 bg-zinc-900 text-zinc-300 hover:border-red-600 transition">
+        <i class="fa-solid fa-film mr-1"></i> Movies
       </button>
-
-      <button 
-        type="button"
-        onclick="setCategory('series')" 
-        id="tab-series" 
-        class="tab-btn px-4 py-1.5 rounded-full text-xs font-bold border border-zinc-700 bg-zinc-900 text-zinc-300 hover:border-red-600 transition flex items-center gap-1.5"
-      >
-        <i class="fa-solid fa-tv"></i> Web Series
+      <button type="button" onclick="setCategory('series')" id="tab-series" class="tab-btn px-4 py-1.5 rounded-full text-xs font-bold border border-zinc-700 bg-zinc-900 text-zinc-300 hover:border-red-600 transition">
+        <i class="fa-solid fa-tv mr-1"></i> Web Series
       </button>
     </div>
   </section>
 
-  <!-- MAIN LIST CONTAINER -->
-  <main class="max-w-7xl mx-auto px-4 sm:px-6 py-6 flex-1 w-full">
-    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-5">
+  <!-- GRID -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 py-5 flex-1 w-full">
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
       <h2 id="sectionHeading" class="text-lg font-bold text-white flex items-center gap-2">
-        <i class="fa-solid fa-bolt text-red-600"></i> Latest 1080p Uploads
+        <i class="fa-solid fa-play text-red-600"></i> Dual Audio Downloads
       </h2>
-      <span class="inline-flex items-center gap-1.5 px-3 py-1 bg-red-600/20 text-red-400 border border-red-500/40 rounded-full text-xs font-bold w-fit">
-        <i class="fa-solid fa-language text-sm"></i> Only Dual Language Dubbing All Movies (Hindi - English)
+      <span class="inline-flex items-center gap-1.5 px-3 py-1 bg-red-600/15 text-red-400 border border-red-500/30 rounded-full text-[11px] font-bold w-fit">
+        <i class="fa-solid fa-language"></i> Dual Audio (Hindi - English)
       </span>
     </div>
 
-    <div id="movieGrid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 sm:gap-6">
-      <!-- Dynamic Injection -->
-    </div>
+    <div id="movieGrid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3.5 sm:gap-5"></div>
 
     <div id="noResults" class="hidden text-center py-16">
       <i class="fa-solid fa-video-slash text-4xl text-zinc-600 mb-2"></i>
-      <p class="text-zinc-400 text-sm">Koi content nahi mila.</p>
+      <p class="text-zinc-400 text-sm">Koi title nahi mila.</p>
     </div>
   </main>
 
-  <!-- 💬 CHAT & COMMENT BOX SECTION -->
+  <!-- 🍿 DOWNLOAD MODAL (QUALITY & EPISODE SELECTOR POPUP) -->
+  <div id="downloadModal" class="fixed inset-0 bg-black/85 backdrop-blur-md z-[100] hidden flex items-center justify-center p-4">
+    <div class="bg-zinc-900 border border-zinc-800 rounded-2xl max-w-md w-full overflow-hidden shadow-2xl animate-fade-in">
+      <div class="relative bg-zinc-950 p-4 border-b border-zinc-800 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <img id="modalPoster" src="" class="w-12 h-16 object-cover rounded-md border border-zinc-700">
+          <div>
+            <h3 id="modalTitle" class="text-sm font-bold text-white line-clamp-1"></h3>
+            <span id="modalMeta" class="text-[11px] text-zinc-400"></span>
+          </div>
+        </div>
+        <button onclick="closeModal()" class="text-zinc-400 hover:text-white p-2 text-lg">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <div class="p-5 max-h-[60vh] overflow-y-auto" id="modalOptionsContainer">
+        <!-- JS Injects Quality or Episodes Here -->
+      </div>
+    </div>
+  </div>
+
+  <!-- REQUEST SECTION -->
   <section id="requestSection" class="max-w-4xl mx-auto px-4 w-full my-6">
     <div class="bg-zinc-900 border border-zinc-800 rounded-2xl p-5 sm:p-6">
-      <h3 class="text-base sm:text-lg font-bold text-white flex items-center gap-2 mb-2">
-        <i class="fa-solid fa-comments text-red-500"></i> Movie & Web Series Request Chat
+      <h3 class="text-base sm:text-lg font-bold text-white flex items-center gap-2 mb-1.5">
+        <i class="fa-solid fa-comments text-red-500"></i> Request Movies & Series
       </h3>
-      <p class="text-xs text-zinc-400 mb-4">Aapko kaunsi movie ya web series chahiye ya koi link me problem ho toh comment karein.</p>
+      <p class="text-xs text-zinc-400 mb-3.5">Agar koi link kaam na kare ya nayi movie chahiye toh request daalein.</p>
       
       <form id="commentForm" class="space-y-3">
-        <input 
-          type="text" 
-          id="commentName" 
-          placeholder="Aapka Naam" 
-          required 
-          class="w-full px-3.5 py-2 bg-zinc-950 border border-zinc-700 rounded-lg text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-red-600 transition"
-        >
-        <textarea 
-          id="commentMsg" 
-          rows="3" 
-          placeholder="Apna comment ya request likhein..." 
-          required 
-          class="w-full px-3.5 py-2 bg-zinc-950 border border-zinc-700 rounded-lg text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-red-600 transition"
-        ></textarea>
-        <button 
-          type="submit" 
-          class="bg-red-600 hover:bg-red-700 text-white font-semibold text-xs px-5 py-2.5 rounded-lg transition active:scale-95 flex items-center gap-1.5"
-        >
+        <input type="text" id="commentName" placeholder="Aapka Naam" required class="w-full px-3.5 py-2 bg-zinc-950 border border-zinc-700 rounded-lg text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-red-600 transition">
+        <textarea id="commentMsg" rows="3" placeholder="Movie/Series ka naam aur Quality likhein..." required class="w-full px-3.5 py-2 bg-zinc-950 border border-zinc-700 rounded-lg text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-red-600 transition"></textarea>
+        <button type="submit" class="bg-red-600 hover:bg-red-700 text-white font-semibold text-xs px-5 py-2.5 rounded-lg transition active:scale-95 flex items-center gap-1.5">
           <i class="fa-solid fa-paper-plane"></i> Send Request
         </button>
       </form>
 
-      <div id="commentList" class="mt-5 space-y-2.5 border-t border-zinc-800/80 pt-4">
-        <div class="bg-zinc-950/70 p-3 rounded-lg border border-zinc-800/60">
+      <div id="commentList" class="mt-4 space-y-2.5 border-t border-zinc-800 pt-3.5">
+        <div class="bg-zinc-950 p-3 rounded-lg border border-zinc-800">
           <div class="flex items-center justify-between text-xs mb-1">
             <span class="font-bold text-red-500">Admin</span>
             <span class="text-[10px] text-zinc-500">Pinned</span>
           </div>
-          <p class="text-xs text-zinc-300">Welcome to HUB CLOUD MOVIES! Agar koi movie ka download link nahi mil raha toh Request button dabayein.</p>
+          <p class="text-xs text-zinc-300">Welcome to HUB CLOUD MOVIES! Fast 480p, 720p, 1080p direct download links available.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- SPONSOR & BUSINESS INQUIRY SECTION -->
-  <section class="max-w-4xl mx-auto px-4 w-full my-6">
-    <div class="bg-gradient-to-r from-zinc-900 via-zinc-900 to-red-950/40 border border-zinc-800 rounded-2xl p-6 sm:p-8 text-center flex flex-col items-center">
-      <div class="w-12 h-12 rounded-full bg-red-600/10 border border-red-500/20 flex items-center justify-center text-red-500 text-xl mb-3">
-        <i class="fa-solid fa-handshake"></i>
-      </div>
-      <h3 class="text-lg sm:text-xl font-bold text-white">Sponsorship & Business Inquiries</h3>
-      <p class="text-xs sm:text-sm text-zinc-400 max-w-lg mt-1 mb-4">
-        Website par promotions, banner ads ya sponsorship deals ke liye direct contact karein.
-      </p>
-
-      <a 
-        id="sponsorEmailBtn"
-        href="mailto:Comcinevault@gmail.com?subject=Sponsorship%20Inquiry%20-%20HUB%20CLOUD%20MOVIES" 
-        class="inline-flex items-center gap-2.5 bg-red-600 hover:bg-red-700 text-white text-sm font-semibold py-2.5 px-6 rounded-full transition shadow-lg shadow-red-900/40 active:scale-95"
-      >
-        <i class="fa-solid fa-envelope"></i>
-        <span>Comcinevault@gmail.com</span>
-      </a>
-      <span class="text-[11px] text-zinc-500 mt-2">Click karke direct email open ho jayega</span>
-    </div>
-  </section>
-
   <!-- FOOTER -->
-  <footer class="bg-zinc-950 border-t border-zinc-800/80 py-6 text-center text-xs text-zinc-500">
-    <p>© HUB CLOUD MOVIES 1080p Portal. High-Speed Direct Downloads.</p>
+  <footer class="bg-black border-t border-zinc-900 py-6 text-center text-xs text-zinc-500">
+    <p>© HUB CLOUD MOVIES. Fast Direct Downloads.</p>
   </footer>
 
-  <!-- 🔗 EXTERNAL MOVIES DATABASE CONNECT -->
+  <!-- SCRIPT FILES -->
   <script src="movies.js"></script>
+  <script src="series.js"></script>
 
   <script>
     const TMDB_API_KEY = "e13cf1f3d38d468fa2073b407d19949f";
+    let combinedLocalData = [];
     let fullMoviesList = [];
     let currentCategory = 'all';
+
+    // Splash animation
+    window.addEventListener('load', () => {
+      const splash = document.getElementById('netflixIntro');
+      setTimeout(() => {
+        splash.style.opacity = '0';
+        setTimeout(() => { splash.style.display = 'none'; }, 700);
+      }, 1400);
+    });
 
     function cleanName(n) {
       return (n || "").toLowerCase().replace(/[^a-z0-9]/g, "");
     }
 
-    // ==========================================
-    // 🚀 AUTO-LOAD ALL MOVIES DETAILS VIA TMDB
-    // ==========================================
-    async function loadAllMoviesAuto() {
+    async function loadDataOptimized() {
       const loader = document.getElementById('searchLoader');
       if (loader) loader.classList.remove('hidden');
 
-      const sourceList = (typeof myMovies !== 'undefined' && Array.isArray(myMovies)) ? myMovies : [];
+      const movieList = (typeof myMovies !== 'undefined' && Array.isArray(myMovies)) ? myMovies.map(m => ({ ...m, type: 'movie' })) : [];
+      const seriesList = (typeof mySeries !== 'undefined' && Array.isArray(mySeries)) ? mySeries.map(s => ({ ...s, type: 'series' })) : [];
+      combinedLocalData = [...movieList, ...seriesList];
 
-      const promises = sourceList.map(async (item) => {
+      const promises = combinedLocalData.map(async (item) => {
         try {
-          const res = await fetch(`https://api.themoviedb.org/3/search/multi?api_key=${TMDB_API_KEY}&query=${encodeURIComponent(item.title)}&include_adult=false`);
+          const endpoint = item.type === 'series' ? 'tv' : 'movie';
+          const res = await fetch(`https://api.themoviedb.org/3/search/${endpoint}?api_key=${TMDB_API_KEY}&query=${encodeURIComponent(item.title)}&include_adult=false`);
           const data = await res.json();
           const match = data.results && data.results.length > 0 ? data.results[0] : null;
 
           if (match) {
-            const isTv = match.media_type === 'tv';
+            const isTv = item.type === 'series';
             const release = isTv ? match.first_air_date : match.release_date;
             return {
               title: isTv ? match.name : match.title,
-              type: isTv ? 'series' : 'movie',
+              type: item.type,
+              season: item.season || null,
+              episodes: item.episodes || null,
+              links: item.links || null,
+              downloadUrl: item.downloadUrl || null,
               year: release ? release.split('-')[0] : '2026',
               vote: match.vote_average ? match.vote_average.toFixed(1) : '8.5',
-              poster: match.poster_path ? `https://image.tmdb.org/t/p/w500${match.poster_path}` : 'https://via.placeholder.com/300x450/111827/ffffff?text=' + encodeURIComponent(item.title),
-              genre: isTv ? 'Web Series' : 'Movie',
-              downloadUrl: item.downloadUrl
+              poster: match.poster_path ? `https://image.tmdb.org/t/p/w342${match.poster_path}` : 'https://via.placeholder.com/300x450/141414/ffffff?text=' + encodeURIComponent(item.title),
+              genre: isTv ? 'Web Series' : 'Movie'
             };
           }
-        } catch (e) {
-          console.error(e);
-        }
+        } catch (e) {}
 
         return {
           title: item.title,
-          type: 'movie',
+          type: item.type,
+          season: item.season || null,
+          episodes: item.episodes || null,
+          links: item.links || null,
+          downloadUrl: item.downloadUrl || null,
           year: '2026',
           vote: '8.0',
-          poster: 'https://via.placeholder.com/300x450/111827/ffffff?text=' + encodeURIComponent(item.title),
-          genre: '1080p FHD',
-          downloadUrl: item.downloadUrl
+          poster: 'https://via.placeholder.com/300x450/141414/ffffff?text=' + encodeURIComponent(item.title),
+          genre: item.type === 'series' ? 'Web Series' : 'Movie'
         };
       });
 
       fullMoviesList = await Promise.all(promises);
       if (loader) loader.classList.add('hidden');
-
       renderCarousel(fullMoviesList);
       filterContent();
     }
 
-    // 1. RENDER CAROUSEL (No #requestSection jumping)
+    // Carousel Render
     function renderCarousel(list) {
       const track = document.getElementById('carouselTrack');
       if (!track) return;
       const loopList = [...list, ...list];
-      
-      track.innerHTML = loopList.map(item => {
-        const hasUrl = Boolean(item.downloadUrl);
-        const clickAttr = hasUrl 
-          ? `href="${item.downloadUrl}" target="_blank" rel="noopener noreferrer"` 
-          : `href="javascript:void(0)" onclick="requestMovie('${item.title.replace(/'/g, "\\'")}')"`;
 
-        return `
-          <a ${clickAttr} class="flex-shrink-0 w-44 sm:w-52 bg-zinc-900 border border-zinc-800 rounded-xl overflow-hidden hover:border-red-600 transition group cursor-pointer">
-            <div class="relative aspect-[16/10] overflow-hidden bg-zinc-950">
-              <img src="${item.poster}" alt="${item.title}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-              <span class="absolute top-1.5 left-1.5 bg-red-600 text-white font-bold text-[9px] px-1.5 py-0.5 rounded">1080p</span>
-              <span class="absolute bottom-1.5 right-1.5 bg-black/80 text-zinc-300 text-[9px] px-1.5 py-0.5 rounded">⭐ ${item.vote}</span>
+      track.innerHTML = loopList.map((item, index) => `
+        <div onclick="openItemModal(${index % list.length})" class="flex-shrink-0 w-36 sm:w-48 bg-zinc-900 border border-zinc-800 rounded-xl overflow-hidden hover:border-red-600 transition group cursor-pointer">
+          <div class="relative aspect-[16/10] overflow-hidden bg-black">
+            <img src="${item.poster}" alt="${item.title}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" loading="lazy">
+            <span class="absolute top-1.5 left-1.5 ${item.type === 'series' ? 'bg-blue-600' : 'bg-red-600'} text-white font-extrabold text-[8px] px-1.5 py-0.5 rounded">
+              ${item.type === 'series' ? 'SERIES' : 'MOVIE'}
+            </span>
+            <span class="absolute bottom-1.5 right-1.5 bg-black/80 text-zinc-300 text-[9px] px-1.5 py-0.5 rounded">⭐ ${item.vote}</span>
+          </div>
+          <div class="p-2">
+            <h4 class="text-white text-xs font-semibold truncate group-hover:text-red-500 transition">${item.title}</h4>
+            <div class="text-[10px] text-zinc-400 mt-0.5 flex justify-between">
+              <span>${item.season || item.year}</span>
+              <span class="text-red-500 font-bold"><i class="fa-solid fa-download"></i> Download</span>
             </div>
-            <div class="p-2.5">
-              <h4 class="text-white text-xs font-semibold truncate group-hover:text-red-500 transition">${item.title}</h4>
-              <div class="text-[10px] text-zinc-400 mt-0.5 flex justify-between">
-                <span>${item.year}</span>
-                <span class="text-red-500 font-bold"><i class="fa-solid fa-download"></i> ${hasUrl ? 'Fast Link' : 'Request'}</span>
-              </div>
-            </div>
-          </a>
-        `;
-      }).join('');
+          </div>
+        </div>
+      `).join('');
     }
 
-    // 2. RENDER MAIN GRID
+    // Grid Render (Clean "Download" Button without 1080p)
     function renderMovies(data) {
       const grid = document.getElementById('movieGrid');
       const noResults = document.getElementById('noResults');
       if (!grid) return;
 
       grid.innerHTML = '';
-
       if (!data || data.length === 0) {
         if (noResults) noResults.classList.remove('hidden');
         return;
       }
       if (noResults) noResults.classList.add('hidden');
 
-      data.forEach(item => {
+      data.forEach((item) => {
         const card = document.createElement('div');
-        card.className = "poster-card bg-zinc-900 border border-zinc-800 rounded-xl overflow-hidden flex flex-col group";
+        card.className = "netflix-card bg-zinc-900 border border-zinc-800 rounded-xl overflow-hidden flex flex-col group relative cursor-pointer";
+        card.onclick = (e) => {
+          if (!e.target.closest('button') && !e.target.closest('a')) {
+            showDetails(item);
+          }
+        };
 
-        const hasLink = Boolean(item.downloadUrl);
-        const actionBtn = hasLink 
-          ? `<a 
-              href="${item.downloadUrl}" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              class="w-full bg-red-600 hover:bg-red-700 text-white text-xs font-semibold py-2 px-3 rounded-lg flex items-center justify-center gap-1.5 transition active:scale-95 shadow-md shadow-red-900/30"
+        const hasAnyLink = Boolean(item.links || item.downloadUrl || (item.episodes && item.episodes.length > 0));
+
+        const actionBtn = hasAnyLink 
+          ? `<button 
+              type="button"
+              onclick="event.stopPropagation(); showDetails(${JSON.stringify(item).replace(/"/g, '&quot;')})" 
+              class="w-full bg-red-600 hover:bg-red-700 text-white text-xs font-semibold py-2 px-3 rounded-lg flex items-center justify-center gap-1.5 transition active:scale-95 shadow-md shadow-red-900/40"
             >
-              <i class="fa-solid fa-download"></i> ${item.type === 'series' ? 'Download Series' : 'Download (1080p)'}
-            </a>`
+              <i class="fa-solid fa-download"></i> Download
+            </button>`
           : `<button 
               type="button"
-              onclick="requestMovie('${item.title.replace(/'/g, "\\'")}')" 
+              onclick="event.stopPropagation(); requestMovie('${item.title.replace(/'/g, "\\'")}')" 
               class="w-full bg-zinc-800 hover:bg-red-600 text-zinc-300 hover:text-white text-xs font-semibold py-2 px-3 rounded-lg flex items-center justify-center gap-1.5 transition active:scale-95 border border-zinc-700 hover:border-red-600"
             >
-              <i class="fa-solid fa-bell"></i> Request 1080p Link
+              <i class="fa-solid fa-bell"></i> Request Link
             </button>`;
 
         card.innerHTML = `
-          <div class="relative block aspect-[2/3] overflow-hidden bg-zinc-950">
-            <img 
-              src="${item.poster}" 
-              alt="${item.title}" 
-              class="w-full h-full object-cover group-hover:scale-105 transition duration-500"
-              loading="lazy"
-            >
-            <span class="absolute top-2 left-2 ${item.type === 'series' ? 'bg-blue-600' : 'bg-red-600'} text-white font-extrabold text-[10px] px-2 py-0.5 rounded shadow">
-              ${item.type === 'series' ? 'WEB SERIES' : '1080p FHD'}
+          <div class="relative block aspect-[2/3] overflow-hidden bg-black">
+            <img src="${item.poster}" alt="${item.title}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" loading="lazy">
+            <span class="absolute top-2 left-2 ${item.type === 'series' ? 'bg-blue-600' : 'bg-red-600'} text-white font-extrabold text-[9px] px-2 py-0.5 rounded shadow">
+              ${item.type === 'series' ? 'WEB SERIES' : 'MOVIE'}
             </span>
-            <span class="absolute bottom-2 right-2 bg-black/85 backdrop-blur text-zinc-300 font-semibold text-[10px] px-2 py-0.5 rounded border border-zinc-700">
+            <span class="absolute bottom-2 right-2 bg-black/85 text-zinc-300 font-semibold text-[9px] px-1.5 py-0.5 rounded border border-zinc-700">
               ⭐ ${item.vote}
             </span>
           </div>
 
-          <div class="p-3.5 flex flex-col flex-1 justify-between gap-3">
+          <div class="p-3 flex flex-col flex-1 justify-between gap-2.5">
             <div>
-              <div class="flex items-center justify-between text-[11px] text-zinc-400 mb-1">
-                <span>${item.year}</span>
+              <div class="flex items-center justify-between text-[10px] text-zinc-400 mb-0.5">
+                <span>${item.season || item.year}</span>
                 <span class="text-zinc-500">•</span>
                 <span>${item.genre}</span>
               </div>
@@ -381,7 +380,92 @@
       });
     }
 
-    // 3. CATEGORY SWITCH LOGIC
+    // Modal Trigger
+    window.openItemModal = function(index) {
+      if (fullMoviesList[index]) {
+        showDetails(fullMoviesList[index]);
+      }
+    };
+
+    // 🍿 OPEN DETAILS POPUP (QUALITY / EPISODES)
+    window.showDetails = function(item) {
+      const modal = document.getElementById('downloadModal');
+      const modalPoster = document.getElementById('modalPoster');
+      const modalTitle = document.getElementById('modalTitle');
+      const modalMeta = document.getElementById('modalMeta');
+      const container = document.getElementById('modalOptionsContainer');
+
+      modalPoster.src = item.poster;
+      modalTitle.innerText = item.title;
+      modalMeta.innerText = `${item.year} • ${item.genre} • ⭐ ${item.vote}`;
+      container.innerHTML = '';
+
+      if (item.type === 'series') {
+        // WEB SERIES EPISODES
+        const epList = item.episodes || [];
+        if (epList.length === 0 && item.downloadUrl) {
+          container.innerHTML = `
+            <a href="${item.downloadUrl}" target="_blank" class="w-full bg-red-600 hover:bg-red-700 text-white font-bold text-xs py-3 px-4 rounded-xl flex items-center justify-between transition">
+              <span>Download Complete Pack</span>
+              <i class="fa-solid fa-download"></i>
+            </a>
+          `;
+        } else if (epList.length > 0) {
+          container.innerHTML = `<h4 class="text-xs font-bold uppercase tracking-wider text-zinc-400 mb-3">Select Episode</h4>`;
+          const listDiv = document.createElement('div');
+          listDiv.className = "space-y-2";
+
+          epList.forEach((ep) => {
+            listDiv.innerHTML += `
+              <div class="flex items-center justify-between bg-zinc-950 p-2.5 rounded-xl border border-zinc-800 hover:border-zinc-700 transition">
+                <span class="text-xs font-semibold text-white">${ep.name}</span>
+                <a href="${ep.link}" target="_blank" rel="noopener noreferrer" class="bg-red-600 hover:bg-red-700 text-white text-[11px] font-bold py-1.5 px-3 rounded-lg flex items-center gap-1.5 transition">
+                  <i class="fa-solid fa-download"></i> Download
+                </a>
+              </div>
+            `;
+          });
+          container.appendChild(listDiv);
+        } else {
+          container.innerHTML = `
+            <p class="text-xs text-zinc-400 text-center mb-3">Link abhi add nahi hua hai.</p>
+            <button onclick="closeModal(); requestMovie('${item.title}')" class="w-full bg-zinc-800 hover:bg-red-600 text-white text-xs py-2.5 rounded-lg transition">Request Series</button>
+          `;
+        }
+      } else {
+        // MOVIE QUALITIES (480p, 720p, 1080p)
+        const links = item.links || {};
+        const q480 = links["480p"] || item.downloadUrl;
+        const q720 = links["720p"] || item.downloadUrl;
+        const q1080 = links["1080p"] || item.downloadUrl;
+
+        container.innerHTML = `
+          <h4 class="text-xs font-bold uppercase tracking-wider text-zinc-400 mb-3">Select Quality</h4>
+          <div class="space-y-2.5">
+            <a href="${q480}" target="_blank" rel="noopener noreferrer" class="w-full bg-zinc-950 hover:bg-red-600/20 border border-zinc-800 hover:border-red-600 text-white text-xs font-semibold py-2.5 px-4 rounded-xl flex items-center justify-between transition group">
+              <span class="flex items-center gap-2"><i class="fa-solid fa-file-video text-zinc-400 group-hover:text-red-500"></i> 480p Standard</span>
+              <span class="bg-red-600 text-white text-[10px] px-2 py-0.5 rounded font-bold">Fast Download</span>
+            </a>
+            <a href="${q720}" target="_blank" rel="noopener noreferrer" class="w-full bg-zinc-950 hover:bg-red-600/20 border border-zinc-800 hover:border-red-600 text-white text-xs font-semibold py-2.5 px-4 rounded-xl flex items-center justify-between transition group">
+              <span class="flex items-center gap-2"><i class="fa-solid fa-film text-zinc-400 group-hover:text-red-500"></i> 720p HD</span>
+              <span class="bg-red-600 text-white text-[10px] px-2 py-0.5 rounded font-bold">Recommended</span>
+            </a>
+            <a href="${q1080}" target="_blank" rel="noopener noreferrer" class="w-full bg-zinc-950 hover:bg-red-600/20 border border-zinc-800 hover:border-red-600 text-white text-xs font-semibold py-2.5 px-4 rounded-xl flex items-center justify-between transition group">
+              <span class="flex items-center gap-2"><i class="fa-solid fa-compact-disc text-zinc-400 group-hover:text-red-500"></i> 1080p Full HD</span>
+              <span class="bg-red-600 text-white text-[10px] px-2 py-0.5 rounded font-bold">Best Quality</span>
+            </a>
+          </div>
+        `;
+      }
+
+      modal.classList.remove('hidden');
+    };
+
+    window.closeModal = function() {
+      document.getElementById('downloadModal').classList.add('hidden');
+    };
+
+    // Category Tabs
     function setCategory(category) {
       currentCategory = category;
 
@@ -391,29 +475,24 @@
 
       const heading = document.getElementById('sectionHeading');
       if (heading) {
-        if (category === 'movie') heading.innerHTML = '<i class="fa-solid fa-film text-red-600"></i> Latest Movies (1080p)';
-        else if (category === 'series') heading.innerHTML = '<i class="fa-solid fa-tv text-blue-500"></i> Popular Web Series';
-        else heading.innerHTML = '<i class="fa-solid fa-bolt text-red-600"></i> Latest 1080p Uploads';
+        if (category === 'movie') heading.innerHTML = '<i class="fa-solid fa-film text-red-600"></i> Latest Movies';
+        else if (category === 'series') heading.innerHTML = '<i class="fa-solid fa-tv text-blue-500"></i> Web Series & Seasons';
+        else heading.innerHTML = '<i class="fa-solid fa-play text-red-600"></i> Dual Audio Downloads';
       }
 
       filterOrSearch();
     }
 
-    // ONLY smooth scroll when user explicitly clicks "Request"
     window.requestMovie = function(movieTitle) {
       const msgInput = document.getElementById('commentMsg');
       if (!msgInput) return;
-      msgInput.value = `Mujhe "${movieTitle}" ka 1080p direct download link upload karke dijiye.`;
+      msgInput.value = `Mujhe "${movieTitle}" ka download link upload karke dijiye.`;
       const targetSec = document.getElementById('requestSection');
-      if (targetSec) {
-        targetSec.scrollIntoView({ behavior: 'smooth' });
-      }
+      if (targetSec) targetSec.scrollIntoView({ behavior: 'smooth' });
       msgInput.focus();
     };
 
-    // 4. SEARCH (Search karte time scroll bilkul nahi hoga)
     let searchDebounce = null;
-
     function filterContent() {
       const searchEl = document.getElementById('searchInput');
       const term = searchEl ? searchEl.value.trim() : '';
@@ -440,9 +519,7 @@
         return matchesCategory && item.title.toLowerCase().includes(term.toLowerCase());
       });
 
-      if (localMatches.length > 0) {
-        renderMovies(localMatches);
-      }
+      if (localMatches.length > 0) renderMovies(localMatches);
 
       if (loader) loader.classList.remove('hidden');
       clearTimeout(searchDebounce);
@@ -459,18 +536,21 @@
                 const isTv = r.media_type === 'tv';
                 const title = isTv ? r.name : r.title;
                 const release = isTv ? r.first_air_date : r.release_date;
-                const poster = r.poster_path ? `https://image.tmdb.org/t/p/w500${r.poster_path}` : 'https://via.placeholder.com/300x450/111827/ffffff?text=' + encodeURIComponent(title);
+                const poster = r.poster_path ? `https://image.tmdb.org/t/p/w342${r.poster_path}` : 'https://via.placeholder.com/300x450/141414/ffffff?text=' + encodeURIComponent(title);
 
-                const existing = (typeof myMovies !== 'undefined') ? myMovies.find(m => cleanName(m.title) === cleanName(title)) : null;
+                const existing = combinedLocalData.find(m => cleanName(m.title) === cleanName(title));
 
                 return {
                   title: title,
                   type: isTv ? 'series' : 'movie',
+                  season: existing ? existing.season : (isTv ? 'All Seasons' : null),
+                  episodes: existing ? existing.episodes : null,
+                  links: existing ? existing.links : null,
+                  downloadUrl: existing ? existing.downloadUrl : null,
                   year: release ? release.split('-')[0] : '2026',
                   vote: r.vote_average ? r.vote_average.toFixed(1) : '8.0',
                   poster: poster,
-                  genre: isTv ? 'Web Series' : 'Movie',
-                  downloadUrl: existing ? existing.downloadUrl : null
+                  genre: isTv ? 'Web Series' : 'Movie'
                 };
               });
 
@@ -488,15 +568,13 @@
         } catch (e) {
           if (loader) loader.classList.add('hidden');
         }
-      }, 400);
+      }, 350);
     }
 
     document.getElementById('searchInput').addEventListener('input', filterOrSearch);
 
-    // Initial Load
-    loadAllMoviesAuto();
+    loadDataOptimized();
 
-    // Comment Chat Submission
     document.getElementById('commentForm').addEventListener('submit', (e) => {
       e.preventDefault();
       const name = document.getElementById('commentName').value.trim();
@@ -505,7 +583,7 @@
 
       const commentList = document.getElementById('commentList');
       const newComment = document.createElement('div');
-      newComment.className = "bg-zinc-950/70 p-3 rounded-lg border border-zinc-800/60";
+      newComment.className = "bg-zinc-950 p-3 rounded-lg border border-zinc-800";
       newComment.innerHTML = `
         <div class="flex items-center justify-between text-xs mb-1">
           <span class="font-bold text-white">${name}</span>
