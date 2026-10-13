@@ -56,7 +56,7 @@
     .carousel-track {
       display: flex;
       width: max-content;
-      animation: autoScroll 40s linear infinite;
+      animation: autoScroll 400s linear infinite;
     }
     .carousel-track:hover {
       animation-play-state: paused;
@@ -78,7 +78,7 @@
 </head>
 <body class="min-h-screen flex flex-col">
 
-  <!-- NETFLIX INTRO -->
+  <!-- NETFLIX INTRO SPLASH -->
   <div id="netflixIntro">
     <div class="intro-logo text-center">
       <div class="flex items-center justify-center gap-3 text-red-600 font-black text-4xl sm:text-6xl drop-shadow-[0_0_35px_rgba(229,9,20,0.9)]">
@@ -117,7 +117,7 @@
   <section class="max-w-7xl mx-auto px-4 sm:px-6 pt-5 pb-2 w-full">
     <div class="flex items-center justify-between mb-2.5">
       <span class="text-xs font-bold uppercase tracking-widest text-red-500 flex items-center gap-1.5">
-        <i class="fa-solid fa-fire text-yellow-400"></i> Trending Spotlight
+        <i class="fa-solid fa-fire text-yellow-400"></i> Trending Spotlight (Sorted by Year)
       </span>
       <span class="text-[11px] text-zinc-500">Auto-playing banner</span>
     </div>
@@ -127,7 +127,7 @@
     </div>
   </section>
 
-  <!-- 🔥 ACCURATE CATEGORY TABS -->
+  <!-- CATEGORY BUTTONS -->
   <section class="max-w-7xl mx-auto px-4 sm:px-6 pt-4 w-full">
     <div class="flex items-center gap-2 border-b border-zinc-800 pb-3 overflow-x-auto no-scrollbar">
       <button type="button" onclick="setCategory('all')" id="tab-all" class="tab-btn active whitespace-nowrap px-4 py-1.5 rounded-full text-xs font-bold border border-zinc-700 bg-zinc-900 text-zinc-300 hover:border-red-600 transition">
@@ -164,14 +164,14 @@
     </div>
   </section>
 
-  <!-- CONTENT GRID -->
+  <!-- MAIN CONTENT GRID (YEAR WISE SORTED) -->
   <main class="max-w-7xl mx-auto px-4 sm:px-6 py-5 flex-1 w-full">
     <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
       <h2 id="sectionHeading" class="text-lg font-bold text-white flex items-center gap-2">
-        <i class="fa-solid fa-play text-red-600"></i> All Direct Downloads
+        <i class="fa-solid fa-calendar-days text-red-600"></i> Latest Releases (Year-wise)
       </h2>
       <span class="inline-flex items-center gap-1.5 px-3 py-1 bg-red-600/15 text-red-400 border border-red-500/30 rounded-full text-[11px] font-bold w-fit">
-        <i class="fa-solid fa-check-circle"></i> High Speed Dual Audio Links
+        <i class="fa-solid fa-arrow-down-wide-short"></i> 2026 ➔ 2025 ➔ 2024 Order
       </span>
     </div>
 
@@ -179,11 +179,11 @@
 
     <div id="noResults" class="hidden text-center py-16">
       <i class="fa-solid fa-video-slash text-4xl text-zinc-600 mb-2"></i>
-      <p class="text-zinc-400 text-sm">Koi title nahi mila.</p>
+      <p class="text-zinc-400 text-sm">Koi content nahi mila.</p>
     </div>
   </main>
 
-  <!-- DOWNLOAD MODAL -->
+  <!-- QUALITY & EPISODE DOWNLOAD POPUP MODAL -->
   <div id="downloadModal" class="fixed inset-0 bg-black/85 backdrop-blur-md z-[100] hidden flex items-center justify-center p-4">
     <div class="bg-zinc-900 border border-zinc-800 rounded-2xl max-w-md w-full overflow-hidden shadow-2xl">
       <div class="relative bg-zinc-950 p-4 border-b border-zinc-800 flex items-center justify-between">
@@ -203,13 +203,13 @@
     </div>
   </div>
 
-  <!-- REQUEST SECTION -->
+  <!-- REQUEST CHAT SECTION -->
   <section id="requestSection" class="max-w-4xl mx-auto px-4 w-full my-6">
     <div class="bg-zinc-900 border border-zinc-800 rounded-2xl p-5 sm:p-6">
       <h3 class="text-base sm:text-lg font-bold text-white flex items-center gap-2 mb-1.5">
         <i class="fa-solid fa-comments text-red-500"></i> Request Movies & Series
       </h3>
-      <p class="text-xs text-zinc-400 mb-3.5">Aapko kaunsi movie ya web series chahiye yahan request likhein.</p>
+      <p class="text-xs text-zinc-400 mb-3.5">Aapko kaunsi movie ya web series chahiye yahan request karein.</p>
       
       <form id="commentForm" class="space-y-3">
         <input type="text" id="commentName" placeholder="Aapka Naam" required class="w-full px-3.5 py-2 bg-zinc-950 border border-zinc-700 rounded-lg text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-red-600 transition">
@@ -225,7 +225,7 @@
             <span class="font-bold text-red-500">Admin</span>
             <span class="text-[10px] text-zinc-500">Pinned</span>
           </div>
-          <p class="text-xs text-zinc-300">Welcome to HUB CLOUD MOVIES! Quality direct links available.</p>
+          <p class="text-xs text-zinc-300">Welcome to HUB CLOUD MOVIES! Fast direct links available.</p>
         </div>
       </div>
     </div>
@@ -246,6 +246,7 @@
     let fullMoviesList = [];
     let currentCategory = 'all';
 
+    // Splash Hider
     window.addEventListener('load', () => {
       const splash = document.getElementById('netflixIntro');
       setTimeout(() => {
@@ -258,50 +259,43 @@
       return (n || "").toLowerCase().replace(/[^a-z0-9]/g, "");
     }
 
-    // 🤖 REAL INTELLIGENT AUTO-CATEGORY SELECTOR
+    // 🤖 AUTO-CATEGORY DETECTOR VIA TMDB & KEYWORDS
     function autoDetectCategory(title, origLang, isTv) {
       if (isTv) return 'series';
 
       const t = (title || "").toLowerCase();
 
-      // 1. Marvel & DC Check (Hero names, comic titles)
       const marvelDcWords = [
         "iron man", "thor", "captain america", "avengers", "hulk", "spider-man", "spiderman",
         "guardians of the galaxy", "ant-man", "black panther", "doctor strange", "deadpool",
         "wolverine", "x-men", "batman", "superman", "joker", "flash", "aquaman", "wonder woman",
-        "justice league", "dark knight", "marvel", "dc", "venom", "shazam"
+        "justice league", "dark knight", "marvel", "dc", "venom", "shazam", "thunderbolts", "fantastic 4", "fantastic four", "suicide squad"
       ];
       if (marvelDcWords.some(hero => t.includes(hero))) {
         return 'marvel_dc';
       }
 
-      // 2. Language-based Auto Detection from TMDB
       if (origLang === 'hi') return 'bollywood';
       if (origLang === 'te') return 'telugu';
       if (origLang === 'ta') return 'tamil';
       if (origLang === 'ml') return 'malayalam';
 
-      // 3. Fallback Title Matching for South Titles
-      if (t.includes('rrr') || t.includes('pushpa') || t.includes('devara') || t.includes('salaar') || t.includes('kalki') || t.includes('bahubali')) {
-        return 'telugu';
-      }
-      if (t.includes('leo') || t.includes('jailer') || t.includes('vikram') || t.includes('goat') || t.includes('mandaadi') || t.includes('vadala') || t.includes('toxic') || t.includes('hokum') || t.includes('ohh my dog')) {
-        return 'tamil';
-      }
-      if (t.includes('kudumba') || t.includes('manjummel') || t.includes('aavesham') || t.includes('bramayugam')) {
-        return 'malayalam';
-      }
+      if (t.includes('rrr') || t.includes('pushpa') || t.includes('devara') || t.includes('salaar') || t.includes('kalki') || t.includes('bahubali')) return 'telugu';
+      if (t.includes('leo') || t.includes('jailer') || t.includes('vikram') || t.includes('goat') || t.includes('mandaadi') || t.includes('vadala') || t.includes('toxic') || t.includes('hokum') || t.includes('ohh my dog') || t.includes('khalifa') || t.includes('saale aashiq') || t.includes('paatki')) return 'tamil';
+      if (t.includes('kudumba') || t.includes('manjummel') || t.includes('aavesham') || t.includes('bramayugam')) return 'malayalam';
+      if (t.includes('awarapan') || t.includes('dhurandhar') || t.includes('tumbbad') || t.includes('mirzapur') || t.includes('pooja meri jaan') || t.includes('adbhut')) return 'bollywood';
 
-      // 4. Default to Hollywood
       return 'hollywood';
     }
 
+    // 🚀 LOAD & SORT AUTOMATICALLY BY YEAR (2026 -> 2025 -> 2024 -> ...)
     async function loadDataOptimized() {
       const loader = document.getElementById('searchLoader');
       if (loader) loader.classList.remove('hidden');
 
       const movieList = (typeof myMovies !== 'undefined' && Array.isArray(myMovies)) ? myMovies.map(m => ({ ...m, type: 'movie' })) : [];
       const seriesList = (typeof mySeries !== 'undefined' && Array.isArray(mySeries)) ? mySeries.map(s => ({ ...s, type: 'series' })) : [];
+
       combinedLocalData = [...movieList, ...seriesList];
 
       const promises = combinedLocalData.map(async (item) => {
@@ -316,6 +310,7 @@
             const release = isTv ? match.first_air_date : match.release_date;
             const finalTitle = isTv ? match.name : match.title;
             const origLang = match.original_language || '';
+            const rawYear = release ? release.split('-')[0] : '2026';
 
             return {
               title: finalTitle,
@@ -325,7 +320,7 @@
               episodes: item.episodes || null,
               links: item.links || null,
               downloadUrl: item.downloadUrl || null,
-              year: release ? release.split('-')[0] : '2026',
+              year: rawYear,
               vote: match.vote_average ? match.vote_average.toFixed(1) : '8.5',
               poster: match.poster_path ? `https://image.tmdb.org/t/p/w342${match.poster_path}` : 'https://via.placeholder.com/300x450/141414/ffffff?text=' + encodeURIComponent(item.title),
               genre: isTv ? 'Web Series' : 'Movie'
@@ -341,7 +336,7 @@
           episodes: item.episodes || null,
           links: item.links || null,
           downloadUrl: item.downloadUrl || null,
-          year: '2026',
+          year: '2020',
           vote: '8.0',
           poster: 'https://via.placeholder.com/300x450/141414/ffffff?text=' + encodeURIComponent(item.title),
           genre: item.type === 'series' ? 'Web Series' : 'Movie'
@@ -349,11 +344,20 @@
       });
 
       fullMoviesList = await Promise.all(promises);
+
+      // 🔥 AUTO SORT BY YEAR (DESCENDING: 2026 -> 2025 -> 2024 -> ...)
+      fullMoviesList.sort((a, b) => {
+        const yearA = parseInt(a.year) || 2000;
+        const yearB = parseInt(b.year) || 2000;
+        return yearB - yearA;
+      });
+
       if (loader) loader.classList.add('hidden');
       renderCarousel(fullMoviesList);
       filterContent();
     }
 
+    // CAROUSEL
     function renderCarousel(list) {
       const track = document.getElementById('carouselTrack');
       if (!track) return;
@@ -365,6 +369,9 @@
             <img src="${item.poster}" alt="${item.title}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" loading="lazy">
             <span class="absolute top-1.5 left-1.5 ${item.type === 'series' ? 'bg-blue-600' : 'bg-red-600'} text-white font-extrabold text-[8px] px-1.5 py-0.5 rounded uppercase">
               ${item.category === 'marvel_dc' ? 'MARVEL/DC' : (item.category || item.type)}
+            </span>
+            <span class="absolute top-1.5 right-1.5 bg-red-600/90 text-white font-bold text-[9px] px-1.5 py-0.5 rounded shadow">
+              ${item.year}
             </span>
             <span class="absolute bottom-1.5 right-1.5 bg-black/80 text-zinc-300 text-[9px] px-1.5 py-0.5 rounded">⭐ ${item.vote}</span>
           </div>
@@ -379,6 +386,7 @@
       `).join('');
     }
 
+    // MAIN GRID (AUTOMATIC YEAR-WISE POSITION)
     function renderMovies(data) {
       const grid = document.getElementById('movieGrid');
       const noResults = document.getElementById('noResults');
@@ -424,6 +432,9 @@
             <span class="absolute top-2 left-2 ${item.type === 'series' ? 'bg-blue-600' : 'bg-red-600'} text-white font-extrabold text-[9px] px-2 py-0.5 rounded shadow uppercase">
               ${item.category === 'marvel_dc' ? 'Marvel & DC' : (item.category || item.type)}
             </span>
+            <span class="absolute top-2 right-2 bg-black/80 text-yellow-400 font-extrabold text-[10px] px-2 py-0.5 rounded border border-zinc-700 shadow">
+              ${item.year}
+            </span>
             <span class="absolute bottom-2 right-2 bg-black/85 text-zinc-300 font-semibold text-[9px] px-1.5 py-0.5 rounded border border-zinc-700">
               ⭐ ${item.vote}
             </span>
@@ -432,7 +443,7 @@
           <div class="p-3 flex flex-col flex-1 justify-between gap-2.5">
             <div>
               <div class="flex items-center justify-between text-[10px] text-zinc-400 mb-0.5">
-                <span>${item.season || item.year}</span>
+                <span class="font-bold text-zinc-300">${item.season || item.year}</span>
                 <span class="text-zinc-500">•</span>
                 <span class="capitalize">${item.category === 'marvel_dc' ? 'Marvel/DC' : (item.category || item.genre)}</span>
               </div>
@@ -462,7 +473,7 @@
 
       modalPoster.src = item.poster;
       modalTitle.innerText = item.title;
-      modalMeta.innerText = `${item.year} • ${item.genre} • ⭐ ${item.vote}`;
+      modalMeta.innerText = `Released: ${item.year} • ${item.genre} • ⭐ ${item.vote}`;
       container.innerHTML = '';
 
       if (item.type === 'series') {
@@ -475,7 +486,7 @@
             </a>
           `;
         } else if (epList.length > 0) {
-          container.innerHTML = `<h4 class="text-xs font-bold uppercase tracking-wider text-zinc-400 mb-3">Select Episode</h4>`;
+          container.innerHTML = `<h4 class="text-xs font-bold uppercase tracking-wider text-zinc-400 mb-3">Select Episode (${item.year})</h4>`;
           const listDiv = document.createElement('div');
           listDiv.className = "space-y-2";
 
@@ -492,7 +503,7 @@
           container.appendChild(listDiv);
         } else {
           container.innerHTML = `
-            <p class="text-xs text-zinc-400 text-center mb-3">Link abhi add nahi hua hai.</p>
+            <p class="text-xs text-zinc-400 text-center mb-3">Link abhi upload nahi hua hai.</p>
             <button onclick="closeModal(); requestMovie('${item.title}')" class="w-full bg-zinc-800 hover:bg-red-600 text-white text-xs py-2.5 rounded-lg transition">Request Series</button>
           `;
         }
@@ -503,7 +514,7 @@
         const q1080 = links["1080p"] || item.downloadUrl;
 
         container.innerHTML = `
-          <h4 class="text-xs font-bold uppercase tracking-wider text-zinc-400 mb-3">Select Quality</h4>
+          <h4 class="text-xs font-bold uppercase tracking-wider text-zinc-400 mb-3">Select Quality (${item.year})</h4>
           <div class="space-y-2.5">
             <a href="${q480}" target="_blank" rel="noopener noreferrer" class="w-full bg-zinc-950 hover:bg-red-600/20 border border-zinc-800 hover:border-red-600 text-white text-xs font-semibold py-2.5 px-4 rounded-xl flex items-center justify-between transition group">
               <span class="flex items-center gap-2"><i class="fa-solid fa-file-video text-zinc-400 group-hover:text-red-500"></i> 480p Standard</span>
@@ -528,7 +539,6 @@
       document.getElementById('downloadModal').classList.add('hidden');
     };
 
-    // Category Tabs Logic
     function setCategory(category) {
       currentCategory = category;
 
@@ -538,14 +548,14 @@
 
       const heading = document.getElementById('sectionHeading');
       if (heading) {
-        if (category === 'bollywood') heading.innerHTML = '<i class="fa-solid fa-film text-red-600"></i> Bollywood Movies';
-        else if (category === 'hollywood') heading.innerHTML = '<i class="fa-solid fa-clapperboard text-red-600"></i> Hollywood (Dual Audio)';
-        else if (category === 'marvel_dc') heading.innerHTML = '<i class="fa-solid fa-shield-halved text-red-600"></i> Marvel & DC Superhero Movies';
-        else if (category === 'tamil') heading.innerHTML = '<i class="fa-solid fa-fire text-red-600"></i> Tamil Cinema';
-        else if (category === 'telugu') heading.innerHTML = '<i class="fa-solid fa-bolt text-red-600"></i> Telugu Cinema (Tollywood)';
-        else if (category === 'malayalam') heading.innerHTML = '<i class="fa-solid fa-masks-theater text-red-600"></i> Malayalam Cinema (Mollywood)';
-        else if (category === 'series') heading.innerHTML = '<i class="fa-solid fa-tv text-blue-500"></i> Web Series & Seasons';
-        else heading.innerHTML = '<i class="fa-solid fa-play text-red-600"></i> All Direct Downloads';
+        if (category === 'bollywood') heading.innerHTML = '<i class="fa-solid fa-film text-red-600"></i> Bollywood Movies (Year-wise)';
+        else if (category === 'hollywood') heading.innerHTML = '<i class="fa-solid fa-clapperboard text-red-600"></i> Hollywood (Year-wise)';
+        else if (category === 'marvel_dc') heading.innerHTML = '<i class="fa-solid fa-shield-halved text-red-600"></i> Marvel & DC (Year-wise)';
+        else if (category === 'tamil') heading.innerHTML = '<i class="fa-solid fa-fire text-red-600"></i> Tamil Cinema (Year-wise)';
+        else if (category === 'telugu') heading.innerHTML = '<i class="fa-solid fa-bolt text-red-600"></i> Telugu Cinema (Year-wise)';
+        else if (category === 'malayalam') heading.innerHTML = '<i class="fa-solid fa-masks-theater text-red-600"></i> Malayalam (Year-wise)';
+        else if (category === 'series') heading.innerHTML = '<i class="fa-solid fa-tv text-blue-500"></i> Web Series (Year-wise)';
+        else heading.innerHTML = '<i class="fa-solid fa-calendar-days text-red-600"></i> Latest Releases (Year-wise)';
       }
 
       filterOrSearch();
@@ -606,6 +616,7 @@
                 const release = isTv ? r.first_air_date : r.release_date;
                 const poster = r.poster_path ? `https://image.tmdb.org/t/p/w342${r.poster_path}` : 'https://via.placeholder.com/300x450/141414/ffffff?text=' + encodeURIComponent(title);
                 const origLang = r.original_language || '';
+                const rawYear = release ? release.split('-')[0] : '2026';
 
                 const existing = combinedLocalData.find(m => cleanName(m.title) === cleanName(title));
 
@@ -617,7 +628,7 @@
                   episodes: existing ? existing.episodes : null,
                   links: existing ? existing.links : null,
                   downloadUrl: existing ? existing.downloadUrl : null,
-                  year: release ? release.split('-')[0] : '2026',
+                  year: rawYear,
                   vote: r.vote_average ? r.vote_average.toFixed(1) : '8.0',
                   poster: poster,
                   genre: isTv ? 'Web Series' : 'Movie'
@@ -633,6 +644,8 @@
               }
             });
 
+            // Search results mein bhi saal ke hisaab se order
+            combined.sort((a, b) => (parseInt(b.year) || 2000) - (parseInt(a.year) || 2000));
             renderMovies(combined);
           }
         } catch (e) {
