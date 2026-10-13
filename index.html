@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="hi">
 <head>
-  <meta name="google-site-verification" content="0taHAybdVoxW6ROjtU0pfg7QkMGPcXa-lVMWMHXwdTE" />
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>HUB CLOUD MOVIES - Direct Downloads</title>
@@ -68,6 +67,13 @@
       color: #ffffff;
       border-color: #e50914;
     }
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
   </style>
 </head>
 <body class="min-h-screen flex flex-col">
@@ -97,7 +103,7 @@
           type="text" 
           id="searchInput" 
           autocomplete="off"
-          placeholder="Search Marvel, Bollywood, Hollywood, Tamil..." 
+          placeholder="Search Bollywood, Hollywood, Marvel, Telugu..." 
           class="w-full pl-10 pr-10 py-2 bg-zinc-900 border border-zinc-700 rounded-full text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-red-600 transition"
         >
         <span id="searchLoader" class="hidden absolute right-3.5 top-3 text-red-500 text-xs">
@@ -111,7 +117,7 @@
   <section class="max-w-7xl mx-auto px-4 sm:px-6 pt-5 pb-2 w-full">
     <div class="flex items-center justify-between mb-2.5">
       <span class="text-xs font-bold uppercase tracking-widest text-red-500 flex items-center gap-1.5">
-        <i class="fa-solid fa-fire text-yellow-400"></i> Trending Top Picks
+        <i class="fa-solid fa-fire text-yellow-400"></i> Trending Spotlight
       </span>
       <span class="text-[11px] text-zinc-500">Auto-playing banner</span>
     </div>
@@ -121,7 +127,7 @@
     </div>
   </section>
 
-  <!-- 🔥 UPDATED CATEGORIES (BOLLYWOOD, HOLLYWOOD, MARVEL, TAMIL, SERIES) -->
+  <!-- 🔥 ACCURATE CATEGORY TABS -->
   <section class="max-w-7xl mx-auto px-4 sm:px-6 pt-4 w-full">
     <div class="flex items-center gap-2 border-b border-zinc-800 pb-3 overflow-x-auto no-scrollbar">
       <button type="button" onclick="setCategory('all')" id="tab-all" class="tab-btn active whitespace-nowrap px-4 py-1.5 rounded-full text-xs font-bold border border-zinc-700 bg-zinc-900 text-zinc-300 hover:border-red-600 transition">
@@ -136,12 +142,20 @@
         <i class="fa-solid fa-clapperboard mr-1"></i> Hollywood
       </button>
 
-      <button type="button" onclick="setCategory('marvel')" id="tab-marvel" class="tab-btn whitespace-nowrap px-4 py-1.5 rounded-full text-xs font-bold border border-zinc-700 bg-zinc-900 text-zinc-300 hover:border-red-600 transition">
-        <i class="fa-solid fa-shield-halved mr-1"></i> Marvel & Superheroes
+      <button type="button" onclick="setCategory('marvel_dc')" id="tab-marvel_dc" class="tab-btn whitespace-nowrap px-4 py-1.5 rounded-full text-xs font-bold border border-zinc-700 bg-zinc-900 text-zinc-300 hover:border-red-600 transition">
+        <i class="fa-solid fa-shield-halved mr-1"></i> Marvel & DC
       </button>
 
       <button type="button" onclick="setCategory('tamil')" id="tab-tamil" class="tab-btn whitespace-nowrap px-4 py-1.5 rounded-full text-xs font-bold border border-zinc-700 bg-zinc-900 text-zinc-300 hover:border-red-600 transition">
-        <i class="fa-solid fa-fire-flame-curved mr-1"></i> Tamil & South
+        <i class="fa-solid fa-fire mr-1"></i> Tamil
+      </button>
+
+      <button type="button" onclick="setCategory('telugu')" id="tab-telugu" class="tab-btn whitespace-nowrap px-4 py-1.5 rounded-full text-xs font-bold border border-zinc-700 bg-zinc-900 text-zinc-300 hover:border-red-600 transition">
+        <i class="fa-solid fa-bolt mr-1"></i> Telugu
+      </button>
+
+      <button type="button" onclick="setCategory('malayalam')" id="tab-malayalam" class="tab-btn whitespace-nowrap px-4 py-1.5 rounded-full text-xs font-bold border border-zinc-700 bg-zinc-900 text-zinc-300 hover:border-red-600 transition">
+        <i class="fa-solid fa-masks-theater mr-1"></i> Malayalam
       </button>
 
       <button type="button" onclick="setCategory('series')" id="tab-series" class="tab-btn whitespace-nowrap px-4 py-1.5 rounded-full text-xs font-bold border border-zinc-700 bg-zinc-900 text-zinc-300 hover:border-red-600 transition">
@@ -157,7 +171,7 @@
         <i class="fa-solid fa-play text-red-600"></i> All Direct Downloads
       </h2>
       <span class="inline-flex items-center gap-1.5 px-3 py-1 bg-red-600/15 text-red-400 border border-red-500/30 rounded-full text-[11px] font-bold w-fit">
-        <i class="fa-solid fa-language"></i> Dual Audio (Hindi Dubbed)
+        <i class="fa-solid fa-check-circle"></i> High Speed Dual Audio Links
       </span>
     </div>
 
@@ -195,7 +209,7 @@
       <h3 class="text-base sm:text-lg font-bold text-white flex items-center gap-2 mb-1.5">
         <i class="fa-solid fa-comments text-red-500"></i> Request Movies & Series
       </h3>
-      <p class="text-xs text-zinc-400 mb-3.5">Aapko kaunsi movie ya series chahiye request karein.</p>
+      <p class="text-xs text-zinc-400 mb-3.5">Aapko kaunsi movie ya web series chahiye yahan request likhein.</p>
       
       <form id="commentForm" class="space-y-3">
         <input type="text" id="commentName" placeholder="Aapka Naam" required class="w-full px-3.5 py-2 bg-zinc-950 border border-zinc-700 rounded-lg text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-red-600 transition">
@@ -211,7 +225,7 @@
             <span class="font-bold text-red-500">Admin</span>
             <span class="text-[10px] text-zinc-500">Pinned</span>
           </div>
-          <p class="text-xs text-zinc-300">Welcome to HUB CLOUD MOVIES! Fast 480p, 720p, 1080p download links available.</p>
+          <p class="text-xs text-zinc-300">Welcome to HUB CLOUD MOVIES! Quality direct links available.</p>
         </div>
       </div>
     </div>
@@ -244,25 +258,41 @@
       return (n || "").toLowerCase().replace(/[^a-z0-9]/g, "");
     }
 
-    // Auto classify category agar movies.js me category specify na ho
-    function detectCategory(title, customCategory, isTv) {
+    // 🤖 REAL INTELLIGENT AUTO-CATEGORY SELECTOR
+    function autoDetectCategory(title, origLang, isTv) {
       if (isTv) return 'series';
-      if (customCategory) return customCategory.toLowerCase();
 
-      const t = title.toLowerCase();
-      // Marvel & Superheroes
-      if (t.includes('avengers') || t.includes('spider') || t.includes('batman') || t.includes('iron man') || t.includes('thor') || t.includes('hulk') || t.includes('superman') || t.includes('deadpool') || t.includes('dark knight')) {
-        return 'marvel';
+      const t = (title || "").toLowerCase();
+
+      // 1. Marvel & DC Check (Hero names, comic titles)
+      const marvelDcWords = [
+        "iron man", "thor", "captain america", "avengers", "hulk", "spider-man", "spiderman",
+        "guardians of the galaxy", "ant-man", "black panther", "doctor strange", "deadpool",
+        "wolverine", "x-men", "batman", "superman", "joker", "flash", "aquaman", "wonder woman",
+        "justice league", "dark knight", "marvel", "dc", "venom", "shazam"
+      ];
+      if (marvelDcWords.some(hero => t.includes(hero))) {
+        return 'marvel_dc';
       }
-      // Tamil / South
-      if (t.includes('rrr') || t.includes('kgf') || t.includes('pushpa') || t.includes('leo') || t.includes('jailer') || t.includes('bahubali') || t.includes('toxic') || t.includes('hokum')) {
+
+      // 2. Language-based Auto Detection from TMDB
+      if (origLang === 'hi') return 'bollywood';
+      if (origLang === 'te') return 'telugu';
+      if (origLang === 'ta') return 'tamil';
+      if (origLang === 'ml') return 'malayalam';
+
+      // 3. Fallback Title Matching for South Titles
+      if (t.includes('rrr') || t.includes('pushpa') || t.includes('devara') || t.includes('salaar') || t.includes('kalki') || t.includes('bahubali')) {
+        return 'telugu';
+      }
+      if (t.includes('leo') || t.includes('jailer') || t.includes('vikram') || t.includes('goat') || t.includes('mandaadi') || t.includes('vadala') || t.includes('toxic') || t.includes('hokum') || t.includes('ohh my dog')) {
         return 'tamil';
       }
-      // Bollywood
-      if (t.includes('awarapan') || t.includes('dhurandhar') || t.includes('tumbbad') || t.includes('mirzapur') || t.includes('pooja meri jaan') || t.includes('bombay')) {
-        return 'bollywood';
+      if (t.includes('kudumba') || t.includes('manjummel') || t.includes('aavesham') || t.includes('bramayugam')) {
+        return 'malayalam';
       }
-      // Default Hollywood
+
+      // 4. Default to Hollywood
       return 'hollywood';
     }
 
@@ -271,7 +301,7 @@
       if (loader) loader.classList.remove('hidden');
 
       const movieList = (typeof myMovies !== 'undefined' && Array.isArray(myMovies)) ? myMovies.map(m => ({ ...m, type: 'movie' })) : [];
-      const seriesList = (typeof mySeries !== 'undefined' && Array.isArray(mySeries)) ? mySeries.map(s => ({ ...s, type: 'series', category: 'series' })) : [];
+      const seriesList = (typeof mySeries !== 'undefined' && Array.isArray(mySeries)) ? mySeries.map(s => ({ ...s, type: 'series' })) : [];
       combinedLocalData = [...movieList, ...seriesList];
 
       const promises = combinedLocalData.map(async (item) => {
@@ -285,10 +315,12 @@
           if (match) {
             const release = isTv ? match.first_air_date : match.release_date;
             const finalTitle = isTv ? match.name : match.title;
+            const origLang = match.original_language || '';
+
             return {
               title: finalTitle,
               type: item.type,
-              category: detectCategory(finalTitle, item.category, isTv),
+              category: autoDetectCategory(finalTitle, origLang, isTv),
               season: item.season || null,
               episodes: item.episodes || null,
               links: item.links || null,
@@ -304,7 +336,7 @@
         return {
           title: item.title,
           type: item.type,
-          category: detectCategory(item.title, item.category, isTv),
+          category: autoDetectCategory(item.title, '', isTv),
           season: item.season || null,
           episodes: item.episodes || null,
           links: item.links || null,
@@ -312,7 +344,7 @@
           year: '2026',
           vote: '8.0',
           poster: 'https://via.placeholder.com/300x450/141414/ffffff?text=' + encodeURIComponent(item.title),
-          genre: isTv ? 'Web Series' : 'Movie'
+          genre: item.type === 'series' ? 'Web Series' : 'Movie'
         };
       });
 
@@ -332,7 +364,7 @@
           <div class="relative aspect-[16/10] overflow-hidden bg-black">
             <img src="${item.poster}" alt="${item.title}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" loading="lazy">
             <span class="absolute top-1.5 left-1.5 ${item.type === 'series' ? 'bg-blue-600' : 'bg-red-600'} text-white font-extrabold text-[8px] px-1.5 py-0.5 rounded uppercase">
-              ${item.category || item.type}
+              ${item.category === 'marvel_dc' ? 'MARVEL/DC' : (item.category || item.type)}
             </span>
             <span class="absolute bottom-1.5 right-1.5 bg-black/80 text-zinc-300 text-[9px] px-1.5 py-0.5 rounded">⭐ ${item.vote}</span>
           </div>
@@ -390,7 +422,7 @@
           <div class="relative block aspect-[2/3] overflow-hidden bg-black">
             <img src="${item.poster}" alt="${item.title}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" loading="lazy">
             <span class="absolute top-2 left-2 ${item.type === 'series' ? 'bg-blue-600' : 'bg-red-600'} text-white font-extrabold text-[9px] px-2 py-0.5 rounded shadow uppercase">
-              ${item.category || item.type}
+              ${item.category === 'marvel_dc' ? 'Marvel & DC' : (item.category || item.type)}
             </span>
             <span class="absolute bottom-2 right-2 bg-black/85 text-zinc-300 font-semibold text-[9px] px-1.5 py-0.5 rounded border border-zinc-700">
               ⭐ ${item.vote}
@@ -402,7 +434,7 @@
               <div class="flex items-center justify-between text-[10px] text-zinc-400 mb-0.5">
                 <span>${item.season || item.year}</span>
                 <span class="text-zinc-500">•</span>
-                <span class="capitalize">${item.category || item.genre}</span>
+                <span class="capitalize">${item.category === 'marvel_dc' ? 'Marvel/DC' : (item.category || item.genre)}</span>
               </div>
               <h3 class="font-bold text-white text-sm hover:text-red-500 transition line-clamp-1">
                 ${item.title}
@@ -508,8 +540,10 @@
       if (heading) {
         if (category === 'bollywood') heading.innerHTML = '<i class="fa-solid fa-film text-red-600"></i> Bollywood Movies';
         else if (category === 'hollywood') heading.innerHTML = '<i class="fa-solid fa-clapperboard text-red-600"></i> Hollywood (Dual Audio)';
-        else if (category === 'marvel') heading.innerHTML = '<i class="fa-solid fa-shield-halved text-red-600"></i> Marvel & Superhero Movies';
-        else if (category === 'tamil') heading.innerHTML = '<i class="fa-solid fa-fire-flame-curved text-red-600"></i> Tamil & South Dubbed';
+        else if (category === 'marvel_dc') heading.innerHTML = '<i class="fa-solid fa-shield-halved text-red-600"></i> Marvel & DC Superhero Movies';
+        else if (category === 'tamil') heading.innerHTML = '<i class="fa-solid fa-fire text-red-600"></i> Tamil Cinema';
+        else if (category === 'telugu') heading.innerHTML = '<i class="fa-solid fa-bolt text-red-600"></i> Telugu Cinema (Tollywood)';
+        else if (category === 'malayalam') heading.innerHTML = '<i class="fa-solid fa-masks-theater text-red-600"></i> Malayalam Cinema (Mollywood)';
         else if (category === 'series') heading.innerHTML = '<i class="fa-solid fa-tv text-blue-500"></i> Web Series & Seasons';
         else heading.innerHTML = '<i class="fa-solid fa-play text-red-600"></i> All Direct Downloads';
       }
@@ -571,13 +605,14 @@
                 const title = isTv ? r.name : r.title;
                 const release = isTv ? r.first_air_date : r.release_date;
                 const poster = r.poster_path ? `https://image.tmdb.org/t/p/w342${r.poster_path}` : 'https://via.placeholder.com/300x450/141414/ffffff?text=' + encodeURIComponent(title);
+                const origLang = r.original_language || '';
 
                 const existing = combinedLocalData.find(m => cleanName(m.title) === cleanName(title));
 
                 return {
                   title: title,
                   type: isTv ? 'series' : 'movie',
-                  category: detectCategory(title, existing ? existing.category : null, isTv),
+                  category: autoDetectCategory(title, origLang, isTv),
                   season: existing ? existing.season : (isTv ? 'All Seasons' : null),
                   episodes: existing ? existing.episodes : null,
                   links: existing ? existing.links : null,
