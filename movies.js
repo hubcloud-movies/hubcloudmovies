@@ -1095,12 +1095,51 @@ const myMovies = [
     }
   },
   {
-    title: "Movie Ka Exact Naam",
+    title: "Love Of Your Life",
     links: {
       "480p": "https://hubcloud.ist/drive/aapka_480p_link",
       "720p": "https://hubcloud.ist/drive/aapka_720p_link",
-      "1080p": "https://hubcloud.ist/drive/aapka_1080p_link"
+      "1080p": "https://hubcloud.ist/drive/oog5bkyrrkrnyxh"
     }
   },
-
+  {
+    title: "Stolen",
+    links: {
+      "480p": "https://hubcloud.ist/drive/aapka_480p_link",
+      "720p": "https://hubcloud.ist/drive/aapka_720p_link",
+      "1080p": "https://hubcloud.ist/drive/wynrkpwnnmispnu"
+    }
+  },
+  {
+    title: "Charukesi",
+    links: {
+      "480p": "https://hubcloud.ist/drive/aapka_480p_link",
+      "720p": "https://hubcloud.ist/drive/aapka_720p_link",
+      "1080p": "https://hubcloud.ist/drive/p9rilnnzt4bh1r1"
+    }
+  },
+  {
+    title: "Ratsasan",
+    links: {
+      "480p": "https://hubcloud.ist/drive/aapka_480p_link",
+      "720p": "https://hubcloud.ist/drive/aapka_720p_link",
+      "1080p": "https://hubcloud.ist/drive/gwqyanf2quufaal"
+    }
+  },
+  {
+    title: "Animals",
+    links: {
+      "480p": "https://hubcloud.ist/drive/aapka_480p_link",
+      "720p": "https://hubcloud.ist/drive/aapka_720p_link",
+      "1080p": "https://hubcloud.ist/drive/mwatfwkkufwt1wc"
+    }
+  },
+  {
+    title: "Reporting Live",
+    links: {
+      "480p": "https://hubcloud.ist/drive/aapka_480p_link",
+      "720p": "https://hubcloud.ist/drive/aapka_720p_link",
+      "1080p": "https://hubcloud.ist/drive/b4sngrbb40ch6a0"
+    }
+  },
 ];
