@@ -325,7 +325,7 @@ const myMovies = [
     }
   },
   {
-    title: "Jailer",
+    title: "jailer",
     links: {
       "480p": "https://hubcloud.ist/drive/teejy1crnhxt221",
       "720p": "https://hubcloud.ist/drive/teejy1crnhxt221",
@@ -1142,4 +1142,270 @@ const myMovies = [
       "1080p": "https://hubcloud.ist/drive/b4sngrbb40ch6a0"
     }
   },
+  {
+    title: "Jailer 2",
+    links: {
+      "480p": "https://hubcloud.ist/drive/aapka_480p_link",
+      "720p": "https://hubcloud.ist/drive/aapka_720p_link",
+      "1080p": "https://hubcloud.ist/drive/tmcrt6rkyptk6ni"
+    }
+  },
+  {
+    title: "colony",
+    links: {
+      "480p": "https://hubcloud.ist/drive/aapka_480p_link",
+      "720p": "https://hubcloud.ist/drive/aapka_720p_link",
+      "1080p": "https://hubcloud.ist/drive/dpqwlyo3snh449v"
+    }
+  },
+  {
+    title: "DC",
+    links: {
+      "480p": "https://hubcloud.ist/drive/aapka_480p_link",
+      "720p": "https://hubcloud.ist/drive/aapka_720p_link",
+      "1080p": "https://hubcloud.ist/drive/pnzikfwk9wtdpyn"
+    }
+  },
+  {
+    title: "Spider-Man",
+    links: {
+      "480p": "https://hubcloud.ist/drive/aapka_480p_link",
+      "720p": "https://hubcloud.ist/drive/aapka_720p_link",
+      "1080p": "https://hubcloud.ist/drive/jpyixb6yfvqyfss"
+    }
+  },
+  {
+    title: "Spider Man 3",
+    links: {
+      "480p": "https://hubcloud.ist/drive/aapka_480p_link",
+      "720p": "https://hubcloud.ist/drive/aapka_720p_link",
+      "1080p": "https://hubcloud.ist/drive/7oht5ocaoko123o"
+    }
+  },
+  {
+    title: "The Amazing Spider-Man",
+    links: {
+      "480p": "https://hubcloud.ist/drive/aapka_480p_link",
+      "720p": "https://hubcloud.ist/drive/aapka_720p_link",
+      "1080p": "https://hubcloud.ist/drive/afat1m1jdvuurbv"
+    }
+  },
+  {
+    
+    title: "Spider-Man 2",
+    links: {
+      "480p": "https://hubcloud.ist/drive/aapka_480p_link",
+      "720p": "https://hubcloud.ist/drive/aapka_720p_link",
+      "1080p": "https://hubcloud.ist/drive/uugukniqmlvgmbj"
+    }
+  },
+  {
+    
+    title: "Spider-Man: Across the Spider-Verse",
+    links: {
+      "480p": "https://hubcloud.ist/drive/aapka_480p_link",
+      "720p": "https://hubcloud.ist/drive/aapka_720p_link",
+      "1080p": "https://hubcloud.ist/drive/qqpm4pqxwuqqvsu"
+    }
+  },
+  {
+    title: "The Vvaan",
+    links: {
+      "480p": "https://hubcloud.ist/drive/aapka_480p_link",
+      "720p": "https://hubcloud.ist/drive/aapka_720p_link",
+      "1080p": "https://hubcloud.ist/drive/1tt1yoss3iwfvwi"
+    }
+  },
+  {
+    title: "Lust Stories 2",
+    links: {
+      "480p": "https://hubcloud.ist/drive/aapka_480p_link",
+      "720p": "https://hubcloud.ist/drive/aapka_720p_link",
+      "1080p": "https://hubcloud.ist/drive/cym51xc2yquconb"
+    }
+  },
+  {
+    title: "Baby Do Die Do",
+    links: {
+      "480p": "https://hubcloud.ist/drive/aapka_480p_link",
+      "720p": "https://hubcloud.ist/drive/aapka_720p_link",
+      "1080p": "https://hubcloud.ist/drive/lld3ttfynsiklyz"
+    }
+  },
+  {
+    title: "Yaariyan",
+    links: {
+      "480p": "https://hubcloud.ist/drive/aapka_480p_link",
+      "720p": "https://hubcloud.ist/drive/aapka_720p_link",
+      "1080p": "https://hubcloud.ist/drive/ssss1py1iziqppp"
+    }
+  },
+  {
+    title: "Daayra",
+    links: {
+      "480p": "https://hubcloud.ist/drive/aapka_480p_link",
+      "720p": "https://hubcloud.ist/drive/aapka_720p_link",
+      "1080p": "https://hubcloud.ist/drive/py5uds19mtq9ymd"
+    }
+  },
+  {
+    title: "Lust Stories 3",
+    links: {
+      "480p": "https://hubcloud.ist/drive/aapka_480p_link",
+      "720p": "https://hubcloud.ist/drive/aapka_720p_link",
+      "1080p": "https://hubcloud.ist/drive/9r4s3pee7mp68w6"
+    }
+  },
+  {
+    title: "Bhaag Johnny",
+    links: {
+      "480p": "https://hubcloud.ist/drive/aapka_480p_link",
+      "720p": "https://hubcloud.ist/drive/aapka_720p_link",
+      "1080p": "https://hubcloud.ist/drive/qdimcttmd1csgs1"
+    }
+  },
+  {
+    title: "Ghamasaan",
+    links: {
+      "480p": "https://hubcloud.ist/drive/aapka_480p_link",
+      "720p": "https://hubcloud.ist/drive/aapka_720p_link",
+      "1080p": "https://hubcloud.ist/drive/qn6vzp3zjhlzi3v"
+    }
+  },
+  {
+    title: "Shaapit",
+    links: {
+      "480p": "https://hubcloud.ist/drive/aapka_480p_link",
+      "720p": "https://hubcloud.ist/drive/aapka_720p_link",
+      "1080p": "https://hubcloud.ist/drive/7roz7h7vgbmrprg"
+    }
+  },
+  {
+    title: "Love in Vietnam",
+    links: {
+      "480p": "https://hubcloud.ist/drive/aapka_480p_link",
+      "720p": "https://hubcloud.ist/drive/aapka_720p_link",
+      "1080p": "https://hubcloud.ist/drive/1e691ujp9191emg"
+    }
+  },
+  {
+    title: "Main Actor Nahin Hoon",
+    links: {
+      "480p": "https://hubcloud.ist/drive/aapka_480p_link",
+      "720p": "https://hubcloud.ist/drive/aapka_720p_link",
+      "1080p": "https://hubcloud.ist/drive/8jxypojbaf7ocbw"
+    }
+  },
+  {
+    title: "Cocaine",
+    links: {
+      "480p": "https://hubcloud.ist/drive/aapka_480p_link",
+      "720p": "https://hubcloud.ist/drive/aapka_720p_link",
+      "1080p": "https://hubcloud.ist/drive/rvsg1xbnmgrm0md"
+    }
+  },
+  {
+    title: "War 2",
+    links: {
+      "480p": "https://hubcloud.ist/drive/aapka_480p_link",
+      "720p": "https://hubcloud.ist/drive/aapka_720p_link",
+      "1080p": "https://hubcloud.ist/drive/02ggat5nxb5ckgv"
+    }
+  },
+  {
+    title: "Meri Pyaari Bindu",
+    links: {
+      "480p": "https://hubcloud.ist/drive/aapka_480p_link",
+      "720p": "https://hubcloud.ist/drive/aapka_720p_link",
+      "1080p": "https://hubcloud.ist/drive/5ru1ixiu4nhxrhn"
+    }
+  },
+  {
+    title: "Gandhi Talks",
+    links: {
+      "480p": "https://hubcloud.ist/drive/aapka_480p_link",
+      "720p": "https://hubcloud.ist/drive/aapka_720p_link",
+      "1080p": "https://hubcloud.ist/drive/xjvltrb1xuuqb28"
+    }
+  },
+  {
+    title: "M.S. Dhoni: The Untold Story",
+    links: {
+      "480p": "https://hubcloud.ist/drive/aapka_480p_link",
+      "720p": "https://hubcloud.ist/drive/aapka_720p_link",
+      "1080p": "https://hubcloud.ist/drive/piiw4gnthqp3v3j"
+    }
+  },
+  {
+    title: "Angrezi Medium",
+    links: {
+      "480p": "https://hubcloud.ist/drive/aapka_480p_link",
+      "720p": "https://hubcloud.ist/drive/aapka_720p_link",
+      "1080p": "https://hubcloud.ist/drive/ayrcggcezcsauzub"
+    }
+  },
+  {
+    title: "Dhamaal 4",
+    links: {
+      "480p": "https://hubcloud.ist/drive/aapka_480p_link",
+      "720p": "https://hubcloud.ist/drive/aapka_720p_link",
+      "1080p": "https://hubcloud.ist/drive/cba1xl5ooqvf5zi"
+    }
+  },
+  {
+    title: "Gandhari",
+    links: {
+      "480p": "https://hubcloud.ist/drive/aapka_480p_link",
+      "720p": "https://hubcloud.ist/drive/aapka_720p_link",
+      "1080p": "https://hubcloud.ist/drive/uolglcciijagi6l"
+    }
+  },
+  {
+    title: "Lootera",
+    links: {
+      "480p": "https://hubcloud.ist/drive/aapka_480p_link",
+      "720p": "https://hubcloud.ist/drive/aapka_720p_link",
+      "1080p": "https://hubcloud.ist/drive/sn411tzt1ccz7ht"
+    }
+  },
+  {
+    title: "Band Baaja Baaraat",
+    links: {
+      "480p": "https://hubcloud.ist/drive/aapka_480p_link",
+      "720p": "https://hubcloud.ist/drive/aapka_720p_link",
+      "1080p": "https://hubcloud.ist/drive/xiqrh611i4pjghq",
+    }
+  },
+  {
+    title: "Mere Desh Ki Dharti",
+    links: {
+      "480p": "https://hubcloud.ist/drive/aapka_480p_link",
+      "720p": "https://hubcloud.ist/drive/aapka_720p_link",
+      "1080p": "https://hubcloud.ist/drive/zut2oknzcsppu1s"
+    }
+  },
+  {
+    title: "Babita Singh Reporting",
+    links: {
+      "480p": "https://hubcloud.ist/drive/aapka_480p_link",
+      "720p": "https://hubcloud.ist/drive/aapka_720p_link",
+      "1080p": "https://hubcloud.ist/drive/ut3bllj9lpbldbu"
+    }
+  },
+  {
+    title: "Alpha",
+    links: {
+      "480p": "https://hubcloud.ist/drive/aapka_480p_link",
+      "720p": "https://hubcloud.ist/drive/aapka_720p_link",
+      "1080p": "https://hubcloud.ist/drive/hjxrfrdbrxqbmg1"
+    }
+  },
+  {
+    title: "Wanted",
+    links: {
+      "480p": "https://hubcloud.ist/drive/aapka_480p_link",
+      "720p": "https://hubcloud.ist/drive/aapka_720p_link",
+      "1080p": "https://hubcloud.ist/drive/nkaadkej9vnkej7"
+    }
+  },  
 ];
