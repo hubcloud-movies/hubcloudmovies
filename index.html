@@ -51,12 +51,12 @@
 
     @keyframes autoScroll {
       0% { transform: translateX(0); }
-      100% { transform: translateX(-50%); }
+      100% { transform: translateX(-5%); }
     }
     .carousel-track {
       display: flex;
       width: max-content;
-      animation: autoScroll 400s linear infinite;
+      animation: autoScroll 40s linear infinite;
     }
     .carousel-track:hover {
       animation-play-state: paused;
@@ -73,6 +73,38 @@
     .no-scrollbar {
       -ms-overflow-style: none;
       scrollbar-width: none;
+    }
+
+    /* Pagination button styling */
+    .page-box {
+      min-width: 2.5rem;
+      height: 2.5rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 0.75rem;
+      border-radius: 0.5rem;
+      font-size: 0.875rem;
+      font-weight: 700;
+      background-color: #1f1f23;
+      border: 1px solid #333338;
+      color: #d4d4d8;
+      transition: all 0.2s ease;
+    }
+    .page-box:hover:not(:disabled) {
+      border-color: #e50914;
+      color: #ffffff;
+      background-color: #27272a;
+    }
+    .page-box.active {
+      background-color: #e50914;
+      border-color: #e50914;
+      color: #ffffff;
+      box-shadow: 0 0 12px rgba(229, 9, 20, 0.5);
+    }
+    .page-box:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
     }
   </style>
 </head>
@@ -119,7 +151,7 @@
       <span class="text-xs font-bold uppercase tracking-widest text-red-500 flex items-center gap-1.5">
         <i class="fa-solid fa-fire text-yellow-400"></i> Trending Spotlight
       </span>
-      <span class="text-[11px] text-zinc-500"></span>
+      <span class="text-[11px] text-zinc-500">Auto-playing banner</span>
     </div>
 
     <div class="relative w-full overflow-hidden rounded-2xl bg-zinc-950 border border-zinc-800/80 p-3">
@@ -164,23 +196,27 @@
     </div>
   </section>
 
-  <!-- MAIN CONTENT GRID (YEAR WISE SORTED) -->
-  <main class="max-w-7xl mx-auto px-4 sm:px-6 py-5 flex-1 w-full">
+  <!-- MAIN CONTENT GRID (PAGINATED: 50 ITEMS PER PAGE) -->
+  <main id="mainContent" class="max-w-7xl mx-auto px-4 sm:px-6 py-5 flex-1 w-full">
     <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
       <h2 id="sectionHeading" class="text-lg font-bold text-white flex items-center gap-2">
-        <i class="fa-solid fa-calendar-days text-red-600"></i> | 1080p | 
+        <i class="fa-solid fa-calendar-days text-red-600"></i> Latest Releases (Language: Hindi Tamil Telugu)
       </h2>
-      <span class="inline-flex items-center gap-1.5 px-3 py-1 bg-red-600/15 text-red-400 border border-red-500/30 rounded-full text-[11px] font-bold w-fit">
-        <i class="fa-solid fa-arrow-down-wide-short"></i> Language: Dual Audio [Hindi & English]
+      <span id="pageInfoBadge" class="inline-flex items-center gap-1.5 px-3 py-1 bg-red-600/15 text-red-400 border border-red-500/30 rounded-full text-[11px] font-bold w-fit">
+        Showing 50 per page
       </span>
     </div>
 
+    <!-- Movie Grid -->
     <div id="movieGrid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3.5 sm:gap-5"></div>
 
     <div id="noResults" class="hidden text-center py-16">
       <i class="fa-solid fa-video-slash text-4xl text-zinc-600 mb-2"></i>
       <p class="text-zinc-400 text-sm">Koi content nahi mila.</p>
     </div>
+
+    <!-- 🔢 PAGINATION BOXES -->
+    <div id="paginationContainer" class="flex flex-wrap items-center justify-center gap-2 mt-10 pt-6 border-t border-zinc-800"></div>
   </main>
 
   <!-- QUALITY & EPISODE DOWNLOAD POPUP MODAL -->
@@ -203,13 +239,13 @@
     </div>
   </div>
 
-  <!-- REQUEST CHAT SECTION -->
+  <!-- 💬 24-HOUR AUTO-EXPIRING REQUEST SECTION -->
   <section id="requestSection" class="max-w-4xl mx-auto px-4 w-full my-6">
     <div class="bg-zinc-900 border border-zinc-800 rounded-2xl p-5 sm:p-6">
       <h3 class="text-base sm:text-lg font-bold text-white flex items-center gap-2 mb-1.5">
         <i class="fa-solid fa-comments text-red-500"></i> Request Movies & Series
       </h3>
-      <p class="text-xs text-zinc-400 mb-3.5">Aapko kaunsi movie ya web series chahiye yahan request karein.</p>
+      <p class="text-xs text-zinc-400 mb-3.5">Aapko kaunsi movie ya web series chahiye request karein. (Requests 24 ghante tak live rahengi)</p>
       
       <form id="commentForm" class="space-y-3">
         <input type="text" id="commentName" placeholder="Aapka Naam" required class="w-full px-3.5 py-2 bg-zinc-950 border border-zinc-700 rounded-lg text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-red-600 transition">
@@ -219,15 +255,7 @@
         </button>
       </form>
 
-      <div id="commentList" class="mt-4 space-y-2.5 border-t border-zinc-800 pt-3.5">
-        <div class="bg-zinc-950 p-3 rounded-lg border border-zinc-800">
-          <div class="flex items-center justify-between text-xs mb-1">
-            <span class="font-bold text-red-500">Admin</span>
-            <span class="text-[10px] text-zinc-500">Pinned</span>
-          </div>
-          <p class="text-xs text-zinc-300">Welcome to HUB CLOUD MOVIES! Fast direct links available.</p>
-        </div>
-      </div>
+      <div id="commentList" class="mt-4 space-y-2.5 border-t border-zinc-800 pt-3.5"></div>
     </div>
   </section>
 
@@ -246,6 +274,15 @@
     let fullMoviesList = [];
     let currentCategory = 'all';
 
+    // 📄 PAGINATION VARIABLES
+    const ITEMS_PER_PAGE = 50;
+    let currentPage = 1;
+    let currentlyFilteredList = [];
+
+    // 💬 24-HOUR REQUEST STORAGE CONFIG
+    const REQUEST_STORAGE_KEY = 'hubcloud_movie_requests';
+    const TWENTY_FOUR_HOURS = 24 * 60 * 60 * 1000;
+
     // Splash Hider
     window.addEventListener('load', () => {
       const splash = document.getElementById('netflixIntro');
@@ -257,6 +294,27 @@
 
     function cleanName(n) {
       return (n || "").toLowerCase().replace(/[^a-z0-9]/g, "");
+    }
+
+    function escapeHtml(str) {
+      return (str || '').replace(/[&<>'"]/g, tag => ({
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        "'": '&#39;',
+        '"': '&quot;'
+      }[tag] || tag));
+    }
+
+    function timeAgo(timestamp) {
+      const diff = Date.now() - timestamp;
+      const minutes = Math.floor(diff / (1000 * 60));
+      const hours = Math.floor(diff / (1000 * 60 * 60));
+
+      if (minutes < 1) return 'Just now';
+      if (minutes < 60) return `${minutes} min ago`;
+      if (hours < 24) return `${hours} hr ago`;
+      return 'Expired';
     }
 
     // 🤖 AUTO-CATEGORY DETECTOR VIA TMDB & KEYWORDS
@@ -288,7 +346,7 @@
       return 'hollywood';
     }
 
-    // 🚀 LOAD & SORT AUTOMATICALLY BY YEAR (2026 -> 2025 -> 2024 -> ...)
+    // 🚀 LOAD & SORT AUTOMATICALLY: LATEST RELEASE DATE + LATEST UPLOAD FIRST
     async function loadDataOptimized() {
       const loader = document.getElementById('searchLoader');
       if (loader) loader.classList.remove('hidden');
@@ -296,9 +354,12 @@
       const movieList = (typeof myMovies !== 'undefined' && Array.isArray(myMovies)) ? myMovies.map(m => ({ ...m, type: 'movie' })) : [];
       const seriesList = (typeof mySeries !== 'undefined' && Array.isArray(mySeries)) ? mySeries.map(s => ({ ...s, type: 'series' })) : [];
 
-      combinedLocalData = [...movieList, ...seriesList];
+      // Nayi upload ki hui cheez pehle aane ke liye reverse:
+      let combined = [...movieList, ...seriesList];
+      combined.reverse();
+      combinedLocalData = combined;
 
-      const promises = combinedLocalData.map(async (item) => {
+      const promises = combinedLocalData.map(async (item, originalIndex) => {
         const isTv = item.type === 'series';
         try {
           const endpoint = isTv ? 'tv' : 'movie';
@@ -307,10 +368,10 @@
           const match = data.results && data.results.length > 0 ? data.results[0] : null;
 
           if (match) {
-            const release = isTv ? match.first_air_date : match.release_date;
+            const rawRelease = isTv ? match.first_air_date : match.release_date;
             const finalTitle = isTv ? match.name : match.title;
             const origLang = match.original_language || '';
-            const rawYear = release ? release.split('-')[0] : '2026';
+            const rawYear = rawRelease ? rawRelease.split('-')[0] : '2026';
 
             return {
               title: finalTitle,
@@ -320,7 +381,9 @@
               episodes: item.episodes || null,
               links: item.links || null,
               downloadUrl: item.downloadUrl || null,
+              releaseDate: rawRelease || '2026-12-31',
               year: rawYear,
+              uploadOrder: originalIndex,
               vote: match.vote_average ? match.vote_average.toFixed(1) : '8.5',
               poster: match.poster_path ? `https://image.tmdb.org/t/p/w342${match.poster_path}` : 'https://via.placeholder.com/300x450/141414/ffffff?text=' + encodeURIComponent(item.title),
               genre: isTv ? 'Web Series' : 'Movie'
@@ -336,7 +399,9 @@
           episodes: item.episodes || null,
           links: item.links || null,
           downloadUrl: item.downloadUrl || null,
-          year: '2020',
+          releaseDate: '2026-01-01',
+          year: '2026',
+          uploadOrder: originalIndex,
           vote: '8.0',
           poster: 'https://via.placeholder.com/300x450/141414/ffffff?text=' + encodeURIComponent(item.title),
           genre: item.type === 'series' ? 'Web Series' : 'Movie'
@@ -345,11 +410,15 @@
 
       fullMoviesList = await Promise.all(promises);
 
-      // 🔥 AUTO SORT BY YEAR (DESCENDING: 2026 -> 2025 -> 2024 -> ...)
+      // 🔥 ACCURATE DATE & RECENCY SORTING:
       fullMoviesList.sort((a, b) => {
-        const yearA = parseInt(a.year) || 2000;
-        const yearB = parseInt(b.year) || 2000;
-        return yearB - yearA;
+        const yearDiff = (parseInt(b.year) || 0) - (parseInt(a.year) || 0);
+        if (yearDiff !== 0) return yearDiff;
+
+        const dateDiff = new Date(b.releaseDate) - new Date(a.releaseDate);
+        if (dateDiff !== 0) return dateDiff;
+
+        return a.uploadOrder - b.uploadOrder;
       });
 
       if (loader) loader.classList.add('hidden');
@@ -386,20 +455,39 @@
       `).join('');
     }
 
-    // MAIN GRID (AUTOMATIC YEAR-WISE POSITION)
+    // 📦 RENDER CURRENT PAGE (EXACTLY 50 ITEMS)
     function renderMovies(data) {
+      currentlyFilteredList = data || [];
+      const totalItems = currentlyFilteredList.length;
+      const totalPages = Math.ceil(totalItems / ITEMS_PER_PAGE) || 1;
+
+      if (currentPage > totalPages) currentPage = totalPages;
+      if (currentPage < 1) currentPage = 1;
+
+      const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+      const endIndex = startIndex + ITEMS_PER_PAGE;
+      const paginatedItems = currentlyFilteredList.slice(startIndex, endIndex);
+
       const grid = document.getElementById('movieGrid');
       const noResults = document.getElementById('noResults');
+      const pageBadge = document.getElementById('pageInfoBadge');
+
       if (!grid) return;
 
       grid.innerHTML = '';
-      if (!data || data.length === 0) {
+      if (totalItems === 0) {
         if (noResults) noResults.classList.remove('hidden');
+        renderPagination(0, 1);
+        if (pageBadge) pageBadge.innerText = '0 Results';
         return;
       }
       if (noResults) noResults.classList.add('hidden');
 
-      data.forEach((item) => {
+      if (pageBadge) {
+        pageBadge.innerText = `Page ${currentPage} of ${totalPages} (${totalItems} 1080p)`;
+      }
+
+      paginatedItems.forEach((item) => {
         const card = document.createElement('div');
         card.className = "netflix-card bg-zinc-900 border border-zinc-800 rounded-xl overflow-hidden flex flex-col group relative cursor-pointer";
         card.onclick = (e) => {
@@ -456,7 +544,86 @@
         `;
         grid.appendChild(card);
       });
+
+      renderPagination(totalItems, totalPages);
     }
+
+    // 🔢 RENDER PAGINATION BUTTONS
+    function renderPagination(totalItems, totalPages) {
+      const container = document.getElementById('paginationContainer');
+      if (!container) return;
+
+      if (totalPages <= 1) {
+        container.innerHTML = '';
+        return;
+      }
+
+      let html = '';
+
+      html += `
+        <button 
+          onclick="changePage(${currentPage - 1})" 
+          ${currentPage === 1 ? 'disabled' : ''} 
+          class="page-box flex items-center gap-1.5"
+        >
+          <i class="fa-solid fa-chevron-left text-xs"></i> Prev
+        </button>
+      `;
+
+      const delta = 2;
+      const range = [];
+      for (let i = Math.max(2, currentPage - delta); i <= Math.min(totalPages - 1, currentPage + delta); i++) {
+        range.push(i);
+      }
+
+      if (currentPage - delta > 2) {
+        range.unshift('...');
+      }
+      if (currentPage + delta < totalPages - 1) {
+        range.push('...');
+      }
+
+      range.unshift(1);
+      if (totalPages > 1) {
+        range.push(totalPages);
+      }
+
+      range.forEach((page) => {
+        if (page === '...') {
+          html += `<span class="px-2 text-zinc-500 text-sm font-bold">...</span>`;
+        } else {
+          html += `
+            <button 
+              onclick="changePage(${page})" 
+              class="page-box ${currentPage === page ? 'active' : ''}"
+            >
+              ${page}
+            </button>
+          `;
+        }
+      });
+
+      html += `
+        <button 
+          onclick="changePage(${currentPage + 1})" 
+          ${currentPage === totalPages ? 'disabled' : ''} 
+          class="page-box flex items-center gap-1.5"
+        >
+          Next <i class="fa-solid fa-chevron-right text-xs"></i>
+        </button>
+      `;
+
+      container.innerHTML = html;
+    }
+
+    window.changePage = function(newPage) {
+      currentPage = newPage;
+      renderMovies(currentlyFilteredList);
+      const target = document.getElementById('mainContent');
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth' });
+      }
+    };
 
     window.openItemModal = function(index) {
       if (fullMoviesList[index]) {
@@ -541,6 +708,7 @@
 
     function setCategory(category) {
       currentCategory = category;
+      currentPage = 1;
 
       document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
       const activeBtn = document.getElementById(`tab-${category}`);
@@ -583,6 +751,7 @@
     }
 
     async function filterOrSearch() {
+      currentPage = 1;
       const term = document.getElementById('searchInput').value.trim();
       const loader = document.getElementById('searchLoader');
 
@@ -628,6 +797,7 @@
                   episodes: existing ? existing.episodes : null,
                   links: existing ? existing.links : null,
                   downloadUrl: existing ? existing.downloadUrl : null,
+                  releaseDate: release || '2026-12-31',
                   year: rawYear,
                   vote: r.vote_average ? r.vote_average.toFixed(1) : '8.0',
                   poster: poster,
@@ -644,8 +814,12 @@
               }
             });
 
-            // Search results mein bhi saal ke hisaab se order
-            combined.sort((a, b) => (parseInt(b.year) || 2000) - (parseInt(a.year) || 2000));
+            combined.sort((a, b) => {
+              const yearDiff = (parseInt(b.year) || 0) - (parseInt(a.year) || 0);
+              if (yearDiff !== 0) return yearDiff;
+              return new Date(b.releaseDate) - new Date(a.releaseDate);
+            });
+
             renderMovies(combined);
           }
         } catch (e) {
@@ -656,29 +830,90 @@
 
     document.getElementById('searchInput').addEventListener('input', filterOrSearch);
 
-    loadDataOptimized();
+    // ==========================================================
+    // 💬 24-HOUR AUTO EXPIRY REQUEST SYSTEM
+    // ==========================================================
+    function loadAndCleanRequests() {
+      const commentList = document.getElementById('commentList');
+      if (!commentList) return;
+
+      let stored = [];
+      try {
+        stored = JSON.parse(localStorage.getItem(REQUEST_STORAGE_KEY)) || [];
+      } catch (e) {
+        stored = [];
+      }
+
+      const now = Date.now();
+      const activeRequests = stored.filter(req => (now - req.timestamp) < TWENTY_FOUR_HOURS);
+      localStorage.setItem(REQUEST_STORAGE_KEY, JSON.stringify(activeRequests));
+
+      let html = `
+        <div class="bg-zinc-950 p-3 rounded-lg border border-zinc-800">
+          <div class="flex items-center justify-between text-xs mb-1">
+            <span class="font-bold text-red-500"><i class="fa-solid fa-thumbtack mr-1"></i> Admin</span>
+            <span class="text-[10px] text-zinc-500">Pinned</span>
+          </div>
+          <p class="text-xs text-zinc-300">Welcome! Sabhi requests yahan agle 24 ghante tak live rahengi aur uske baad auto-clear ho jayengi.</p>
+        </div>
+      `;
+
+      if (activeRequests.length > 0) {
+        activeRequests.forEach(req => {
+          html += `
+            <div class="bg-zinc-950 p-3 rounded-lg border border-zinc-800 animate-fade-in">
+              <div class="flex items-center justify-between text-xs mb-1">
+                <span class="font-bold text-white flex items-center gap-1.5">
+                  <i class="fa-solid fa-user-circle text-red-500"></i> ${escapeHtml(req.name)}
+                </span>
+                <span class="text-[10px] text-zinc-400 flex items-center gap-1">
+                  <i class="fa-regular fa-clock text-zinc-500"></i> ${timeAgo(req.timestamp)}
+                </span>
+              </div>
+              <p class="text-xs text-zinc-300 mt-0.5">${escapeHtml(req.msg)}</p>
+            </div>
+          `;
+        });
+      }
+
+      commentList.innerHTML = html;
+    }
 
     document.getElementById('commentForm').addEventListener('submit', (e) => {
       e.preventDefault();
-      const name = document.getElementById('commentName').value.trim();
-      const msg = document.getElementById('commentMsg').value.trim();
-      if(!name || !msg) return;
+      const nameInput = document.getElementById('commentName');
+      const msgInput = document.getElementById('commentMsg');
 
-      const commentList = document.getElementById('commentList');
-      const newComment = document.createElement('div');
-      newComment.className = "bg-zinc-950 p-3 rounded-lg border border-zinc-800";
-      newComment.innerHTML = `
-        <div class="flex items-center justify-between text-xs mb-1">
-          <span class="font-bold text-white">${name}</span>
-          <span class="text-[10px] text-zinc-500">Just now</span>
-        </div>
-        <p class="text-xs text-zinc-300">${msg}</p>
-      `;
-      commentList.prepend(newComment);
+      const name = nameInput.value.trim();
+      const msg = msgInput.value.trim();
+      if (!name || !msg) return;
 
-      document.getElementById('commentName').value = '';
-      document.getElementById('commentMsg').value = '';
+      let stored = [];
+      try {
+        stored = JSON.parse(localStorage.getItem(REQUEST_STORAGE_KEY)) || [];
+      } catch (err) {
+        stored = [];
+      }
+
+      const newEntry = {
+        name: name,
+        msg: msg,
+        timestamp: Date.now()
+      };
+
+      stored.unshift(newEntry);
+      localStorage.setItem(REQUEST_STORAGE_KEY, JSON.stringify(stored));
+
+      nameInput.value = '';
+      msgInput.value = '';
+
+      loadAndCleanRequests();
     });
+
+    // Initial Calls
+    loadDataOptimized();
+    loadAndCleanRequests();
+    setInterval(loadAndCleanRequests, 60000);
   </script>
 </body>
 </html>
