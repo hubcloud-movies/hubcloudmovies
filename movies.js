@@ -1408,4 +1408,489 @@ const myMovies = [
       "1080p": "https://hubcloud.ist/drive/nkaadkej9vnkej7"
     }
   },  
-];
+  {
+    title: "Aasha",
+    links: {
+      "480p": "https://hubcloud.ist/drive/aapka_480p_link",
+      "720p": "https://hubcloud.ist/drive/aapka_720p_link",
+      "1080p": "https://hubcloud.ist/drive/z1v1trjvav3vkrm"
+    }
+  },
+  {
+    title: "Masterplan",
+    links: {
+      "480p": "https://inventoryidea.com/homelander/",
+      "720p": "https://hubdrive.pics/file/2588279170",
+      "1080p": "https://hubcloud.ist/drive/fjzpjojjvzq3ofz"
+    }
+  },
+
+  {
+    title: "Jeet Ki Zid",
+    links: {
+      "1080p": "https://hubcloud.ist/drive/ckqaqbq8qdoqtb1"
+    }
+  },
+  {
+    title: " Jihne Mera Ghar Patteya",
+    links: {
+      "1080p": "https://hubcloud.ist/drive/7c3fwzlhf39197u"
+    }
+  },
+  {
+    title: "Welcome to the Jungle",
+    links: {
+    
+      "1080p": "https://hubcloud.ist/drive/jsjpthdvptrpbxx"
+    }
+  },
+  {
+    title: "Horror Story ",
+    links: {
+      
+      "1080p": "https://hubcloud.ist/drive/xy82nyal82x4v4l"
+    }
+  },
+  {
+    title: " Article 15",
+    links: {
+     
+      "1080p": "https://hubcloud.ist/drive/y8joxs8rsxissmm "
+    }
+  },
+  {
+    title: "Agyaat ",
+    links: {
+      "1080p": "https://hubcloud.ist/drive/s3dqtq01szeei4q "
+    }
+  },
+  {
+    title: "Jumper ",
+    links: {
+     
+      "1080p": "https://hubcloud.ist/drive/7ohrob7twpodmkd "
+    }
+  },
+  {
+    title: "Badlapur ",
+    links: {
+    
+      "1080p": "https://hubcloud.ist/drive/sm3ymuziimicfoj "
+    }
+  },
+  {
+    title: "The Royal Cat ",
+    links: {
+    
+      "1080p": "https://hubcloud.ist/drive/11k4lqqwgo6p42f "
+    }
+  },
+  {
+    title: "Premium Rush ",
+    links: {
+    
+      "1080p": "https://hubcloud.ist/drive/sp1ibfaxvvap1kv "
+    }
+  },
+  {
+    title: "Speed 2: Cruise Control ",
+    links: {
+      "1080p": "https://hubcloud.ist/drive/gw2gcrjh9gjn22i "
+    }
+  },
+  
+  {
+    title: "Speed",
+    links: {
+      "1080p": "https://hubcloud.ist/drive/dri0ea65wkrd6af "
+    }
+  },
+
+  {
+    title: "The Silent Planet ",
+    links: {
+      "1080p": "https://hubcloud.ist/drive/qo1lmo1myqqdd5w "
+    }
+  },
+  {
+    title: " The Woman in Black",
+    links: {
+      "1080p": "https://hubcloud.ist/drive/xcdth7shkhvybh1 "
+    }
+  },
+  {
+    title: "Punisher: War Zone ",
+    links: {
+      "1080p": "https://hubcloud.ist/drive/zu2gnamg4ypcnua "
+    }
+  },
+  {
+    title: "Safe ",
+    links: {
+      "1080p": "https://hubcloud.ist/drive/oojap3s6iiytm0j "
+    }
+  },
+  {
+    title: "E.T. the Extra-Terrestrial ",
+    links: {
+      "1080p": "https://hubcloud.ist/drive/dhpgrooegyrrq2q "
+    }
+  },
+  {
+    title: "Get the Gringo ",
+    links: {
+      "1080p": "https://hubcloud.ist/drive/la7fhm7o2furtua"
+    }
+  },
+  {
+    title: " Toy Story 5",
+    links: {
+      "1080p": "https://hubcloud.ist/drive/1s1q0qsssnrx555 "
+    }
+  },
+  {
+    title: "Lethal Weapon  ",
+    links: {
+      "1080p": "https://hubcloud.ist/drive/rt6fs6ygqyfqmv9 "
+    }
+  },
+  {
+    title: "Gail Daughtry and the Celebrity Sex Pass ",
+    links: {
+      "1080p": "https://hubcloud.ist/drive/qb133kzzm3meiwb "
+    }
+  },
+  {
+    title: "The Wish of the Fairy Fish ",
+    links: {
+      "1080p": "https://hubcloud.ist/drive/f33spjljwljfjee "
+    }
+  },
+  {
+    title: "One Night Only ",
+    links: {
+      "1080p": "https://hubcloud.ist/drive/ydlf99zl9dp1oh5 "
+    }
+  },
+  {
+    title: "The Get Out ",
+    links: {
+      "1080p": "https://hubcloud.ist/drive/pqjyypl3yqp7gn7 "
+    }
+  },
+  {
+    title: "Parker ",
+    links: {
+      "1080p": "https://hubcloud.ist/drive/xt8zthc6kvcxrky "
+    }
+  },
+  {
+    title: "Charlie and the Chocolate Factory ",
+    links: {
+      "1080p": "https://hubcloud.ist/drive/j1zjhyhynmcdmdg"
+    }
+  },
+  {
+    title: "You+Me Against the World ",
+    links: {
+      "1080p": " https://hubcloud.ist/drive/0kdbo8e7jll0ied"
+    }
+  },
+  {
+    title: "I Am Number Four ",
+    links: {
+      "1080p": "https://hubcloud.ist/drive/feta00s005vde0o "
+    }
+  },
+  {
+    title: "Push  ",
+    links: {
+      "1080p": "https://hubcloud.ist/drive/1zz5w8ugcewlyyz "
+    }
+  },
+  {
+    title: "The Darkest Minds ",
+    links: {
+      "1080p": "https://hubcloud.ist/drive/ifioybfabohhpr0 "
+    }
+  },
+  {
+    title: "Untitled Home Invasion Romance ",
+    links: {
+      "1080p": " https://hubcloud.ist/drive/nsu18sradi7rak1"
+    }
+  },
+  {
+    title: "A Great Awakening ",
+    links: {
+      "1080p": "https://hubcloud.ist/drive/fu4bnhhf5uhfupn"
+    }
+  },
+  {
+    title: "Identity Thief  ",
+    links: {
+      "1080p": "https://hubcloud.ist/drive/8eeejylbc3x198r "
+    }
+  },
+  {
+    title: "Idle Hands ",
+    links: {
+      "1080p": "https://hubcloud.ist/drive/z1t07mtg1bf6ahi"
+    }
+  },
+  {
+    title: " My Best Friend s Wedding",
+    links: {
+      "1080p": "https://hubcloud.ist/drive/3qyfxnhw0xr83cr "
+    }
+  },
+  {
+    title: "Red Heat ",
+    links: {
+      "1080p": "https://hubcloud.ist/drive/rrmxsiooby6neya "
+    }
+  },
+  {
+    title: " Roald Dahl s Matilda the Musical",
+    links: {
+      "1080p": "https://hubcloud.ist/drive/fv1dzan0a600e1l "
+    }
+  },
+  {
+    title: " The Fixies: Top Secret",
+    links: {
+      "1080p": "https://hubcloud.ist/drive/gakgrw1u5g5ykrr "
+    }
+  },
+  {
+    title: " Untouchables",
+    links: {
+      "1080p": " https://hubcloud.ist/drive/1lz1hb1xfzuuzax"
+    }
+  },
+  {
+    title: " Carrie",
+    links: {
+      "1080p": " https://hubcloud.ist/drive/nbwau4a1pztfetp"
+    }
+  },
+  {
+    title: " Duplicity",
+    links: {
+      "1080p": "https://hubcloud.ist/drive/0ppf40wp3137pp7 "
+    }
+  },
+  {
+    title: " Like Crazy",
+    links: {
+      "1080p": "https://hubcloud.ist/drive/6h6avcinmuunza6"
+    }
+  },
+  {
+    title: "Snatch",
+    links: {
+      "1080p": "https://hubcloud.ist/drive/gtmdbfhhhcfydsg "
+    }
+  },
+  {
+    title: "White Elephant ",
+    links: {
+      "1080p": "https://hubcloud.ist/drive/cbmm48h7g4ammci "
+    }
+  },
+  {
+    title: "Hansel & Gretel: Witch Hunters ",
+    links: {
+      "1080p": "https://hubcloud.ist/drive/42ur9lqaiql41oa"
+    }
+  },
+  {
+    title: " Hitch",
+    links: {
+      "1080p": "https://hubcloud.ist/drive/bppo2lbpxlcqjlu"
+    }
+  },
+  {
+    title: "Midsommar ",
+    links: {
+      "1080p": "https://hubcloud.ist/drive/ivh4hvtyvtkhttk"
+    }
+  },
+  {
+    title: "The Break-Up ",
+    links: {
+      "1080p": "https://hubcloud.ist/drive/hkvappskp7thsvd "
+    }
+  },
+  {
+    title: "Salmokji: Whispering Water",
+    links: {
+      "1080p": "https://hubcloud.ist/drive/q5tldqqpyddvqn5 "
+    }
+  },
+  {
+    title: " Pinocchio: Unstrung",
+    links: {
+      "1080p": "https://hubcloud.ist/drive/mrzwflceypyyfpy "
+    }
+  },
+  {
+    title: "Hungry ",
+    links: {
+      "1080p": "https://hubcloud.ist/drive/v08f54mm5j5m86l "
+    }
+  },
+  {
+    title: " Moana",
+    links: {
+      "1080p": " https://hubcloud.ist/drive/i5919yepkskipc3"
+    }
+  },
+  {
+    title: "Lovelace ",
+    links: {
+      "1080p": "https://hubcloud.ist/drive/rwr9lqflsttilwr "
+    }
+  },
+  {
+    title: "Where Hope Grows ",
+    links: {
+      "1080p": "https://hubcloud.ist/drive/hyjkotjqthhthyr "
+    }
+  },
+  {
+    title: "World s Greatest Dad ",
+    links: {
+      "1080p": "https://hubcloud.ist/drive/ifulfpibytfaflf "
+    }
+  },
+  {
+    title: "Drawn Together ",
+    links: {
+      "1080p": "https://hubcloud.ist/drive/n4xoh1xllnpd10x "
+    }
+  },
+  {
+    title: " Last Days",
+    links: {
+      "1080p": "https://hubcloud.ist/drive/mk7e3lltr7sa2an "
+    }
+  },
+  {
+    title: " Mutiny",
+    links: {
+      "1080p": "https://hubcloud.ist/drive/qb9x11dkdr119yl "
+    }
+  },
+  {
+    title: "Alexander ",
+    links: {
+      "1080p": "https://hubcloud.ist/drive/uutxnlmqlu1fhmv "
+    }
+  },
+  {
+    title: " Hours",
+    links: {
+      "1080p": "https://hubcloud.ist/drive/shef1eumh1bqibi "
+    }
+  },
+  {
+    title: "Midnight Runners ",
+    links: {
+      "1080p": "https://hubcloud.ist/drive/j1zz3zrq190uxio "
+    }
+  },
+  {
+    title: "The Hard Corps ",
+    links: {
+      "1080p": "https://hubcloud.ist/drive/2fp1818ofhf6i9c "
+    }
+  },
+  {
+    title: "Sinners ",
+    links: {
+      "1080p": "https://hubcloud.ist/drive/nx5uymnch71chlc "
+    }
+  },
+  {
+    title: " Man of the Year",
+    links: {
+      "1080p": "https://hubcloud.ist/drive/lz8lgcsclsvgada "
+    }
+  },
+  {
+    title: "Black Box ",
+    links: {
+      "1080p": "https://hubcloud.ist/drive/gp15ougwgper8ob "
+    }
+  },
+  {
+    title: "Doctor Strange ",
+    links: {
+      "1080p": "https://hubcloud.ist/drive/uuh7uouxx3qhqb7"
+    }
+  },
+  {
+    title: "Walking Against the Rain ",
+    links: {
+      "1080p": "https://hubcloud.ist/drive/jsmpmo5esdwojqh "
+    }
+  },
+  {
+    title: "Homefront ",
+    links: {
+      "1080p": "https://hubcloud.ist/drive/ifgf44cbcnfofyi "
+    }
+  },
+  {
+    title: "Rules of Engagement  ",
+    links: {
+      "1080p": " https://hubcloud.ist/drive/go00e81mq1nq0k8"
+    }
+  },
+  {
+    title: "The One ",
+    links: {
+      "1080p": " https://hubcloud.ist/drive/eqpwbdebihsipit"
+    }
+  },
+  {
+    title: "Mayday ",
+    links: {
+      "1080p": "https://hubcloud.ist/drive/cneftkb1jhjmcfj "
+    }
+  },
+  {
+    title: "Normal ",
+    links: {
+      "1080p": "https://hubcloud.ist/drive/vv30f200wusesvf "
+    }
+  },
+  {
+    title: " King Arthur",
+    links: {
+      "1080p": "https://hubcloud.ist/drive/8hn8z1mpssgxnok "
+    }
+  },
+  {
+    title: "The Frozen Ground ",
+    links: {
+      "1080p": "https://hubcloud.ist/drive/lcn0iai0tz0pn5v "
+    }
+  },
+  {
+    title: "The Grandmaster ",
+    links: {
+      "1080p": "https://hubcloud.ist/drive/ih9ypelzrvdszp1 "
+    }
+  },
+  {
+    title: "The Three Musketeers ",
+    links: {
+      "1080p": " https://hubcloud.ist/drive/3jxujx2xd8ytuuj"
+    }
+  },
+
+ 
+
+]
