@@ -1890,7 +1890,163 @@ const myMovies = [
       "1080p": " https://hubcloud.ist/drive/3jxujx2xd8ytuuj"
     }
   },
-
+  {
+    title: "Death Race ",
+    links: {
+      "1080p": " https://hubcloud.ist/drive/hmlvbnm0th0iech"
+    }
+  },
+  {
+    title: "Enna Vilai ",
+    links: {
+      "1080p": " https://hubcloud.ist/drive/w1jsutsrruivwcj"
+    }
+  },
+  
+  {
+    title: " Stand Up Guys",
+    links: {
+      "1080p": "https://hubcloud.ist/drive/5zleffllcc5wm9w "
+    }
+  },
+  {
+    title: " Killing Them Softly",
+    links: {
+      "1080p": "https://hubcloud.ist/drive/ymv9kvs1rm2d2ql "
+    }
+  },
+  {
+    title: "Matchless Mulan ",
+    links: {
+      "1080p": "https://hubcloud.ist/drive/emd2bbgdegz6nqq "
+    }
+  },
+  {
+    title: "Mo Money ",
+    links: {
+      "1080p": "https://hubcloud.ist/drive/qaub8uymafuiqga "
+    }
+  },
+  {
+    title: " Halloween H20: 20 Years Later",
+    links: {
+      "1080p": "https://hubcloud.ist/drive/ieydv28ppzgdjit "
+    }
+  },
+  {
+    title: " The Runner",
+    links: {
+      "1080p": "https://hubcloud.ist/drive/ycqzypbhvebnze3 "
+    }
+  },
+  {
+    title: "Margin Call ",
+    links: {
+      "1080p": " https://hubcloud.ist/drive/6eokbjzx3suooij"
+    }
+  },
+  {
+    title: "Badland ",
+    links: {
+      "1080p": "https://hubcloud.ist/drive/911xcwzduwrtexg "
+    }
+  },
+  {
+    title: "The Orphans ",
+    links: {
+      "1080p": "https://hubcloud.ist/drive/sasjlyfxqggghgh "
+    }
+  },
+  {
+    title: "2012 ",
+    links: {
+      "1080p": "https://hubcloud.ist/drive/579htwvbvop5thv "
+    }
+  },
+  {
+    title: "An Elephant s Journey ",
+    links: {
+      "1080p": " https://hubcloud.ist/drive/p4tt8vnt1eiittb"
+    }
+  },
+  {
+    title: "Extinction ",
+    links: {
+      "1080p": "https://hubcloud.ist/drive/iadickcvmv66odo "
+    }
+  },
+  {
+    title: "Higher Learning ",
+    links: {
+      "1080p": " https://hubcloud.ist/drive/ipqdtdidewybdql"
+    }
+  },
+  {
+    title: "Troy ",
+    links: {
+      "1080p": " https://hubcloud.ist/drive/tvxvhhl8xjx8pi1"
+    }
+  },
+  {
+    title: "Out of the Furnace ",
+    links: {
+      "1080p": "https://hubcloud.ist/drive/qu6lg6ethh606c6"
+    }
+  },
+  {
+    title: " ",
+    links: {
+      "1080p": " "
+    }
+  },
+  {
+    title: " ",
+    links: {
+      "1080p": " "
+    }
+  },
+  {
+    title: " ",
+    links: {
+      "1080p": " "
+    }
+  },
+  {
+    title: " ",
+    links: {
+      "1080p": " "
+    }
+  },
+  {
+    title: " ",
+    links: {
+      "1080p": " "
+    }
+  },
+  {
+    title: " ",
+    links: {
+      "1080p": " "
+    }
+  },
+  {
+    title: " ",
+    links: {
+      "1080p": " "
+    }
+  },
+  {
+    title: " ",
+    links: {
+      "1080p": " "
+    }
+  },
+  {
+    title: " ",
+    links: {
+      "1080p": " "
+    }
+  },
  
 
 ]
